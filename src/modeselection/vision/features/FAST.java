@@ -64,21 +64,21 @@ public class FAST extends BitImage {
 	public <T extends ProcessableImage<T>> void addFeaturesFor(ProcessableImage<T> img, int featureScale) {
 		for (int x = RADIUS; x < img.getWidth() - RADIUS - 1; x++) {
 			for (int y = RADIUS; y < img.getHeight() - RADIUS - 1; y++) {
-				Thresh i0 = eval(img, x, y, 0);
-				Thresh i8 = eval(img, x, y, 8);
-				if (i0 != Thresh.WITHIN || i8 != Thresh.WITHIN) {
-					Thresh i4 = eval(img, x, y, 4);
-					Thresh i12 = eval(img, x, y, 12);
-					EnumHistogram<Thresh> counts = new EnumHistogram<>(Thresh.class);
+				byte i0 = eval(img, x, y, 0);
+				byte i8 = eval(img, x, y, 8);
+				if (i0 != ThreshCounter.WITHIN || i8 != ThreshCounter.WITHIN) {
+					byte i4 = eval(img, x, y, 4);
+					byte i12 = eval(img, x, y, 12);
+					ThreshCounter counts = new ThreshCounter();
 					counts.bump(i0);
 					counts.bump(i4);
 					counts.bump(i8);
 					counts.bump(i12);
 					boolean found = false;
-					if (counts.getCountFor(Thresh.ABOVE) >= 3) {
-						found = longestSequenceOf(getComparisons(img, x, y), Thresh.ABOVE) >= N;
-					} else if (counts.getCountFor(Thresh.BELOW) >= 3) {
-						found = longestSequenceOf(getComparisons(img, x, y), Thresh.BELOW) >= N;
+					if (counts.getCountFor(ThreshCounter.ABOVE) >= 3) {
+						found = longestSequenceOf(getComparisons(img, x, y), ThreshCounter.ABOVE) >= N;
+					} else if (counts.getCountFor(ThreshCounter.BELOW) >= 3) {
+						found = longestSequenceOf(getComparisons(img, x, y), ThreshCounter.BELOW) >= N;
 					}
 					if (found) {
 						set(x * featureScale, y * featureScale);
@@ -157,15 +157,15 @@ public class FAST extends BitImage {
 		}
 	}
 	
-	<T extends ProcessableImage<T>> Thresh[] getComparisons(ProcessableImage<T> img, int x, int y) {
-		Thresh[] result = new Thresh[CIRCLE_POINTS.length];
+	<T extends ProcessableImage<T>> byte[] getComparisons(ProcessableImage<T> img, int x, int y) {
+		byte[] result = new byte[CIRCLE_POINTS.length];
 		for (int i = 0; i < CIRCLE_POINTS.length; i++) {
 			result[i] = eval(img, x, y, i);
 		}
 		return result;
 	}
 	
-	int longestSequenceOf(Thresh[] threshes, Thresh of) {
+	int longestSequenceOf(byte[] threshes, byte of) {
 		int[] countFor = new int[threshes.length];
 		for (int i = 0; i < threshes.length; i++) {
 			int j = 0;
@@ -183,9 +183,9 @@ public class FAST extends BitImage {
 		return max;
 	}
 	
-	<T extends ProcessableImage<T>> int findFirstOf(ProcessableImage<T> img, int x, int y, int intensityThreshold, Thresh of) {
+	<T extends ProcessableImage<T>> int findFirstOf(ProcessableImage<T> img, int x, int y, int intensityThreshold, byte of) {
 		for (int i = 0; i < CIRCLE_POINTS.length; i++) {
-			Thresh iThresh = eval(img, x + CIRCLE_POINTS[i].X(), y + CIRCLE_POINTS[i].Y(), i);
+			byte iThresh = eval(img, x + CIRCLE_POINTS[i].X(), y + CIRCLE_POINTS[i].Y(), i);
 			if (iThresh == of) {
 				return i;
 			}
@@ -193,11 +193,11 @@ public class FAST extends BitImage {
 		return -1;
 	}
 	
-	static <T extends ProcessableImage<T>> Thresh eval(ProcessableImage<T> img, int x, int y, int circPt) {
+	static <T extends ProcessableImage<T>> byte eval(ProcessableImage<T> img, int x, int y, int circPt) {
 		Feature f = CIRCLE_POINTS[circPt];
 		int diff = img.getIntensity(x + f.X(), y + f.Y()) - img.getIntensity(x, y);
 		return diff > INTENSITY_THRESHOLD 
-				? Thresh.ABOVE 
-				: (diff < -INTENSITY_THRESHOLD ? Thresh.BELOW : Thresh.WITHIN);
+				? ThreshCounter.ABOVE 
+				: (diff < -INTENSITY_THRESHOLD ? ThreshCounter.BELOW : ThreshCounter.WITHIN);
 	}
 }
