@@ -24,18 +24,17 @@ import modeselection.vision.config.VisionBot;
 // 2.51 hz
 // Very irregular though...
 
+// Putting Shi-Thomasi back:
+// 0.67 hz
+
 public class FASTBot extends VisionBot {
-	private int n, s;
-	
-	public FASTBot(int n, int s) {this.n = n; this.s = s;}
-	
 	public static void main(String[] args) {
-		new FASTBot(100, 1).run();
+		new FASTBot().run();
 	}
 	
 	@Override
 	public BitImage processImage(AdaptedYUYVImage img) {
 		Logger.EV3Log.format("cycle:%d time:%d", getCycles(), getLastCycleTime());
-		return new FAST(new AdaptedYUYVImage(img), s);
+		return new FAST(img, 1);
 	}
 }
