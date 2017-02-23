@@ -5,7 +5,6 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 import modeselection.cluster.BoundedSelfOrgCluster;
-import modeselection.util.EnumHistogram;
 import modeselection.vision.BitImage;
 import modeselection.vision.ProcessableImage;
 

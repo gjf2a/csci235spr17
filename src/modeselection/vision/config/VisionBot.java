@@ -19,6 +19,12 @@ abstract public class VisionBot implements Runnable {
 		displayFrameRate(2);
 	}
 	
+	public long getCycles() {return cycles;}
+	
+	public long getDuration() {return duration;}
+	
+	public long getLastCycleTime() {return duration - lastDuration;}
+	
 	public void run() {
 		try {
 			Video wc = setupVideo();
@@ -31,8 +37,9 @@ abstract public class VisionBot implements Runnable {
 				BitImage proc = processImage(img);
 				proc.draw();
 				cycles += 1;
+				lastDuration = duration;
+				duration = System.currentTimeMillis() - startTime;
 			}
-			duration = System.currentTimeMillis() - startTime;
 			
 			finish();
 		} catch (Exception e) {
@@ -41,7 +48,7 @@ abstract public class VisionBot implements Runnable {
 	}
 	
 	private byte[] frame;
-	private long cycles, duration;
+	private long cycles, duration, lastDuration;
 	
 	private Video setupVideo() throws IOException {
 		Video wc = BrickFinder.getDefault().getVideo();

@@ -1,5 +1,6 @@
 package modeselection.vision.features;
 
+import modeselection.util.Logger;
 import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.BitImage;
 import modeselection.vision.config.VisionBot;
@@ -17,6 +18,12 @@ import modeselection.vision.config.VisionBot;
 // No filter
 // s = 1 => 0.19 hz
 
+// Ditching Thresh enum
+// 1.24 hz
+// 1.89 hz
+// 2.51 hz
+// Very irregular though...
+
 public class FASTBot extends VisionBot {
 	private int n, s;
 	
@@ -28,6 +35,7 @@ public class FASTBot extends VisionBot {
 	
 	@Override
 	public BitImage processImage(AdaptedYUYVImage img) {
+		Logger.EV3Log.format("cycle:%d time:%d", getCycles(), getLastCycleTime());
 		return new FAST(new AdaptedYUYVImage(img), s);
 	}
 }
