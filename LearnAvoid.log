@@ -1,0 +1,5327 @@
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.36
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.37
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.35
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.37
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.24
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.17
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.09
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.10
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.10
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.07
+Touch:  0.00
+Touch:  0.00
+current: BACK
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.17
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.15
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.11
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.11
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.10
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.09
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.07
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.07
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.03
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance:  1.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.23
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.17
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.11
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.09
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.07
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.03
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.06
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.06
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.07
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.06
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.06
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.13
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.15
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.15
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.15
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.14
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.15
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance: Infinity
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.11
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.10
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.10
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.10
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.19
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.19
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.17
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.16
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.09
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.07
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.06
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.19
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.19
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.21
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.21
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.21
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.20
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.12
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.11
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.08
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.07
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.05
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+CLOSE
+Distance:  0.04
+Touch:  1.00
+Touch:  1.00
+current: BACK
+state:
+BUMPED
+OPEN
+CLOSE
+Distance:  0.04
+Touch:  0.00
+Touch:  1.00
+current: STOP
+state:
+OPEN
+CLOSE
+Distance:  0.05
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance: Infinity
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+FAR
+Distance: Infinity
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.25
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.36
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.32
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.35
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+current: STOP
+state:
+OPEN
+MID
+Distance:  0.33
+Touch:  0.00
+Touch:  0.00
+(OPEN,CLOSE):STOP(Q:  1.68;V:0)BACK(Q:  0.00;V:0)
+(OPEN,MID):STOP(Q:  1.95;V:0)BACK(Q:  0.00;V:0)
+(OPEN,FAR):STOP(Q:  1.96;V:0)BACK(Q:  0.00;V:0)
+(BUMPED,CLOSE):STOP(Q: -2.00;V:0)BACK(Q: -1.93;V:0)
+(BUMPED,OPEN,CLOSE):STOP(Q: -1.16;V:0)BACK(Q: -0.77;V:0)
+
