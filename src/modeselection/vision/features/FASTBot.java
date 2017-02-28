@@ -35,6 +35,6 @@ public class FASTBot extends VisionBot {
 	@Override
 	public BitImage processImage(AdaptedYUYVImage img) {
 		Logger.EV3Log.format("cycle:%d time:%d", getCycles(), getLastCycleTime());
-		return new FAST(img, 1);
+		return new FAST(img);
 	}
 }
