@@ -6,7 +6,7 @@ import java.util.function.IntUnaryOperator;
 import javafx.scene.paint.Color;
 import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.video.YUYVImage;
-import modeselection.cluster.Clusterable;
+import modeselection.util.Clusterable;
 import modeselection.util.DeepCopyable;
 import modeselection.util.Util;
 

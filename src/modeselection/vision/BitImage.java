@@ -8,24 +8,23 @@ import lejos.hardware.lcd.LCD;
 import lejos.hardware.video.YUYVImage;
 import modeselection.util.DeepCopyable;
 import modeselection.util.Util;
-import modeselection.vision.features.Feature;
 
 public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 	private BitSet pixels;
 	private int width, height;
 	
+	private BitImage(BitSet pix, int w, int h) {
+		pixels = pix;
+		width = w;
+		height = h;
+	}
+	
 	public BitImage(BitImage src) {
-		this.width = src.width;
-		this.height = src.height;
-		this.pixels = src.pixelCopy();
+		this(src.pixelCopy(), src.width, src.height);
 	}
 	
 	private BitSet pixelCopy() {
 		return pixels.get(0, width*height);
-	}
-	
-	public BitImage(YUYVImage src) {
-		this(src.getWidth(), src.getHeight());
 	}
 	
 	public BitImage(int width, int height) {
@@ -36,9 +35,7 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 	}
 	
 	public BitImage(YUYVImage src, TriIntPredicate classifier) {
-		this.width = src.getWidth();
-		this.height = src.getHeight();
-		pixels = new BitSet(width * height);
+		this(new BitSet(src.getWidth() * src.getHeight()), src.getWidth(), src.getHeight());
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				set(x, y, 
@@ -49,9 +46,20 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 		}
 	}
 	
+	public static BitImage from(String src) {
+		String[] rows = src.split(" ");
+		BitImage result = new BitImage(rows[0].length(), rows.length);
+		for (int y = 0; y < rows.length; y++) {
+			for (int x = 0; x < rows[y].length(); x++) {
+				result.set(x, y, rows[y].charAt(x) == '1');
+			}
+		}
+		return result;
+	}
+	
 	public static BitImage intensityView(YUYVImage src) {
 		int mean = src.getMeanY();
-		BitImage img = new BitImage(src);
+		BitImage img = new BitImage(src.getWidth(), src.getHeight());
 		for (int y = 0; y < img.getHeight(); y++) {
 			for (int x = 0; x < img.getWidth(); x++) {
 				img.set(x, y, (src.getY(x, y) & 0xFF) > mean);
@@ -61,7 +69,7 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 	}
 	
 	public static BitImage colorView(YUYVImage src, BiIntPredicate colors) {
-		BitImage img = new BitImage(src);
+		BitImage img = new BitImage(src.getWidth(), src.getHeight());
 		for (int y = 0; y < img.getHeight(); y++) {
 			for (int x = 0; x < img.getWidth(); x+=2) {
 				boolean match = colors.test(src.getU(x, y) & 0xFF, src.getV(x, y) & 0xFF);
@@ -144,10 +152,14 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 		pixels.clear();
 	}
 	
-	public int distanceTo(BitImage other) {
+	public BitImage xored(BitImage other) {
 		BitSet xored = this.pixelCopy();
 		xored.xor(other.pixels);
-		return xored.cardinality();
+		return new BitImage(xored, width, height);
+	}
+	
+	public int distanceTo(BitImage other) {
+		return xored(other).size();
 	}
 	
 	public void xDilate(int radius) {

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import lejos.hardware.motor.Motor;
@@ -69,6 +70,10 @@ public class Util {
 		}
 		s.close();
 		return sb.toString();
+	}
+	
+	public static <T> T fileToObject(File f, Function<String,T> extractor) throws FileNotFoundException {
+		return extractor.apply(fileToString(f));
 	}
 	
 	/**
