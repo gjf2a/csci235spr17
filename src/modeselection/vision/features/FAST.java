@@ -18,6 +18,10 @@ public class FAST extends BitImage {
 					new Feature(0, -3), new Feature(-1, -3), new Feature(-2, -2), new Feature(-3, -1),
 					new Feature(-3, 0), new Feature(-3, 1), new Feature(-2, 2), new Feature(-1, 3)};
 	
+	private ThreshCounter threshCounts = new ThreshCounter();
+	private byte[] comparisons = new byte[CIRCLE_POINTS.length];
+	private int[] countFor = new int[comparisons.length];
+	
 	public <T extends ProcessableImage<T>> FAST(T img, int scale) {
 		super(img.getWidth(), img.getHeight());
 		scalePyramid(img, scale);
@@ -43,16 +47,16 @@ public class FAST extends BitImage {
 				if (i0 != ThreshCounter.WITHIN || i8 != ThreshCounter.WITHIN) {
 					byte i4 = eval(img, x, y, 4);
 					byte i12 = eval(img, x, y, 12);
-					ThreshCounter counts = new ThreshCounter();
-					counts.bump(i0);
-					counts.bump(i4);
-					counts.bump(i8);
-					counts.bump(i12);
+					threshCounts.reset();
+					threshCounts.bump(i0);
+					threshCounts.bump(i4);
+					threshCounts.bump(i8);
+					threshCounts.bump(i12);
 					boolean found = false;
-					if (counts.getCountFor(ThreshCounter.ABOVE) >= 3) {
-						found = longestSequenceOf(getComparisons(img, x, y), ThreshCounter.ABOVE) >= N;
-					} else if (counts.getCountFor(ThreshCounter.BELOW) >= 3) {
-						found = longestSequenceOf(getComparisons(img, x, y), ThreshCounter.BELOW) >= N;
+					if (threshCounts.getCountFor(ThreshCounter.ABOVE) >= 3) {
+						found = longestOf(ThreshCounter.ABOVE, img, x, y) >= N;
+					} else if (threshCounts.getCountFor(ThreshCounter.BELOW) >= 3) {
+						found = longestOf(ThreshCounter.BELOW, img, x, y) >= N;
 					}
 					if (found) {
 						set(x * featureScale, y * featureScale);
@@ -62,23 +66,20 @@ public class FAST extends BitImage {
 		}
 	}
 	
-	<T extends ProcessableImage<T>> byte[] getComparisons(ProcessableImage<T> img, int x, int y) {
-		byte[] result = new byte[CIRCLE_POINTS.length];
+	<T extends ProcessableImage<T>> int longestOf(byte of, ProcessableImage<T> img, int x, int y) {
 		for (int i = 0; i < CIRCLE_POINTS.length; i++) {
-			result[i] = eval(img, x, y, i);
+			comparisons[i] = eval(img, x, y, i);
+			countFor[i] = 0;
 		}
-		return result;
-	}
-	
-	int longestSequenceOf(byte[] threshes, byte of) {
-		int[] countFor = new int[threshes.length];
-		for (int i = 0; i < threshes.length; i++) {
+		
+		for (int i = 0; i < comparisons.length; i++) {
 			int j = 0;
-			while (j < threshes.length && threshes[(i+j) % threshes.length] == of) {
+			while (j < comparisons.length && comparisons[(i+j) % comparisons.length] == of) {
 				j += 1;
 			}
 			countFor[i] = j;
 		}
+		
 		int max = countFor[0];
 		for (int i = 1; i < countFor.length; i++) {
 			if (countFor[i] > max) {

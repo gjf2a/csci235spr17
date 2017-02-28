@@ -9,6 +9,10 @@ public class ThreshCounter {
 		counts[which] += 1;
 	}
 	
+	public void reset() {
+		counts[0] = counts[1] = counts[2] = 0;
+	}
+	
 	public int getCountFor(byte which) {
 		return counts[which];
 	}
