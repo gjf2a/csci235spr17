@@ -2,14 +2,13 @@ package modeselection.vision;
 
 import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.LinkedHashMap;
 import java.util.function.BiConsumer;
 
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.video.YUYVImage;
 import modeselection.util.DeepCopyable;
+import modeselection.util.Util;
 import modeselection.vision.features.Feature;
-import modeselection.vision.features.StableMatchPrefs;
 
 public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 	private BitSet pixels;
@@ -18,7 +17,11 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 	public BitImage(BitImage src) {
 		this.width = src.width;
 		this.height = src.height;
-		this.pixels = src.pixels.get(0, width*height);
+		this.pixels = src.pixelCopy();
+	}
+	
+	private BitSet pixelCopy() {
+		return pixels.get(0, width*height);
 	}
 	
 	public BitImage(YUYVImage src) {
@@ -46,7 +49,7 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 		}
 	}
 	
-	public static BitImage basicView(YUYVImage src) {
+	public static BitImage intensityView(YUYVImage src) {
 		int mean = src.getMeanY();
 		BitImage img = new BitImage(src);
 		for (int y = 0; y < img.getHeight(); y++) {
@@ -141,6 +144,23 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 		pixels.clear();
 	}
 	
+	public int distanceTo(BitImage other) {
+		BitSet xored = this.pixelCopy();
+		xored.xor(other.pixels);
+		return xored.cardinality();
+	}
+	
+	public void xDilate(int radius) {
+		Util.assertArgument(radius >= 1, "dilation width must be positive");
+		for (int y = 0; y < getHeight(); y++) {
+			for (int x = 0; x < getWidth(); x++) {
+				for (int w = Math.max(0, x - radius); w <= Math.min(getWidth() - 1, x + radius); w++) {
+					if (!isSet(x, y) && isSet(w, y)) {set(x, y);}
+				}
+			}
+		}
+	}
+	
 	public boolean isSet(int x, int y) {
 		return pixels.get(index(x, y));
 	}
@@ -168,23 +188,6 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 	@Override
 	public BitImage deepCopy() {
 		return new BitImage(this);
-	}
-	
-	public static LinkedHashMap<Feature,Feature> getStableMatches(BitImage img1, BitImage img2) {
-		return StableMatchPrefs.makeStableMatches(img1.allSet(), img2.allSet(), (m, w) -> (int)(Feature.euclideanDistanceSquared(m, w)));
-	}
-	
-	public static LinkedHashMap<Feature,Feature> getGreedyMatches(BitImage img1, BitImage img2, int searchBound) {
-		LinkedHashMap<Feature,Long> bestDistances = new LinkedHashMap<>();
-		LinkedHashMap<Feature,Feature> result = new LinkedHashMap<>();
-		visitNeighbors(img1, img2, searchBound, (f1, f2) -> {
-			long f2distance = Feature.euclideanDistanceSquared(f1, f2);
-			if (!bestDistances.containsKey(f1) || f2distance < bestDistances.get(f1)) {
-				result.put(f1, f2);
-				bestDistances.put(f1, f2distance);
-			}
-		});
-		return result;
 	}
 	
 	public static void visitNeighbors(BitImage img1, BitImage img2, int searchBound, BiConsumer<Feature,Feature> neighborFunc) {

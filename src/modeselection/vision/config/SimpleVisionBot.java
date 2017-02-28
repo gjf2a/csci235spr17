@@ -11,7 +11,7 @@ public class SimpleVisionBot extends VisionBot {
 	
 	@Override
 	public BitImage processImage(AdaptedYUYVImage img) {
-		return BitImage.basicView(img);
+		return BitImage.intensityView(img);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class ColorPicker extends VisionBot {
 	
 	@Override
 	public BitImage processImage(AdaptedYUYVImage img) {
-		BitImage show = BitImage.basicView(img);
+		BitImage show = BitImage.intensityView(img);
 		moveCursor();		
 		cursor.render(show);
 		addColor(img);

@@ -67,26 +67,36 @@ public class FAST extends BitImage {
 	}
 	
 	<T extends ProcessableImage<T>> int longestOf(byte of, ProcessableImage<T> img, int x, int y) {
+		evalCircleAt(img, x, y);
+		findCountsFor(of);
+		return longestCountAt();
+	}
+	
+	private <T extends ProcessableImage<T>> void evalCircleAt(ProcessableImage<T> img, int x, int y) {
 		for (int i = 0; i < CIRCLE_POINTS.length; i++) {
 			comparisons[i] = eval(img, x, y, i);
 			countFor[i] = 0;
-		}
-		
+		}		
+	}
+	
+	private void findCountsFor(byte of) {
 		for (int i = 0; i < comparisons.length; i++) {
 			int j = 0;
 			while (j < comparisons.length && comparisons[(i+j) % comparisons.length] == of) {
 				j += 1;
 			}
 			countFor[i] = j;
-		}
-		
+		}		
+	}
+	
+	private int longestCountAt() {
 		int max = countFor[0];
 		for (int i = 1; i < countFor.length; i++) {
 			if (countFor[i] > max) {
 				max = countFor[i];
 			}
 		}
-		return max;
+		return max;		
 	}
 	
 	<T extends ProcessableImage<T>> int findFirstOf(ProcessableImage<T> img, int x, int y, int intensityThreshold, byte of) {
