@@ -7,20 +7,19 @@ import lejos.hardware.lcd.LCD;
 import modeselection.util.Util;
 import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.BitImage;
-import modeselection.vision.config.VisionBot;
 
-public class SceneChecker extends VisionBot {
+public class BitSceneChecker extends BasicVisionBot {
 	public static final String FILENAME = "img1.txt";
 
 	private BitImage ref;
 	private int total, min, max;
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		SceneChecker checker = new SceneChecker(FILENAME);
+		BitSceneChecker checker = new BitSceneChecker(FILENAME);
 		checker.run();
 	}
 	
-	public SceneChecker(String filename) throws FileNotFoundException {
+	public BitSceneChecker(String filename) throws FileNotFoundException {
 		ref = Util.fileToObject(new File(filename), s -> BitImage.from(s));
 		min = Integer.MAX_VALUE;
 		max = Integer.MIN_VALUE;
@@ -28,14 +27,14 @@ public class SceneChecker extends VisionBot {
 	}
 	
 	@Override
-	public BitImage processImage(AdaptedYUYVImage img) {
+	public void grabImage(AdaptedYUYVImage img) {
 		BitImage proc = BitImage.intensityView(img);
 		BitImage xored = proc.xored(ref);
 		int xor = xored.size();
 		if (xor < min) {min = xor;}
 		if (xor > max) {max = xor;}
 		total += xor;
-		return xored;
+		LCD.drawString(String.format("%d     ", xor), 3, 3);
 	}
 	
 	@Override

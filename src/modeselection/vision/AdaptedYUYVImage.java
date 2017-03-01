@@ -39,6 +39,22 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 	}
 	
 	@Override
+	public boolean equals(Object other) {
+		if (other instanceof AdaptedYUYVImage) {
+			AdaptedYUYVImage that = (AdaptedYUYVImage)other;
+			if (this.pix.length == that.pix.length) {
+				for (int i = 0; i < this.pix.length; i++) {
+					if (this.pix[i] != that.pix[i]) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 		result.append(getWidth());
@@ -52,7 +68,7 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 	}
 	
 	public static AdaptedYUYVImage fromString(String src) {
-		String[] nums = src.split(" ");
+		String[] nums = src.trim().split(" ");
 		int width = Integer.parseInt(nums[0]);
 		int height = Integer.parseInt(nums[1]);
 		int remainingValues = nums.length - 2;
@@ -225,5 +241,20 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 	@Override
 	public AdaptedYUYVImage deepCopy() {
 		return new AdaptedYUYVImage(this);
+	}
+	
+	public long getDistanceTo(YUYVImage other) {
+		long ssd = 0;
+		for (int x = 0; x < this.getWidth(); ++x) {
+			for (int y = 0; y < this.getHeight(); ++y) {
+				long yDiff = this.getY(x, y) - other.getY(x, y);
+				ssd += Util.pow(yDiff, 2);
+				long uDiff = this.getU(x, y) - other.getU(x, y);
+				ssd += Util.pow(uDiff, 2);
+				long vDiff = this.getV(x, y) - other.getV(x, y);
+				ssd += Util.pow(vDiff, 2);
+			}
+		}
+		return ssd;
 	}
 }

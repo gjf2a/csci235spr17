@@ -6,11 +6,11 @@ import java.io.FileNotFoundException;
 import lejos.hardware.video.YUYVImage;
 import modeselection.util.Util;
 
-public class SceneFlagger<C extends Enum<C>> extends BaseSubFlagger<C,Integer> {
+public class BitSceneFlagger<C extends Enum<C>> extends BaseSubFlagger<C,Integer> {
 
 	private BitImage reference;
 	
-	public SceneFlagger(String filename) throws FileNotFoundException {
+	public BitSceneFlagger(String filename) throws FileNotFoundException {
 		reference = Util.fileToObject(new File(filename), s -> BitImage.from(s));
 	}
 	

@@ -1,4 +1,4 @@
-package proj6.example;
+package proj6.example1;
 
 import java.io.IOException;
 
@@ -6,14 +6,14 @@ import lejos.hardware.motor.Motor;
 import modeselection.ModeSelector;
 import modeselection.Transitions;
 import modeselection.vision.CameraFlagger;
-import modeselection.vision.SceneFlagger;
+import modeselection.vision.BitSceneFlagger;
 
 public class RunAway {
 	public static void main(String[] args) throws IOException {
 		CameraFlagger<Condition> camera = new CameraFlagger<>();
-		SceneFlagger<Condition> image = new SceneFlagger<>("img1.txt");
+		BitSceneFlagger<Condition> image = new BitSceneFlagger<>("img1.txt");
 		camera.addSub(image);
-		image.add2(Condition.SCARED, Condition.OKAY, i -> i < 5000);
+		image.add2(Condition.SCARED, Condition.OKAY, i -> i < 8000);
 		
 		Transitions<Condition,Mode> table = new Transitions<>();
 		table.add(Condition.SCARED, Mode.BACKWARD)

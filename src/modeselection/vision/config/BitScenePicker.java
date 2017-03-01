@@ -10,11 +10,11 @@ import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.BitImage;
 import modeselection.vision.config.VisionBot;
 
-public class ScenePicker extends VisionBot {
+public class BitScenePicker extends VisionBot {
 	public static final String FILENAME = "img1.txt";
 	
 	public static void main(String[] args) {
-		new ScenePicker().run();
+		new BitScenePicker().run();
 	}
 	
 	private BitImage picked;
