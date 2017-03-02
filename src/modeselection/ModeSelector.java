@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
+import modeselection.util.CycleTracker;
 import modeselection.util.Logger;
 
 public class ModeSelector<C extends Enum<C>, M extends Enum<M>> implements Runnable, Consumer<SensedValues<C>> {
@@ -16,6 +17,7 @@ public class ModeSelector<C extends Enum<C>, M extends Enum<M>> implements Runna
 	private EnumMap<M,Runnable> actions;
 	private EnumMap<M,Transitions<C,M>> modeTransitions;
 	private Logger logger = Logger.EV3Log;
+	private CycleTracker cycles;
 	
 	public ModeSelector(Class<C> conditionClass, Class<M> modeClass, M start) {
 		this.current = start;
@@ -61,6 +63,7 @@ public class ModeSelector<C extends Enum<C>, M extends Enum<M>> implements Runna
 	
 	public void control() throws IOException {
 		actions.get(current).run();
+		cycles = new CycleTracker();
 		while (Button.ESCAPE.isUp()) {
 			run();
 			show();
@@ -72,6 +75,7 @@ public class ModeSelector<C extends Enum<C>, M extends Enum<M>> implements Runna
 	@Override
 	public void run() {
 		accept(sensors.getCurrentState());
+		cycles.cycle();
 	}
 
 	@Override
@@ -93,11 +97,13 @@ public class ModeSelector<C extends Enum<C>, M extends Enum<M>> implements Runna
 	public void show() {
 		LCD.clear();
 		LCD.drawString(current.name(), 0, 0);
-		StateClassifier.showState(conditions, 1);
+		LCD.drawString(cycles.getFPSString() + " hz", 0, 1);
+		StateClassifier.showState(conditions, 2);
 	}
 	
 	public void log() {
 		logger.format("current: %s", current.name());
+		logger.format("%s hz", cycles.getFPSString());
 		sensors.logState(logger, conditions);
 	}
 }

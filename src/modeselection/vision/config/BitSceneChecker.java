@@ -9,7 +9,7 @@ import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.BitImage;
 
 public class BitSceneChecker extends BasicVisionBot {
-	public static final String FILENAME = "img1.txt";
+	public static final String FILENAME = "run2.txt";
 
 	private BitImage ref;
 	private int total, min, max;

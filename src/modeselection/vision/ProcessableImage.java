@@ -1,10 +1,7 @@
 package modeselection.vision;
 
-import javafx.scene.paint.Color;
-
 public interface ProcessableImage<T extends ProcessableImage<T>> extends ImageOutline {
 	public int getIntensity(int x, int y);
-	public void setRGB(int x, int y, Color c);
 	
 	default public boolean canShrinkBy(int shrinkFactor) {
 		return getWidth() % shrinkFactor == 0 && getHeight() % shrinkFactor == 0;

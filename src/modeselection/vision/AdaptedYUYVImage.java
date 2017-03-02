@@ -3,7 +3,6 @@ package modeselection.vision;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
 
-import javafx.scene.paint.Color;
 import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.video.YUYVImage;
 import modeselection.util.Clusterable;
@@ -83,23 +82,6 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 
 		AdaptedYUYVImage result = new AdaptedYUYVImage(pix, width, height);
 		return result;
-	}
-	
-	@Override
-	public void setRGB(int x, int y, Color c) {
-		//double Y = 0.299 * c.getRed() + 0.587 * c.getGreen() + 0.114 * c.getBlue();
-		//double U = Math.max(0, 0.492 * (c.getBlue() - Y));
-		//double V = Math.max(0, 0.877 * (c.getRed() - Y));
-		double Y = (c.getRed() + c.getBlue() + c.getGreen()) / 3;
-		double U = (1.0 + c.getBlue() - Y) / 2;
-		double V = (1.0 + c.getRed() - Y) / 2;
-		int base = getPairBase(x, y);
-		pix[base] = (byte)(Y * 255);
-		pix[base+1] = (byte)(U * 255);
-		if (base + 3 < pix.length) {
-			pix[base+2] = pix[base];
-			pix[base+3] = (byte)(V * 255);
-		}
 	}
 
 	public int getPairBase(int x, int y) {  
@@ -196,16 +178,6 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 	
 	public static int clamp(int value) {
 		return Math.min(255, Math.max(0, value));
-	}
-	
-	public Color getRGBColor(int x, int y) {
-		int c = getY(x, y) - 16;
-		int d = getU(x, y) - 128;
-		int e = getV(x, y) - 128;
-		int r = clamp((298*c + 409*e + 128) >> 8);
-		int g = clamp((298*c - 100*d - 208*e + 128) >> 8);
-		int b = clamp((298*c + 516*d + 128) >> 8);
-		return new Color(r / 255.0, g / 255.0, b / 255.0, 1.0);
 	}
 
 	@Override

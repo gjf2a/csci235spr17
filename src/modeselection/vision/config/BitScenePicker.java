@@ -11,7 +11,7 @@ import modeselection.vision.BitImage;
 import modeselection.vision.config.VisionBot;
 
 public class BitScenePicker extends VisionBot {
-	public static final String FILENAME = "img1.txt";
+	public static final String FILENAME = "run2.txt";
 	
 	public static void main(String[] args) {
 		new BitScenePicker().run();

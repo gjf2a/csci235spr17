@@ -11,9 +11,9 @@ import modeselection.vision.BitSceneFlagger;
 public class RunAway {
 	public static void main(String[] args) throws IOException {
 		CameraFlagger<Condition> camera = new CameraFlagger<>();
-		BitSceneFlagger<Condition> image = new BitSceneFlagger<>("img1.txt");
+		BitSceneFlagger<Condition> image = new BitSceneFlagger<>("run1.txt", "run2.txt");
 		camera.addSub(image);
-		image.add2(Condition.SCARED, Condition.OKAY, i -> i < 8000);
+		image.add2(Condition.SCARED, Condition.OKAY, i -> i < 7000);
 		
 		Transitions<Condition,Mode> table = new Transitions<>();
 		table.add(Condition.SCARED, Mode.BACKWARD)
