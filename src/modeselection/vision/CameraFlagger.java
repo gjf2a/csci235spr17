@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import lejos.hardware.BrickFinder;
 import lejos.hardware.video.Video;
-import lejos.hardware.video.YUYVImage;
 import modeselection.ConditionCounted;
 import modeselection.Flagger;
 import modeselection.SensedValues;
@@ -33,7 +32,7 @@ public class CameraFlagger<C extends Enum<C>> implements Flagger<C> {
 	public void update(SensedValues<C> conditions) {
 		try {
 			camera.grabFrame(frame);
-			YUYVImage img = new YUYVImage(frame, WIDTH, HEIGHT);
+			AdaptedYUYVImage img = new AdaptedYUYVImage(frame, WIDTH, HEIGHT);
 			for (SubFlagger<C> sub: subs) {
 				sub.update(img, conditions);
 			}

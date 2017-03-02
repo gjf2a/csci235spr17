@@ -34,7 +34,7 @@ public class BitSceneChecker extends BasicVisionBot {
 		if (xor < min) {min = xor;}
 		if (xor > max) {max = xor;}
 		total += xor;
-		LCD.drawString(String.format("%d     ", xor), 3, 3);
+		Util.rightJustifyLong(xor, 3);
 	}
 	
 	@Override

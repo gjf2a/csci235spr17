@@ -3,7 +3,6 @@ package modeselection.vision;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import lejos.hardware.video.YUYVImage;
 import modeselection.util.Util;
 
 public class BitSceneFlagger<C extends Enum<C>> extends BaseSubFlagger<C,Integer> {
@@ -15,7 +14,7 @@ public class BitSceneFlagger<C extends Enum<C>> extends BaseSubFlagger<C,Integer
 	}
 	
 	@Override
-	public Integer getSample(YUYVImage img) {
+	public Integer getSample(AdaptedYUYVImage img) {
 		BitImage xored = BitImage.intensityView(img).xored(reference);
 		return xored.size();
 	}

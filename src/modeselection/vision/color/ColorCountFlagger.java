@@ -1,6 +1,6 @@
 package modeselection.vision.color;
 
-import lejos.hardware.video.YUYVImage;
+import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.BaseSubFlagger;
 
 public class ColorCountFlagger<C extends Enum<C>> extends BaseSubFlagger<C,ColorCount> {
@@ -11,7 +11,7 @@ public class ColorCountFlagger<C extends Enum<C>> extends BaseSubFlagger<C,Color
 	}
 
 	@Override
-	public ColorCount getSample(YUYVImage img) {
+	public ColorCount getSample(AdaptedYUYVImage img) {
 		return new ColorCount(filter, img);
 	}
 }

@@ -10,7 +10,9 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.Motor;
+import modeselection.vision.config.BasicVisionBot;
 
 public class Util {
 	
@@ -164,5 +166,15 @@ public class Util {
 
 	public static double angleDiff(double theta1, double theta2) {
 		return Math.atan2(Math.sin(theta1 - theta2), Math.cos(theta1 - theta2));
+	}
+	
+	public static void rightJustifyLong(long value, int row) {
+		String vStr = Long.toString(value);
+		int x = BasicVisionBot.CHAR_COLS - vStr.length();
+		String leading = "";
+		for (int i = 0; i < x; i++) {
+			leading += " ";
+		}
+		LCD.drawString(leading + vStr, 0, row);
 	}
 }

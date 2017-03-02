@@ -11,6 +11,7 @@ import modeselection.vision.Pos;
 
 abstract public class BasicVisionBot implements Runnable {
 	public static final int WIDTH = 160, HEIGHT = 120;
+	public static final int CHAR_ROWS = 8, CHAR_COLS = 18;
 
 	abstract public void grabImage(AdaptedYUYVImage img);
 	

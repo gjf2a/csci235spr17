@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import lejos.hardware.lcd.LCD;
 import modeselection.util.Util;
 import modeselection.vision.AdaptedYUYVImage;
+import modeselection.vision.SSDSceneFlagger;
 
 public class SSDSceneChecker extends BasicVisionBot {
 	public static final String FILENAME = "ssd1.txt";
@@ -19,7 +20,7 @@ public class SSDSceneChecker extends BasicVisionBot {
 	}
 	
 	public SSDSceneChecker(String filename) throws FileNotFoundException {
-		ref = Util.fileToObject(new File(filename), s -> AdaptedYUYVImage.fromString(s));
+		ref = Util.fileToObject(new File(filename), s -> AdaptedYUYVImage.fromString(s)).shrunken(SSDSceneFlagger.SHRINK);
 		min = Long.MAX_VALUE;
 		max = Long.MIN_VALUE;
 		total = 0;
@@ -27,11 +28,11 @@ public class SSDSceneChecker extends BasicVisionBot {
 	
 	@Override
 	public void grabImage(AdaptedYUYVImage img) {
-		long dist = ref.getDistanceTo(img);
+		long dist = ref.getDistanceTo(img.shrunken(SSDSceneFlagger.SHRINK));
 		if (dist < min) {min = dist;}
 		if (dist > max) {max = dist;}
 		total += dist;
-		LCD.drawString(String.format("%d       ", dist), 1, 3);
+		Util.rightJustifyLong(dist, 3);
 	}
 	
 	@Override
