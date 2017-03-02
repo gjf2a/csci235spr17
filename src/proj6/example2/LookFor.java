@@ -13,7 +13,7 @@ public class LookFor {
 		CameraFlagger<Condition> camera = new CameraFlagger<>();
 		BitSceneFlagger<Condition> image = new BitSceneFlagger<>("img1.txt");
 		camera.addSub(image);
-		image.add2(Condition.FOUND, Condition.LOST, i -> i < 5500);
+		image.add2(Condition.FOUND, Condition.LOST, i -> i < 7500);
 		
 		Transitions<Condition,Mode> table = new Transitions<>();
 		table.add(Condition.FOUND, Mode.STOP)

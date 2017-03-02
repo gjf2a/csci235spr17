@@ -20,7 +20,7 @@ public class SSDSceneChecker extends BasicVisionBot {
 	}
 	
 	public SSDSceneChecker(String filename) throws FileNotFoundException {
-		ref = Util.fileToObject(new File(filename), s -> AdaptedYUYVImage.fromString(s)).shrunken(SSDSceneFlagger.SHRINK);
+		ref = Util.fileToObject(new File(filename), s -> SSDSceneFlagger.adapt(AdaptedYUYVImage.fromString(s)));
 		min = Long.MAX_VALUE;
 		max = Long.MIN_VALUE;
 		total = 0;
@@ -28,7 +28,7 @@ public class SSDSceneChecker extends BasicVisionBot {
 	
 	@Override
 	public void grabImage(AdaptedYUYVImage img) {
-		long dist = ref.getDistanceTo(img.shrunken(SSDSceneFlagger.SHRINK));
+		long dist = ref.getDistanceTo(SSDSceneFlagger.adapt(img));
 		if (dist < min) {min = dist;}
 		if (dist > max) {max = dist;}
 		total += dist;

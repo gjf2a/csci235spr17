@@ -1,22 +1,19 @@
 package modeselection.vision;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
-import modeselection.util.Util;
-
-public class SSDSceneFlagger<C extends Enum<C>> extends BaseSubFlagger<C,Long> {
-
-	private AdaptedYUYVImage img1;
+public class SSDSceneFlagger<C extends Enum<C>> extends SceneFlagger<C,AdaptedYUYVImage,Long> {
 	
-	public static final int SHRINK = 2;
+	private static final int SHRINK = 2;
 	
-	public SSDSceneFlagger(String filename) throws FileNotFoundException {
-		img1 = Util.fileToObject(new File(filename), s -> AdaptedYUYVImage.fromString(s)).shrunken(SHRINK);
+	public static AdaptedYUYVImage adapt(AdaptedYUYVImage src) {
+		return src.shrunken(SHRINK);
 	}
 	
-	@Override
-	public Long getSample(AdaptedYUYVImage img2) {
-		return img1.getDistanceTo(img2.shrunken(SHRINK));
+	public SSDSceneFlagger(String... filenames) throws FileNotFoundException {
+		super((img1, img2) -> img1.getDistanceTo(img2), 
+				img -> adapt(img), 
+				s -> adapt(AdaptedYUYVImage.fromString(s)), 
+				filenames);
 	}
 }
