@@ -23,6 +23,10 @@ abstract public class BaseFlagger<C extends Enum<C>, D> implements ConditionCoun
 			  .add(falseFlag, d -> !p.test(d));
 	}
 	
+	public BaseFlagger<C,D> addFloatValue(C valueFlag, Function<D,Float> valueFunc) {
+		return addValue(valueFlag, f -> (double)valueFunc.apply(f));
+	}
+	
 	public BaseFlagger<C,D> addValue(C valueFlag, Function<D,Double> valueFunc) {
 		valueFlags.add(valueFlag);
 		valueFuncs.add(valueFunc);
