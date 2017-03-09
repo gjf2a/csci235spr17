@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.Motor;
+import lejos.hardware.motor.NXTRegulatedMotor;
 import modeselection.vision.config.BasicVisionBot;
 
 public class Util {
@@ -176,5 +177,15 @@ public class Util {
 			leading += " ";
 		}
 		LCD.drawString(leading + vStr, 0, row);
+	}
+	
+	public static void motorAt(NXTRegulatedMotor m, int speed) {
+		if (speed < 0) {
+			m.backward();
+			speed *= -1;
+		} else {
+			m.forward();
+		}
+		m.setSpeed(speed);
 	}
 }

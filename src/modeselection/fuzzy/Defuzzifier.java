@@ -22,10 +22,11 @@ public class Defuzzifier<C extends Enum<C>> implements Consumer<SensedValues<C>>
 		}
 	}
 
-	public void addDefuzzer(C condition, int start, int end, IntConsumer action) {
+	public Defuzzifier<C> addDefuzzer(C condition, int start, int end, IntConsumer action) {
 		defuzzers.put(condition, value -> {
 			action.accept(defuzzify(value, start, end));
 		});
+		return this;
 	}
 	
 	protected final static int defuzzify(double fuzzy, int speed0, int speed1) {

@@ -11,6 +11,7 @@ import modeselection.Transitions;
 import modeselection.fuzzy.Defuzzifier;
 import modeselection.fuzzy.Fuzzy;
 import modeselection.fuzzy.FuzzyRuleBase;
+import modeselection.util.Util;
 import modeselection.vision.CameraFlagger;
 import modeselection.vision.color.ColorCountFlagger;
 
@@ -30,10 +31,8 @@ public class Backup {
 		
 		Defuzzifier<Condition> defuzz = new Defuzzifier<>(Condition.class);
 		defuzz.addDefuzzer(Condition.EITHER, -300, 0, i -> {
-			Motor.A.setSpeed(i);
-			Motor.D.setSpeed(i);
-			Motor.A.backward();
-			Motor.D.backward();
+			Util.motorAt(Motor.A, i);
+			Util.motorAt(Motor.D, i);
 		});
 		
 		Transitions<Condition,Mode> table = new Transitions<>();

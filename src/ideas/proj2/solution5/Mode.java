@@ -1,4 +1,4 @@
-package proj2.solution5;
+package ideas.proj2.solution5;
 
 public enum Mode {
 	PATROLLING,

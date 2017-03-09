@@ -1,4 +1,4 @@
-package proj2.solution1;
+package ideas.proj2.solution1;
 
 import java.io.IOException;
 
