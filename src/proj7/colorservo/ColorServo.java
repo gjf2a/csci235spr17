@@ -13,6 +13,8 @@ import modeselection.vision.CameraFlagger;
 import modeselection.vision.color.ColorCountFlagger;
 
 public class ColorServo {
+	public static final int SPEED = 180;
+	
 	public static void main(String[] args) throws IOException {
 		CameraFlagger<Condition> camera = new CameraFlagger<>();
 		ColorCountFlagger<Condition> counter = new ColorCountFlagger<>(89, 106, 190, 213);
@@ -24,8 +26,8 @@ public class ColorServo {
 		rules.addRule(Condition.NEG_RED_POS, sensed -> Fuzzy.not(sensed, Condition.RED_POS));
 		
 		Defuzzifier<Condition> defuzz = new Defuzzifier<>(Condition.class);
-		defuzz.addDefuzzer(Condition.RED_POS, -360, 360, i -> Util.motorAt(Motor.A, i))
-		      .addDefuzzer(Condition.NEG_RED_POS, 360, -360, i -> Util.motorAt(Motor.D,  i));
+		defuzz.addDefuzzer(Condition.RED_POS, -SPEED, SPEED, i -> Util.motorAt(Motor.A, i))
+		      .addDefuzzer(Condition.NEG_RED_POS, -SPEED, SPEED, i -> Util.motorAt(Motor.D, i));
 	
 		Transitions<Condition,Mode> table = new Transitions<>();
 		table.add(Condition.HAS_RED, Mode.SERVO)

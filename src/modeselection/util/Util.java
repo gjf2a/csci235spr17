@@ -180,12 +180,11 @@ public class Util {
 	}
 	
 	public static void motorAt(NXTRegulatedMotor m, int speed) {
+		m.setSpeed(speed);
 		if (speed < 0) {
 			m.backward();
-			speed *= -1;
 		} else {
 			m.forward();
 		}
-		m.setSpeed(speed);
 	}
 }
