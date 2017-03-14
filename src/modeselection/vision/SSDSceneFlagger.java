@@ -11,7 +11,7 @@ public class SSDSceneFlagger<C extends Enum<C>> extends SceneFlagger<C,AdaptedYU
 	}
 	
 	public SSDSceneFlagger(String... filenames) throws FileNotFoundException {
-		super((img1, img2) -> img1.getDistanceTo(img2), 
+		super((img1, img2) -> img1.distanceTo(img2), 
 				img -> adapt(img), 
 				s -> adapt(AdaptedYUYVImage.fromString(s)), 
 				filenames);

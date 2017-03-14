@@ -1,4 +1,4 @@
-package ideas.cluster;
+package modeselection.cluster;
 
 public interface DistanceFunc<T> {
 	public long distance(T img1, T img2);

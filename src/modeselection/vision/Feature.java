@@ -1,6 +1,6 @@
 package modeselection.vision;
 
-import modeselection.util.Clusterable;
+import modeselection.cluster.Clusterable;
 import modeselection.util.DeepCopyable;
 
 public class Feature implements Clusterable<Feature>, DeepCopyable<Feature> {

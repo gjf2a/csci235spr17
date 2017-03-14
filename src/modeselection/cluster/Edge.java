@@ -1,6 +1,5 @@
-package ideas.cluster;
+package modeselection.cluster;
 
-import modeselection.util.Clusterable;
 import modeselection.util.DeepCopyable;
 import modeselection.util.Util;
 

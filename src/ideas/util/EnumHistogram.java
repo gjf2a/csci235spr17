@@ -5,15 +5,26 @@ import java.util.Map.Entry;
 
 import lejos.hardware.lcd.LCD;
 import modeselection.util.DeepCopyable;
+import modeselection.util.Util;
 
 public class EnumHistogram<T extends Enum<T>> extends SemiAbstractHistogram<T,EnumMap<T,Integer>> implements DeepCopyable<EnumHistogram<T>> {
 	private Class<T> enumType;
-	private EnumMap<T,String> abbreviations;
+	
+	private static final String JOINER = ":";
 	
 	public EnumHistogram(Class<T> enumType) {
 		super(new EnumMap<T,Integer>(enumType));
 		this.enumType = enumType;
-		abbreviations = getAbbreviations(enumType);
+	}
+	
+	public static <T extends Enum<T>> EnumHistogram<T> from(Class<T> enumType, String src) {
+		EnumHistogram<T> result = new EnumHistogram<>(enumType);
+		for (String part: Util.debrace(src)) {
+			String[] pieces = part.split(JOINER);
+			result.setCountFor(Util.toEnum(enumType, pieces[0]), 
+					Integer.parseInt(pieces[1]));
+		}
+		return result;
 	}
 	
 	public EnumMap<T,Double> getPortions() {
@@ -22,16 +33,12 @@ public class EnumHistogram<T extends Enum<T>> extends SemiAbstractHistogram<T,En
 		return result;
 	}
 	
-	public String toShortString() {
+	@Override
+	public String toString() {
 		StringBuilder result = new StringBuilder();
-		result.append("{");
 		for (Entry<T, Integer> entry: this) {
-			result.append(abbreviations.get(entry.getKey()) + " " + entry.getValue() + ", ");
+			result.append("{" + entry.getKey() + JOINER + entry.getValue() + "}");
 		}
-		if (result.length() > 1) {
-			result.delete(result.length() - 2, result.length());
-		}
-		result.append("}");
 		return result.toString();
 	}
 	
@@ -41,14 +48,6 @@ public class EnumHistogram<T extends Enum<T>> extends SemiAbstractHistogram<T,En
 		for (Entry<T, Integer> entry: this) {
 			LCD.drawString(String.format("%s:%d", entry.getKey().toString(), entry.getValue()), 0, line++);
 		}
-	}
-	
-	public static <T extends Enum<T>> EnumMap<T,String> getAbbreviations(Class<T> enumType) {
-		EnumMap<T,String> result = new EnumMap<T,String>(enumType);
-		for (T t: enumType.getEnumConstants()) {
-			result.put(t, t.toString().substring(0,findMinDistinctPrefixSizeFor(t, enumType)));
-		}		
-		return result;
 	}
 	
 	public static int minDistinctPrefixSize(String s1, String s2) {

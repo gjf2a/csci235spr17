@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import lejos.hardware.Key;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.Motor;
 import lejos.hardware.motor.NXTRegulatedMotor;
@@ -92,6 +93,17 @@ public class Util {
 	}
 	
 	/**
+	 * Takes any Object with a solid toString() implementation and dumps it into a File.
+	 * @throws IOException 
+	 * 
+	 * 
+	 */
+	public static void objectToFile(File f, Object obj) throws IOException {
+		stringToFile(f, obj.toString());
+	}
+
+	
+	/**
 	 * Stops all EV3 motors.
 	 */
 	public static void stopAllMotors() {
@@ -99,6 +111,21 @@ public class Util {
 		Motor.B.stop(true);
 		Motor.C.stop(true);
 		Motor.D.stop();
+	}
+	
+	/**
+	 * Checks if the button is down. 
+	 * If so, stops all motors, then waits for button to go up.
+	 * @param button
+	 * @return true if button is down
+	 */
+	public static boolean isClicked(Key button) {
+		if (button.isDown()) {
+			stopAllMotors();
+			while (button.isDown()) {}
+			return true;
+		}
+		return false;
 	}
 
 	public static byte bool2byte(boolean bool) {
@@ -186,5 +213,18 @@ public class Util {
 		} else {
 			m.forward();
 		}
+	}
+	
+	/**
+	 * Converts a String to a target enum type.
+	 * Throws IllegalArgumentException if this is not possible.
+	 */
+	public static <E extends Enum<E>> E toEnum(Class<E> enumType, String src) {
+		for (E possibility: enumType.getEnumConstants()) {
+			if (possibility.toString().equals(src)) {
+				return possibility;
+			}
+		}
+		throw new IllegalArgumentException(String.format("'%s' does not match enum type", src));
 	}
 }

@@ -1,9 +1,8 @@
-package ideas.cluster;
+package modeselection.cluster;
 
-import modeselection.util.Clusterable;
 import modeselection.util.DeepCopyable;
 
-public class BSOCTestee implements Clusterable<BSOCTestee>, DeepCopyable<BSOCTestee> {
+public class BSOCTestee implements Clusterable<BSOCTestee>, DeepCopyable<BSOCTestee>, Measurable<BSOCTestee> {
 	private long value;
 	
 	public BSOCTestee() {this(0);}
@@ -16,7 +15,7 @@ public class BSOCTestee implements Clusterable<BSOCTestee>, DeepCopyable<BSOCTes
 	
 	public long get() {return value;}
 	
-	public long distance(BSOCTestee other) {return Math.abs(this.value - other.value);}
+	public long distanceTo(BSOCTestee other) {return Math.abs(this.value - other.value);}
 
 	@Override
 	public BSOCTestee weightedCentroidWith(BSOCTestee other, long thisCount, long otherCount) {

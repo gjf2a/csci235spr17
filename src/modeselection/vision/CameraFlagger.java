@@ -36,6 +36,7 @@ public class CameraFlagger<C extends Enum<C>> implements Flagger<C> {
 			for (SubFlagger<C> sub: subs) {
 				sub.update(img, conditions);
 			}
+			conditions.setRawImage(img);
 		} catch (IOException e) {
 			throw new IllegalStateException("Camera trouble");
 		}		

@@ -1,4 +1,4 @@
-package ideas.cluster;
+package modeselection.cluster;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ public class BoundedSelfOrgClusterTest {
 	
 	@Before
 	public void setup() {
-		bsoc1 = new BoundedSelfOrgCluster<BSOCTestee>(MAX_NODES, BSOCTestee::distance);
+		bsoc1 = new BoundedSelfOrgCluster<BSOCTestee>(MAX_NODES);
 		stringTest("{3}\n{}\n{}");
 		for (long value = 0; value < MAX_NODES; value++) {
 			bsoc1.train(new BSOCTestee(value*value));
@@ -39,6 +39,6 @@ public class BoundedSelfOrgClusterTest {
 	public void stringTest(String target) {
 		assertTrue(bsoc1.edgeRepresentationConsistent());
 		assertEquals(target, bsoc1.toString());
-		assertEquals(bsoc1, new BoundedSelfOrgCluster<>(bsoc1.toString(), BSOCTestee::new, BSOCTestee::distance));
+		assertEquals(bsoc1, new BoundedSelfOrgCluster<>(bsoc1.toString(), BSOCTestee::new));
 	}
 }

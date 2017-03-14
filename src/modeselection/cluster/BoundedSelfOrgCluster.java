@@ -1,4 +1,4 @@
-package ideas.cluster;
+package modeselection.cluster;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,6 @@ import java.util.TreeSet;
 import java.util.function.Function;
 
 import ideas.util.FixedSizeArray;
-import modeselection.util.Clusterable;
 import modeselection.util.DeepCopyable;
 import modeselection.util.Util;
 
@@ -18,7 +17,7 @@ import modeselection.util.Util;
 // Our goal here is to create an online learning algorithm with fast and predictable 
 // runtime performance, suitable for both supervised and unsupervised learning.
 
-public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T>> implements Clusterer<T>, DeepCopyable<BoundedSelfOrgCluster<T>> {
+public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & Measurable<T>> implements Clusterer<T>, DeepCopyable<BoundedSelfOrgCluster<T>> {
 	// Object state
 	private FixedSizeArray<Node<T>> nodes;
 	private ArrayList<TreeSet<Edge<T>>> nodes2edges;
@@ -26,15 +25,12 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T>> i
 	
 	public int maxNumNodes() {return nodes.capacity() - 1;}
 	
-	// Higher-order function
-	private DistanceFunc<T> dist;
-	
 	// Notification
 	private ArrayList<BSOCListener> listeners = new ArrayList<>();
 
 	@Override
 	public BoundedSelfOrgCluster<T> deepCopy() {
-		BoundedSelfOrgCluster<T> result = new BoundedSelfOrgCluster<>(size(), dist);
+		BoundedSelfOrgCluster<T> result = new BoundedSelfOrgCluster<>(size());
 		deepCopyHelp(result);
 		return result;
 	}
@@ -46,13 +42,12 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T>> i
 		result.nodes = this.nodes.deepCopy();
 	}
 
-	public BoundedSelfOrgCluster(int maxNumNodes, DistanceFunc<T> dist) {
-		setupBasic(dist);
+	public BoundedSelfOrgCluster(int maxNumNodes) {
+		setupBasic();
 		setupAvailable(maxNumNodes);
 	}
 	
-	private void setupBasic(DistanceFunc<T> dist) {
-		this.dist = dist;
+	private void setupBasic() {
 		this.edges = new TreeSet<>();		
 		this.nodes2edges = new ArrayList<>();
 	}
@@ -62,8 +57,8 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T>> i
 		Util.assertState(size() == 0, "size() should be zero, but is " + size());
 	}
 	
-	public BoundedSelfOrgCluster(String src, Function<String,T> extractor, DistanceFunc<T> dist) {
-		setupBasic(dist);
+	public BoundedSelfOrgCluster(String src, Function<String,T> extractor) {
+		setupBasic();
 		ArrayList<String> topLevel = Util.debrace(src);
 		fromStringHelp(topLevel, extractor);
 	}
@@ -139,7 +134,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T>> i
 	}
 	
 	private long distance(Node<T> n1, Node<T> n2) {
-		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * dist.distance(n1.getCluster(), n2.getCluster());
+		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * n1.getCluster().distanceTo(n2.getCluster());
 	}
 	
 	private void removeAllEdgesFor(int node) {
@@ -279,11 +274,6 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T>> i
 			result.add(n.getCluster());
 		}
 		return result;
-	}
-
-	@Override
-	public DistanceFunc<T> getDistanceFunc() {
-		return dist;
 	}
 	
 	@Override

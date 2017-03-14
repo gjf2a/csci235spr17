@@ -7,9 +7,12 @@ import java.util.EnumSet;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import modeselection.vision.AdaptedYUYVImage;
+
 public class SensedValues<C extends Enum<C>> {
 	private EnumSet<C> conditions;
 	private EnumMap<C,Double> raw;
+	private AdaptedYUYVImage image;
 	
 	public SensedValues(Class<C> flags) {
 		conditions = EnumSet.noneOf(flags);
@@ -49,5 +52,17 @@ public class SensedValues<C extends Enum<C>> {
 			report.add(String.format("%s:%5.2f", sensor.getKey().name(), sensor.getValue()));
 		}
 		return report;
+	}
+	
+	public void setRawImage(AdaptedYUYVImage img) {
+		this.image = img;
+	}
+	
+	public boolean hasRawImage() {
+		return image != null;
+	}
+	
+	public AdaptedYUYVImage getRawImage() {
+		return image;
 	}
 }

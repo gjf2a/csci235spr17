@@ -5,11 +5,12 @@ import java.util.function.IntUnaryOperator;
 
 import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.video.YUYVImage;
-import modeselection.util.Clusterable;
+import modeselection.cluster.Clusterable;
+import modeselection.cluster.Measurable;
 import modeselection.util.DeepCopyable;
 import modeselection.util.Util;
 
-public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<AdaptedYUYVImage>, DeepCopyable<AdaptedYUYVImage>, Clusterable<AdaptedYUYVImage> {
+public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<AdaptedYUYVImage>, DeepCopyable<AdaptedYUYVImage>, Clusterable<AdaptedYUYVImage>, Measurable<AdaptedYUYVImage> {
 	private byte[] pix;
 	
 	public static byte[] pixelCopy(byte[] pixels) {
@@ -215,7 +216,7 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 		return new AdaptedYUYVImage(this);
 	}
 	
-	public long getDistanceTo(YUYVImage other) {
+	public long distanceTo(AdaptedYUYVImage other) {
 		long ssd = 0;
 		for (int x = 0; x < this.getWidth(); ++x) {
 			for (int y = 0; y < this.getHeight(); ++y) {

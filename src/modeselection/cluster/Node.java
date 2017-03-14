@@ -1,9 +1,8 @@
-package ideas.cluster;
+package modeselection.cluster;
 
 import java.util.ArrayList;
 import java.util.function.Function;
 
-import modeselection.util.Clusterable;
 import modeselection.util.DeepCopyable;
 import modeselection.util.Util;
 

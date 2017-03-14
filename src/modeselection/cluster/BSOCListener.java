@@ -1,4 +1,4 @@
-package ideas.cluster;
+package modeselection.cluster;
 
 public interface BSOCListener {
 	public void addingNode(int node);

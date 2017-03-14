@@ -28,7 +28,7 @@ public class SSDSceneChecker extends BasicVisionBot {
 	
 	@Override
 	public void grabImage(AdaptedYUYVImage img) {
-		long dist = ref.getDistanceTo(SSDSceneFlagger.adapt(img));
+		long dist = ref.distanceTo(SSDSceneFlagger.adapt(img));
 		if (dist < min) {min = dist;}
 		if (dist > max) {max = dist;}
 		total += dist;
