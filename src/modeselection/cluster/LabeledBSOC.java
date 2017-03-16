@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
-import ideas.util.EnumHistogram;
 import modeselection.util.DeepCopyable;
+import modeselection.util.EnumHistogram;
 import modeselection.util.Logger;
 import modeselection.util.Util;
 

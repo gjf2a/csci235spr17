@@ -1,4 +1,4 @@
-package ideas.util;
+package modeselection.util;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -7,9 +7,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.function.UnaryOperator;
-
-import modeselection.util.DeepCopyable;
-import modeselection.util.Util;
 
 public class FixedSizeArray<T> implements DeepCopyable<FixedSizeArray<T>> {
 	private T[] array;

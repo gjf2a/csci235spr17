@@ -1,6 +1,7 @@
 package modeselection.cluster.train;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import lejos.hardware.Button;
@@ -20,7 +21,22 @@ public class RealTimeTrainer<E extends Enum<E> & RobotKey> extends VisionBot {
 	private CycleTimer trainRate, applyRate;
 	
 	public RealTimeTrainer(Class<E> enumClass, int nodes, int shrink, E unclassified, String filename) {
-		bsoc = new ShrinkingLabeledBSOC<>(enumClass, nodes, unclassified, shrink);
+		this(enumClass, filename, new ShrinkingLabeledBSOC<>(enumClass, nodes, unclassified, shrink));
+		
+	}
+	
+	/**
+	 * Loads a previously trained learner for further training.
+	 * @param enumClass
+	 * @param filename
+	 * @throws FileNotFoundException
+	 */
+	public RealTimeTrainer(Class<E> enumClass, String filename) throws FileNotFoundException {
+		this(enumClass, filename, Util.fileToObject(new File(filename), s -> new ShrinkingLabeledBSOC<>(enumClass, s)));
+	}
+	
+	private RealTimeTrainer(Class<E> enumClass, String filename, ShrinkingLabeledBSOC<E> bsoc) {
+		this.bsoc = bsoc;
 		this.enumClass = enumClass;
 		this.filename = filename;
 		learning = true;

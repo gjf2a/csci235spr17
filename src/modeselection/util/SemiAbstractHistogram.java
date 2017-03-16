@@ -1,4 +1,4 @@
-package ideas.util;
+package modeselection.util;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;

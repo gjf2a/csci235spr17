@@ -1,4 +1,4 @@
-package ideas.util;
+package modeselection.util;
 
 import static org.junit.Assert.*;
 

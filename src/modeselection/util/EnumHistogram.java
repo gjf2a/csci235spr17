@@ -1,11 +1,9 @@
-package ideas.util;
+package modeselection.util;
 
 import java.util.EnumMap;
 import java.util.Map.Entry;
 
 import lejos.hardware.lcd.LCD;
-import modeselection.util.DeepCopyable;
-import modeselection.util.Util;
 
 public class EnumHistogram<T extends Enum<T>> extends SemiAbstractHistogram<T,EnumMap<T,Integer>> implements DeepCopyable<EnumHistogram<T>> {
 	private Class<T> enumType;

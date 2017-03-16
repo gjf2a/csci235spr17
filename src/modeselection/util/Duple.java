@@ -1,4 +1,4 @@
-package ideas.util;
+package modeselection.util;
 
 public class Duple<X,Y> {
 	private X x;

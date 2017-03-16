@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.function.Function;
 
-import ideas.util.FixedSizeArray;
 import modeselection.util.DeepCopyable;
+import modeselection.util.FixedSizeArray;
 import modeselection.util.Util;
 
 // This data structure is an adaptation of the idea of Agglomerative Clustering.
@@ -128,10 +128,6 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	public int size() {return nodes.size();}
 	
 	public int getStartingLabel() {return 0;}
-	
-	public long distanceToClosestMatch(T example) {
-		return getNodeRanking(example).get(0).getSecond();
-	}
 	
 	private long distance(Node<T> n1, Node<T> n2) {
 		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * n1.getCluster().distanceTo(n2.getCluster());

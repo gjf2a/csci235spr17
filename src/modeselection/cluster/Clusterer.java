@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import ideas.util.Duple;
+import modeselection.util.Duple;
 import modeselection.util.Util;
 
 public interface Clusterer<T extends Measurable<T>> {

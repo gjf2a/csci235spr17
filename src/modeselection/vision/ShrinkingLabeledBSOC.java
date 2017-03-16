@@ -2,8 +2,8 @@ package modeselection.vision;
 
 import java.util.ArrayList;
 
-import ideas.util.EnumHistogram;
 import modeselection.cluster.LabeledBSOC;
+import modeselection.util.EnumHistogram;
 import modeselection.util.Util;
 
 public class ShrinkingLabeledBSOC<E extends Enum<E>> {
