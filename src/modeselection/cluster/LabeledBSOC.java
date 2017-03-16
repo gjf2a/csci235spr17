@@ -70,6 +70,7 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 	}
 	
 	public EnumHistogram<E> getCountsFor(T example) {
+		Util.assertArgument(example != null, "No example!");
 		int node = bsoc.getClosestMatchFor(example);
 		return node2counts.get(node).deepCopy();
 	}
@@ -93,16 +94,23 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 		return result.toString();
 	}
 	
-	public static <T extends Clusterable<T> & DeepCopyable<T> & Measurable<T>, E extends Enum<E>> LabeledBSOC<T,E> from(Class<E> enumClass, String src, Function<String,T> extractor) {
-		LabeledBSOC<T,E> result = new LabeledBSOC<>(enumClass);
+	public LabeledBSOC(Class<E> enumClass, String src, Function<String,T> extractor) {
+		this(enumClass);
 		ArrayList<String> parts = Util.debrace(src);
-		result.bsoc = new BoundedSelfOrgCluster<T>(parts.get(0), extractor);
-		result.previous = Util.toEnum(enumClass, parts.get(1));
+		bsoc = new BoundedSelfOrgCluster<T>(parts.get(0), extractor);
+		previous = Util.toEnum(enumClass, parts.get(1));
 		for (int i = 2; i < parts.size(); i++) {
 			ArrayList<String> treeParts = Util.debrace(parts.get(i));
 			Integer key = Integer.parseInt(treeParts.get(0));
-			result.node2counts.put(key, EnumHistogram.from(enumClass, treeParts.get(1)));
+			node2counts.put(key, histogramFrom(enumClass, treeParts));
 		}
-		return result;
+	}
+	
+	private static <E extends Enum<E>> EnumHistogram<E> histogramFrom(Class<E> enumClass, ArrayList<String> parts) {
+		if (parts.size() < 2) {
+			return new EnumHistogram<>(enumClass);
+		} else {
+			return EnumHistogram.from(enumClass, parts.get(1));
+		}
 	}
 }

@@ -16,6 +16,7 @@ public interface Clusterer<T extends Measurable<T>> {
 	
 	default public Duple<Integer,Long> getClosestNodeDistanceFor(T example) {
 		Util.assertState(size() > 0, "No nodes exist");
+		Util.assertArgument(example != null, "Null example given!");
 		Duple<Integer,Long> result = null;
 		for (int id: getClusterIds()) {
 			long dist = example.distanceTo(getIdealInputFor(id));

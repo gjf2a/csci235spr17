@@ -30,6 +30,4 @@ public enum Move implements RobotKey {
 			Motor.D.forward();
 		}
 	};
-	
-	abstract public Key getKey();
 }

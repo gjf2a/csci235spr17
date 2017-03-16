@@ -6,6 +6,7 @@ import lejos.hardware.BrickFinder;
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.video.Video;
+import modeselection.util.CycleTimer;
 import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.Pos;
 
@@ -15,29 +16,28 @@ abstract public class BasicVisionBot implements Runnable {
 
 	abstract public void grabImage(AdaptedYUYVImage img);
 	
+	private CycleTimer timer = new CycleTimer();
+	
 	public void displayFinalInfo() {
 		displayFrameRate(2);
 	}
 	
-	public long getCycles() {return cycles;}
+	public long getCycles() {return timer.getCycles();}
 	
-	public long getDuration() {return duration;}
+	public long getDuration() {return timer.getDuration();}
 	
-	public long getLastCycleTime() {return duration - lastDuration;}
+	public long getLastCycleTime() {return timer.getLastDuration();}
 	
 	public void run() {
 		try {
 			Video wc = setupVideo();
-			cycles = 0;
-			long startTime = System.currentTimeMillis();
+			timer.start();
 			while (Button.ESCAPE.isUp()) {
 				wc.grabFrame(frame);
 				
 				AdaptedYUYVImage img = new AdaptedYUYVImage(frame, WIDTH, HEIGHT);
 				grabImage(img);
-				cycles += 1;
-				lastDuration = duration;
-				duration = System.currentTimeMillis() - startTime;
+				timer.bumpCycle();
 			}
 			
 			finish();
@@ -47,7 +47,6 @@ abstract public class BasicVisionBot implements Runnable {
 	}
 	
 	private byte[] frame;
-	private long cycles, duration, lastDuration;
 	
 	private Video setupVideo() throws IOException {
 		Video wc = BrickFinder.getDefault().getVideo();
@@ -64,11 +63,11 @@ abstract public class BasicVisionBot implements Runnable {
 	}
 	
 	public long frameRate() {
-		return 1000 * cycles / duration;
+		return 1000 * getCycles() / getDuration();
 	}
 	
 	public void displayFrameRate(int row) {
-		String rate = String.format("rate: %4.2f hz", 1000.0 * cycles / duration);
+		String rate = String.format("rate: %4.2f hz", timer.cyclesPerSecond());
 		LCD.drawString(rate, 0, row);
 	}
 	
