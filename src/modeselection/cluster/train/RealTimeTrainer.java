@@ -54,6 +54,7 @@ public class RealTimeTrainer<E extends Enum<E> & RobotKey> extends VisionBot {
 		for (E candidate: enumClass.getEnumConstants()) {
 			if (candidate.getKey().isDown()) {
 				setLearningMode(true);
+				trainRate.start();
 				bsoc.train(img, candidate);
 				candidate.act();	
 				trainRate.bumpCycle();
@@ -68,6 +69,7 @@ public class RealTimeTrainer<E extends Enum<E> & RobotKey> extends VisionBot {
 		if (learning) {
 			Util.stopAllMotors();
 		} else {
+			applyRate.start();
 			bsoc.bestMatchFor(img).act();
 			applyRate.bumpCycle();
 		}

@@ -1,5 +1,7 @@
 package modeselection.util;
 
+import lejos.hardware.lcd.LCD;
+
 public class CycleTimer {
 	private long duration, lastDuration, cycles, cycleStart;
 	
@@ -33,5 +35,9 @@ public class CycleTimer {
 	
 	public double cyclesPerSecond() {
 		return 1000.0 * cycles / duration;
+	}
+	
+	public void display(int row, String prefix) {
+		LCD.drawString(String.format("%s:%4.2f hz    ", prefix, cyclesPerSecond()), 0, row);
 	}
 }
