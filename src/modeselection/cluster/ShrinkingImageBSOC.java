@@ -3,6 +3,7 @@ package modeselection.cluster;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import modeselection.util.Duple;
 import modeselection.util.Util;
 import modeselection.vision.AdaptedYUYVImage;
 
@@ -34,6 +35,11 @@ public class ShrinkingImageBSOC implements Clusterer<AdaptedYUYVImage> {
 	@Override
 	public AdaptedYUYVImage getIdealInputFor(int node) {
 		return bsoc.getIdealInputFor(node);
+	}
+	
+	@Override
+	public Duple<Integer,Long> getClosestNodeDistanceFor(AdaptedYUYVImage example) {
+		return bsoc.getClosestNodeDistanceFor(example.shrunken(shrink));
 	}
 	
 	@Override

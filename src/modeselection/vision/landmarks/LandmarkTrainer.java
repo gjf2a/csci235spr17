@@ -1,4 +1,4 @@
-package ideas.vision.landmarks;
+package modeselection.vision.landmarks;
 
 import java.io.File;
 import java.io.IOException;
