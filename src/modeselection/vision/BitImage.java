@@ -100,6 +100,12 @@ public class BitImage implements ImageOutline, DeepCopyable<BitImage> {
 		}
 	}
 	
+	public void drawVerticalLine(int x) {
+		for (int y = 0; y < height; y++) {
+			flip(x, y);
+		}
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();

@@ -1,4 +1,4 @@
-package ideas.colorheight;
+package ideas.colorheight.demo;
 
 public enum Mode {
 	FORWARD,

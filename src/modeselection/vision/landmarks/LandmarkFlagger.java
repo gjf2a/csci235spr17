@@ -37,12 +37,16 @@ public class LandmarkFlagger<C extends Enum<C>> implements SubFlagger<C> {
 		bsoc.train(img);
 	}
 	
-	public void add(C flag, int node, Predicate<Long> matcher) {
+	public LandmarkFlagger<C> add(C flag, int node, Predicate<Long> matcher) {
 		conditions.put(node, new LandmarkPredicate<>(matcher, flag));
+		return this;
 	}
 	
-	public void add(C flag, int node) {
-		add(flag, node, d -> true);
+	public LandmarkFlagger<C> add(C flag, int... nodes) {
+		for (int node: nodes) {
+			add(flag, node, d -> true);
+		}
+		return this;
 	}
 	
 	@Override

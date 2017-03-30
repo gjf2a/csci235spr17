@@ -25,9 +25,7 @@ public class ColorConcentrationViewer extends VisionBot {
 		ColorCount colors = new ColorCount(model, img);
 		if (colors.getTotal() >= minPixels) {
 			int best = colors.densest();
-			for (int y = 0; y < img.getHeight(); y++) {
-				result.set(best, y, true);
-			} 
+			result.drawVerticalLine(best);
 		}
 		return result;
 	}

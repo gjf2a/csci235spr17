@@ -12,9 +12,8 @@ public class LandmarkDemo {
 	public static void main(String[] args) throws IOException {
 		CameraFlagger<Condition> camera = new CameraFlagger<>();
 		LandmarkFlagger<Condition> landmarker = new LandmarkFlagger<>("landmarks1.txt");
-		landmarker.add(Condition.CARPET, 0, d -> d < 5000000);
-		landmarker.add(Condition.CORNER, 1);
-		landmarker.add(Condition.CORNER, 2);
+		landmarker.add(Condition.CARPET, 0, d -> d < 5000000)
+				  .add(Condition.CORNER, 1, 2);
 		camera.addSub(landmarker);
 		
 		Transitions<Condition,Mode> table = new Transitions<>();

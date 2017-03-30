@@ -1,4 +1,4 @@
-package ideas.vision;
+package ideas.colorheight;
 
 import modeselection.vision.AdaptedYUYVImage;
 import modeselection.vision.BaseSubFlagger;
