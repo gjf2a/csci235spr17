@@ -1,4 +1,4 @@
-package modeselection.gui.topoview;
+package modeselection.gui.landmarkview;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import modeselection.cluster.ShrinkingImageBSOC;
 import modeselection.gui.AdaptedYUYVRenderer;
@@ -27,6 +28,9 @@ public class TopoViewController {
 	
 	@FXML
 	Canvas image;
+	
+	@FXML
+	TextField numSources;
 	
 	FileChooser chooser = new FileChooser();
 	ShrinkingImageBSOC map;
@@ -60,5 +64,6 @@ public class TopoViewController {
 	void switchNode(int updated) {
 		System.out.println("Switching to " + updated);
 		AdaptedYUYVRenderer.placeOnCanvas(map.getIdealInputFor(updated), image);
+		numSources.setText(Integer.toString(map.getNumMergesFor(updated)));
 	}
 }

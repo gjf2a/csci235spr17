@@ -51,4 +51,8 @@ public class ShrinkingImageBSOC implements Clusterer<AdaptedYUYVImage> {
 	public Collection<Integer> getClusterIds() {
 		return bsoc.getClusterIds();
 	}
+	
+	public int getNumMergesFor(int node) {
+		return bsoc.getNumMergesFor(node);
+	}
 }

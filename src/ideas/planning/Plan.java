@@ -26,4 +26,6 @@ public class Plan<C extends Enum<C>, M extends Enum<M>> {
 		}
 		return false;
 	}
+	
+	public M getAction() {return action;}
 }
