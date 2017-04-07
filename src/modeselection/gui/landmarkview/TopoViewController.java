@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import modeselection.cluster.ShrinkingImageBSOC;
 import modeselection.gui.AdaptedYUYVRenderer;
+import modeselection.util.Duple;
 import modeselection.util.Util;
 
 public class TopoViewController {
@@ -25,12 +27,19 @@ public class TopoViewController {
 	
 	@FXML
 	Button switchTo;
+	@FXML
+	Button left;
+	@FXML
+	Button right;
 	
 	@FXML
 	Canvas image;
 	
 	@FXML
 	TextField numSources;
+	
+	@FXML
+	ListView<String> transitions;
 	
 	FileChooser chooser = new FileChooser();
 	ShrinkingImageBSOC map;
@@ -39,7 +48,9 @@ public class TopoViewController {
 	void initialize() {
 		System.out.println("Initializing");
 		nodeNum.selectionModelProperty().addListener((obs, oldVal, newVal) -> switchNode(newVal.getSelectedItem()));
-		switchTo.setOnAction(event -> switchNode(nodeNum.getSelectionModel().getSelectedItem()));
+		switchTo.setOnAction(event -> switchNode(nodeNum.getValue()));
+		left.setOnAction(event -> switchTo(nodeNum.getValue() - 1));
+		right.setOnAction(event -> switchTo(nodeNum.getValue() + 1));
 	}
 	
 	@FXML
@@ -61,9 +72,19 @@ public class TopoViewController {
 		}
 	}
 	
+	void switchTo(int target) {
+		target = (target + map.size()) % map.size();
+		nodeNum.setValue(target);
+		switchNode(target);
+	}
+	
 	void switchNode(int updated) {
 		System.out.println("Switching to " + updated);
 		AdaptedYUYVRenderer.placeOnCanvas(map.getIdealInputFor(updated), image);
+		transitions.getItems().clear();
+		for (Duple<Integer, Integer> transition: map.transitionCountsFor(updated)) {
+			transitions.getItems().add(String.format("%d (%d)", transition.getFirst(), transition.getSecond()));
+		}
 		numSources.setText(Integer.toString(map.getNumMergesFor(updated)));
 	}
 }

@@ -41,11 +41,13 @@ public class FixedSizeArray<T> implements DeepCopyable<FixedSizeArray<T>> {
 		ArrayList<String> top = Util.debrace(src);
 		int size = Integer.parseInt(top.get(0));
 		FixedSizeArray<T> result = new FixedSizeArray<>(size, deepCopier);
-		for (String pair: Util.debrace(top.get(1))) {
-			ArrayList<String> pairs = Util.debrace(pair);
-			int i = Integer.parseInt(pairs.get(0));
-			T v = extractor.apply(pairs.get(1));
-			result.put(i, v);
+		if (top.size() > 1) {
+			for (String pair: Util.debrace(top.get(1))) {
+				ArrayList<String> pairs = Util.debrace(pair);
+				int i = Integer.parseInt(pairs.get(0));
+				T v = extractor.apply(pairs.get(1));
+				result.put(i, v);
+			}
 		}
 		return result;
 	}
@@ -116,6 +118,10 @@ public class FixedSizeArray<T> implements DeepCopyable<FixedSizeArray<T>> {
 		return array[i];
 	}
 	
+	public T getOrElse(int i, T backup) {
+		return get(i) != null ? get(i) : backup;
+	}
+	
 	public void swap(int i, int j) {
 		T temp = get(i);
 		put(i, get(j));
@@ -169,6 +175,12 @@ public class FixedSizeArray<T> implements DeepCopyable<FixedSizeArray<T>> {
 			copy.put(i, copier.apply(get(i)));
 		}
 		return copy;
+	}
+	
+	public void setAll(Function<Integer,T> setter) {
+		for (int i = 0; i < array.length; i++) {
+			array[i] = setter.apply(i);
+		}
 	}
 	
 	public void doAll(BiConsumer<Integer,T> f) {

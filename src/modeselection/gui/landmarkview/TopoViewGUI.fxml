@@ -17,6 +17,8 @@
                <children>
                   <Button fx:id="switchTo" mnemonicParsing="false" text="Switch to" />
                   <ChoiceBox fx:id="nodeNum" prefWidth="150.0" />
+                  <Button fx:id="left" mnemonicParsing="false" text="&lt;" />
+                  <Button fx:id="right" mnemonicParsing="false" text="&gt;" />
                </children>
             </HBox>
             <HBox>
@@ -45,4 +47,12 @@
         </menus>
       </MenuBar>
    </top>
+   <right>
+      <VBox>
+         <children>
+            <Label text="Next Node (Count)" />
+            <ListView fx:id="transitions" BorderPane.alignment="CENTER" />
+         </children>
+      </VBox>
+   </right>
 </BorderPane>

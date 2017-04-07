@@ -47,6 +47,10 @@ public class ShrinkingImageBSOC implements Clusterer<AdaptedYUYVImage> {
 		return bsoc.size();
 	}
 	
+	public int maxNumNodes() {
+		return bsoc.maxNumNodes();
+	}
+	
 	@Override
 	public Collection<Integer> getClusterIds() {
 		return bsoc.getClusterIds();
@@ -54,5 +58,9 @@ public class ShrinkingImageBSOC implements Clusterer<AdaptedYUYVImage> {
 	
 	public int getNumMergesFor(int node) {
 		return bsoc.getNumMergesFor(node);
+	}
+	
+	public ArrayList<Duple<Integer,Integer>> transitionCountsFor(int node) {
+		return bsoc.transitionCountsFor(node);
 	}
 }

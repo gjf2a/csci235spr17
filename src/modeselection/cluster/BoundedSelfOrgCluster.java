@@ -1,11 +1,12 @@
 package modeselection.cluster;
 
 import java.util.ArrayList;
-
+import java.util.Optional;
 import java.util.TreeSet;
 import java.util.function.Function;
 
 import modeselection.util.DeepCopyable;
+import modeselection.util.Duple;
 import modeselection.util.FixedSizeArray;
 import modeselection.util.Util;
 
@@ -22,6 +23,10 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	private FixedSizeArray<Node<T>> nodes;
 	private ArrayList<TreeSet<Edge<T>>> nodes2edges;
 	private TreeSet<Edge<T>> edges;
+	private NodeTransitions transitions;
+	
+	// Tracking for transitions
+	private Optional<Integer> lastMatchingNode;
 	
 	public int maxNumNodes() {return nodes.capacity() - 1;}
 	
@@ -40,6 +45,8 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			result.edges.add(edge.deepCopy());
 		}
 		result.nodes = this.nodes.deepCopy();
+		result.setupTransitions(this.transitions.deepCopy());
+		result.lastMatchingNode = this.lastMatchingNode;
 	}
 
 	public BoundedSelfOrgCluster(int maxNumNodes) {
@@ -50,10 +57,17 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	private void setupBasic() {
 		this.edges = new TreeSet<>();		
 		this.nodes2edges = new ArrayList<>();
+		this.lastMatchingNode = Optional.empty();
+	}
+	
+	private void setupTransitions(NodeTransitions transitions) {
+		this.transitions = transitions;
+		this.addListener(transitions);
 	}
 	
 	private void setupAvailable(int maxNumNodes) {
 		this.nodes = FixedSizeArray.make(maxNumNodes + 1);
+		setupTransitions(new NodeTransitions(this.nodes.capacity()));
 		Util.assertState(size() == 0, "size() should be zero, but is " + size());
 	}
 	
@@ -71,6 +85,9 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		if (topLevel.size() > 2) {
 			rebuildEdges(topLevel.get(2));
 		}
+		setupTransitions(topLevel.size() > 3 
+				? new NodeTransitions(topLevel.get(3)) 
+				: new NodeTransitions(maxNumNodes()));
 	}
 	
 	@Override
@@ -90,6 +107,8 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			result.append(edge.toString());
 			result.append('}');
 		}
+		result.append("}\n{");
+		result.append(transitions.toString());
 		result.append("}");
 		return result.toString();
 	}
@@ -152,7 +171,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			}
 		}
 	}
-
+	
 	@Override
 	public int train(T example) {
 		int where = nodes.getLowestAvailable();
@@ -162,7 +181,12 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			where = removeAndMerge();
 		}
 		Util.assertState(nodes.getHighestInUse() == nodes.size() - 1, "Not compact");
-		return getClosestMatchFor(example);
+		int match = getClosestMatchFor(example);
+		lastMatchingNode.ifPresent(lastMatch -> {
+			transitions.transition(lastMatch, match);
+			lastMatchingNode = Optional.of(match);
+		});
+		return match;
 	}
 	
 	private void insert(Node<T> example) {
@@ -270,6 +294,10 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			result.add(n.getCluster());
 		}
 		return result;
+	}
+	
+	public ArrayList<Duple<Integer,Integer>> transitionCountsFor(int node) {
+		return transitions.countsFor(node);
 	}
 	
 	@Override
