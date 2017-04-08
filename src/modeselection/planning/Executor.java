@@ -1,4 +1,4 @@
-package ideas.planning;
+package modeselection.planning;
 
 import java.util.EnumMap;
 import java.util.Optional;
@@ -17,9 +17,13 @@ public class Executor<C extends Enum<C>, M extends Enum<M>> {
 		prevMode = startMode;
 	}
 	
-	public Executor<C,M> mode(M mode, Consumer<SensedValues<C>> action, Runnable actionStart) {
-		subs.put(mode, action);
+	public Executor<C,M> mode(M mode, Runnable actionStart) {
 		starters.put(mode, actionStart);
+		return this;
+	}
+	
+	public Executor<C,M> sub(M mode, Consumer<SensedValues<C>> action) {
+		subs.put(mode, action);
 		return this;
 	}
 	
@@ -27,10 +31,14 @@ public class Executor<C extends Enum<C>, M extends Enum<M>> {
 		plan.ifPresent(p -> {
 			M pMode = p.getAction();
 			if (pMode != prevMode) {
-				starters.get(pMode).run();
+				if (starters.containsKey(pMode)) {
+					starters.get(pMode).run();
+				}
 				prevMode = pMode;
 			}
-			subs.get(pMode).accept(state);
+			if (subs.containsKey(pMode)) {
+				subs.get(pMode).accept(state);
+			}
 		});
 	}
 }

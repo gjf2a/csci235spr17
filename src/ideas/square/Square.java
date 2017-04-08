@@ -1,6 +1,6 @@
-package proj10.square;
+package ideas.square;
 
-import ideas.planning.Planner;
+import modeselection.planning.Planner;
 
 public class Square {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package proj10.square;
+package ideas.square;
 
 public enum Mode {
 	FORWARD,

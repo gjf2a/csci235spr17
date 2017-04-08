@@ -1,4 +1,4 @@
-package proj10.square;
+package ideas.square;
 
 public enum Condition {
 	UL_0, UL_90, UL_180, UL_270,

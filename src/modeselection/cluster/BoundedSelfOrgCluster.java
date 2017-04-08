@@ -184,8 +184,8 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		int match = getClosestMatchFor(example);
 		lastMatchingNode.ifPresent(lastMatch -> {
 			transitions.transition(lastMatch, match);
-			lastMatchingNode = Optional.of(match);
 		});
+		lastMatchingNode = Optional.of(match);
 		return match;
 	}
 	

@@ -26,15 +26,33 @@ public class NodeTransitionsTest {
 	}
 
 	@Test
-	public void testSerialization1() throws FileNotFoundException {
-		String original = Util.fileToString(new File("plan1transitions.txt"));
-		NodeTransitions rebuilt = new NodeTransitions(original);
-		assertEquals(original.trim(), rebuilt.toString());
+	public void testSerialization1a() throws FileNotFoundException {
+		testNTSerial("plan1oldtransitions.txt");
 	}
 	
 	@Test
-	public void testSerialization2() throws FileNotFoundException {
-		String original = Util.fileToString(new File("plan1.txt"));
+	public void testSerialization1b() throws FileNotFoundException {
+		testNTSerial("plan1transitions.txt");
+	}
+	
+	public void testNTSerial(String filename) throws FileNotFoundException {
+		String original = Util.fileToString(new File("src/" + filename));
+		NodeTransitions rebuilt = new NodeTransitions(original);
+		assertEquals(original.trim(), rebuilt.toString());		
+	}
+	
+	@Test
+	public void testSerialization2a() throws FileNotFoundException {
+		testBSOCSerial("plan1old.txt");
+	}
+	
+	@Test
+	public void testSerialization2b() throws FileNotFoundException {
+		testBSOCSerial("plan1.txt");
+	}
+	
+	public void testBSOCSerial(String filename) throws FileNotFoundException {
+		String original = Util.fileToString(new File("src/" + filename));
 		ShrinkingImageBSOC rebuilt = new ShrinkingImageBSOC(original);
 		assertEquals(original.trim(), rebuilt.toString());
 	}

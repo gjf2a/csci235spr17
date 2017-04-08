@@ -1,4 +1,4 @@
-package ideas.planning;
+package modeselection.planning;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -22,13 +22,16 @@ public class Planner<C extends Enum<C>, M extends Enum<M>> {
 		allPossibleStarts = EnumSet.noneOf(condClass);
 	}
 	
-	public Planner<C,M> add(C startState, M transition, C endState) {
+	@SafeVarargs
+	public final Planner<C,M> add(C startState, M transition, C... endStates) {
 		if (!stateActionGraph.containsKey(startState)) {
 			stateActionGraph.put(startState, new EnumMap<>(condClass));
 		}
-		stateActionGraph.get(startState).put(endState, transition);
-		allPossibleStarts.add(startState);
-		allPossibleGoals.add(endState);
+		for (C endState: endStates) {
+			stateActionGraph.get(startState).put(endState, transition);
+			allPossibleStarts.add(startState);
+			allPossibleGoals.add(endState);
+		}
 		return this;
 	}
 	
@@ -48,7 +51,7 @@ public class Planner<C extends Enum<C>, M extends Enum<M>> {
 				} else {
 					Optional<Plan<C,M>> suffix = depthFirstSearch(next.getKey(), goal);
 					if (suffix.isPresent() && !suffix.get().contains(next.getKey())) {
-						return Optional.of(new Plan<>(next.getValue(), next.getKey(), suffix.get()));
+						return Optional.of(new Plan<>(next.getValue(), next.getKey(), suffix));
 					}
 				}
 			}

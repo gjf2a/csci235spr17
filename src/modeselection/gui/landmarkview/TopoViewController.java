@@ -2,6 +2,7 @@ package modeselection.gui.landmarkview;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -79,11 +80,13 @@ public class TopoViewController {
 	}
 	
 	void switchNode(int updated) {
-		System.out.println("Switching to " + updated);
 		AdaptedYUYVRenderer.placeOnCanvas(map.getIdealInputFor(updated), image);
 		transitions.getItems().clear();
-		for (Duple<Integer, Integer> transition: map.transitionCountsFor(updated)) {
-			transitions.getItems().add(String.format("%d (%d)", transition.getFirst(), transition.getSecond()));
+		ArrayList<Duple<Integer, Integer>> counts = map.transitionCountsFor(updated);
+		for (Duple<Integer, Integer> transition: counts) {
+			String show = String.format("%d (%d)", transition.getFirst(), transition.getSecond());
+			System.out.println(show);
+			transitions.getItems().add(show);
 		}
 		numSources.setText(Integer.toString(map.getNumMergesFor(updated)));
 	}
