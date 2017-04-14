@@ -44,19 +44,25 @@ public class Planner<C extends Enum<C>, M extends Enum<M>> {
 	}
 	
 	public Optional<Plan<C,M>> depthFirstSearch(C start, C goal) {
-		if (stateActionGraph.containsKey(start)) {
+		return depthFirstSearch(start, goal, EnumSet.noneOf(condClass));
+	}
+	
+	private Optional<Plan<C,M>> depthFirstSearch(C start, C goal, EnumSet<C> triedFrom) {
+		if (stateActionGraph.containsKey(start) && !triedFrom.contains(start)) {
 			for (Entry<C, M> next: stateActionGraph.get(start).entrySet()) {
 				if (next.getKey() == goal) {
 					return Optional.of(new Plan<>(next.getValue(), next.getKey()));
 				} else {
-					Optional<Plan<C,M>> suffix = depthFirstSearch(next.getKey(), goal);
+					EnumSet<C> triedFromNext = triedFrom.clone();
+					triedFromNext.add(start);
+					Optional<Plan<C,M>> suffix = depthFirstSearch(next.getKey(), goal, triedFromNext);
 					if (suffix.isPresent() && !suffix.get().contains(next.getKey())) {
 						return Optional.of(new Plan<>(next.getValue(), next.getKey(), suffix));
 					}
 				}
 			}
 		} 
-		return Optional.empty();
+		return Optional.empty();		
 	}
 	
 	public Optional<Plan<C,M>> depthFirstSearch(SensedValues<C> state, C goal) {
