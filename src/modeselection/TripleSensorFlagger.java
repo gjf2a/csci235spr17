@@ -5,24 +5,19 @@ import java.util.function.Function;
 import lejos.hardware.sensor.BaseSensor;
 import lejos.robotics.SampleProvider;
 
-public class SensorFlagger<C extends Enum<C>> extends BaseSensorFlagger<C,Float> {
-	public SensorFlagger(BaseSensor sensor) {
+public class TripleSensorFlagger<C extends Enum<C>> extends BaseSensorFlagger<C,ColorTriple> {
+	public TripleSensorFlagger(BaseSensor sensor) {
 		super(sensor);
 	}
 	
-	public <S extends BaseSensor> SensorFlagger(S sensor, Function<S,SampleProvider> invocation) {
+	public <S extends BaseSensor> TripleSensorFlagger(S sensor, Function<S,SampleProvider> invocation) {
 		super(sensor, invocation);
-	}
-	
-	public SensorFlagger<C> addValue(C valueFlag) {
-		addValue(valueFlag, d -> (double)d);
-		return this;
 	}
 	
 	@Override
 	public void update(SensedValues<C> conditions) {
 		fetcher.fetchSample(values, 0);
-		update(values[0], conditions);
+		update(new ColorTriple(values), conditions);
 	}
 	
 	public float getLastValue() {return values[0];}
