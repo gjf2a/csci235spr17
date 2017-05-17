@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Optional;
 
 import edu.hendrix.modeselection.gui.AdaptedYUYVRenderer;
+import edu.hendrix.modeselection.gui.Alerter;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextField;
@@ -38,15 +39,14 @@ public class MoviePlayerController {
 				movie = Optional.of(m);
 				showFrame(m);
 			} catch (Exception exc) {
-				// TODO: Create an Alert
-				exc.printStackTrace();
+				Alerter.errorBox("Can't find file " + chosen.getName());
 			}
 		}
 	}
 	
 	@FXML
 	void about() {
-		// TODO: Display info in an Alert
+		Alerter.infoBox("MoviePlayer, by Gabriel Ferrer (ferrer@hendrix.edu)\nShows movies recorded by an EV3\nAllows building of a BSOC based on a movie.");
 	}
 	
 	@FXML
@@ -60,7 +60,7 @@ public class MoviePlayerController {
 			});
 			
 		} catch (Exception exc) {
-			// TODO: Alert
+			Alerter.errorBox(exc.getMessage());
 		}
 	}
 	
