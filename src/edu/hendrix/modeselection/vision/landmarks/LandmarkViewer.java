@@ -3,6 +3,7 @@ package edu.hendrix.modeselection.vision.landmarks;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import edu.hendrix.modeselection.cluster.DistanceFunc;
 import edu.hendrix.modeselection.cluster.ShrinkingImageBSOC;
 import edu.hendrix.modeselection.util.ButtonDriver;
 import edu.hendrix.modeselection.util.Duple;
@@ -19,6 +20,11 @@ public class LandmarkViewer extends BasicVisionBot {
 	
 	public LandmarkViewer(String filename) throws FileNotFoundException {
 		bsoc = Util.fileToObject(new File(filename), ShrinkingImageBSOC::new);
+	}
+	
+	public LandmarkViewer distanceFunc(DistanceFunc<AdaptedYUYVImage> dist) {
+		bsoc = bsoc.distanceFunc(dist);
+		return this;
 	}
 	
 	@Override

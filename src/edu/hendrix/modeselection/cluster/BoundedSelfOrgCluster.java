@@ -25,6 +25,9 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	private TreeSet<Edge<T>> edges;
 	private NodeTransitions transitions;
 	
+	// Alternative distance function
+	private DistanceFunc<T> dist;
+	
 	// Tracking for transitions
 	private Optional<Integer> lastMatchingNode;
 	
@@ -90,6 +93,11 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 				: new NodeTransitions(maxNumNodes()));
 	}
 	
+	public BoundedSelfOrgCluster<T> distanceFunc(DistanceFunc<T> alternative) {
+		this.dist = alternative;
+		return this;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder();
@@ -149,7 +157,10 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	public int getStartingLabel() {return 0;}
 	
 	private long distance(Node<T> n1, Node<T> n2) {
-		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * n1.getCluster().distanceTo(n2.getCluster());
+		if (dist == null) {
+			dist = (one, two) -> one.distanceTo(two);
+		}
+		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * dist.distance(n1.getCluster(), n2.getCluster());
 	}
 	
 	private void removeAllEdgesFor(int node) {

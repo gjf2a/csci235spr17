@@ -1,0 +1,33 @@
+package edu.hendrix.modeselection.util;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+public class UtilTest {
+
+	@Test
+	public void debraceTest1() {
+		testDebrace("one", "two", "three");
+	}
+	
+	@Test
+	public void debraceTest2() {
+		testDebrace("one", "", "three");
+	}
+
+	public void testDebrace(String... parts) {
+		String braced = "";
+		for (String part: parts) {
+			braced += "{" + part + "}";
+		}
+		
+		ArrayList<String> parted = Util.debrace(braced);
+		assertEquals(parts.length, parted.size());
+		for (int i = 0; i < parted.size(); i++) {
+			assertEquals(parts[i], parted.get(i));
+		}
+	}
+}

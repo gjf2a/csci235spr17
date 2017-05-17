@@ -1,7 +1,6 @@
 package edu.hendrix.modeselection.cluster;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import edu.hendrix.modeselection.util.Duple;
 import edu.hendrix.modeselection.util.Util;
@@ -20,6 +19,11 @@ public class ShrinkingImageBSOC implements Clusterer<AdaptedYUYVImage> {
 		ArrayList<String> parts = Util.debrace(src);
 		bsoc = new BoundedSelfOrgCluster<>(parts.get(0), AdaptedYUYVImage::fromString);
 		shrink = Integer.parseInt(parts.get(1));		
+	}
+	
+	public ShrinkingImageBSOC distanceFunc(DistanceFunc<AdaptedYUYVImage> alternative) {
+		bsoc = bsoc.distanceFunc(alternative);
+		return this;
 	}
 	
 	@Override
@@ -52,7 +56,7 @@ public class ShrinkingImageBSOC implements Clusterer<AdaptedYUYVImage> {
 	}
 	
 	@Override
-	public Collection<Integer> getClusterIds() {
+	public ArrayList<Integer> getClusterIds() {
 		return bsoc.getClusterIds();
 	}
 	

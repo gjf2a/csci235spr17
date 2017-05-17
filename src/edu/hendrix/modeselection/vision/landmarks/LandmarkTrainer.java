@@ -3,6 +3,7 @@ package edu.hendrix.modeselection.vision.landmarks;
 import java.io.File;
 import java.io.IOException;
 
+import edu.hendrix.modeselection.cluster.DistanceFunc;
 import edu.hendrix.modeselection.cluster.ShrinkingImageBSOC;
 import edu.hendrix.modeselection.util.ButtonDriver;
 import edu.hendrix.modeselection.util.CycleTimer;
@@ -21,6 +22,11 @@ public class LandmarkTrainer extends VisionBot {
 	public LandmarkTrainer(String filename, int nodes, int shrink) {
 		bsoc = new ShrinkingImageBSOC(nodes, shrink);
 		this.filename = filename;
+	}
+	
+	public LandmarkTrainer distanceFunc(DistanceFunc<AdaptedYUYVImage> dist) {
+		bsoc = bsoc.distanceFunc(dist);
+		return this;
 	}
 	
 	public LandmarkTrainer(String src) {

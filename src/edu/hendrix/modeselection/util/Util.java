@@ -21,14 +21,14 @@ public class Util {
 	/** 
 	 * + 1 (mod n)
 	 */
-	public static int modUp(int x, int n) {
+	public static int modInc(int x, int n) {
 		return (x + 1) % n;
 	}
 	
 	/**
 	 * - 1 (mod n)
 	 */
-	public static int modDown(int x, int n) {
+	public static int modDec(int x, int n) {
 		return (x + n - 1) % n;
 	}
 	
@@ -177,7 +177,7 @@ public class Util {
 				numOpen -= 1;
 				if (numOpen > 0) {
 					current.append(input.charAt(i));
-				} else if (current.length() > 0) {
+				} else {
 					result.add(current.toString());
 					current = new StringBuilder();
 				}
