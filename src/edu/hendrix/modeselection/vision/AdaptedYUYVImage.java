@@ -4,13 +4,12 @@ import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
 
 import edu.hendrix.modeselection.cluster.Clusterable;
-import edu.hendrix.modeselection.cluster.Measurable;
 import edu.hendrix.modeselection.util.DeepCopyable;
 import edu.hendrix.modeselection.util.Util;
 import lejos.hardware.lcd.GraphicsLCD;
 import lejos.hardware.video.YUYVImage;
 
-public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<AdaptedYUYVImage>, DeepCopyable<AdaptedYUYVImage>, Clusterable<AdaptedYUYVImage>, Measurable<AdaptedYUYVImage> {
+public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<AdaptedYUYVImage>, DeepCopyable<AdaptedYUYVImage>, Clusterable<AdaptedYUYVImage> {
 	private byte[] pix;
 	
 	public static byte[] pixelCopy(byte[] pixels) {
@@ -214,20 +213,5 @@ public class AdaptedYUYVImage extends YUYVImage implements ProcessableImage<Adap
 	@Override
 	public AdaptedYUYVImage deepCopy() {
 		return new AdaptedYUYVImage(this);
-	}
-	
-	public long distanceTo(AdaptedYUYVImage other) {
-		long ssd = 0;
-		for (int x = 0; x < this.getWidth(); ++x) {
-			for (int y = 0; y < this.getHeight(); ++y) {
-				long yDiff = this.getY(x, y) - other.getY(x, y);
-				ssd += Util.pow(yDiff, 2);
-				long uDiff = this.getU(x, y) - other.getU(x, y);
-				ssd += Util.pow(uDiff, 2);
-				long vDiff = this.getV(x, y) - other.getV(x, y);
-				ssd += Util.pow(vDiff, 2);
-			}
-		}
-		return ssd;
 	}
 }

@@ -7,36 +7,43 @@ import java.util.Collections;
 import edu.hendrix.modeselection.util.Duple;
 import edu.hendrix.modeselection.util.Util;
 
-public interface Clusterer<T extends Measurable<T>> {
-	public int train(T example);
+public interface Clusterer<C,I> {
+	public int train(I example);
 	
-	default public int getClosestMatchFor(T example) {
+	public double distance(C one, C two);
+	
+	public C transform(I input);
+	
+	default public int getClosestMatchFor(I example) {
 		return getClosestNodeDistanceFor(example).getFirst();
 	}
 	
-	default public Duple<Integer,Long> getClosestNodeDistanceFor(T example) {
+	default public Duple<Integer, Double> getClosestNodeDistanceFor(I example) {
 		Util.assertState(size() > 0, "No nodes exist");
 		Util.assertArgument(example != null, "Null example given!");
-		Duple<Integer,Long> result = null;
+		C transformed = transform(example);
+		Duple<Integer,Double> result = null;
 		for (int id: getClusterIds()) {
-			long dist = example.distanceTo(getIdealInputFor(id));
+			double dist = distance(transformed, getIdealInputFor(id));
 			if (result == null || dist < result.getSecond()) {
 				result = new Duple<>(id, dist);
 			}
 		}
+		Util.assertState(result != null, "Returning null result!");
 		return result;
 	}
 	
-	default public ArrayList<Duple<Integer,Long>> getNodeRanking(T example) {
-		ArrayList<Duple<Integer, Long>> result = new ArrayList<>();
+	default public ArrayList<Duple<Integer, Double>> getNodeRanking(I example) {
+		C transformed = transform(example);
+		ArrayList<Duple<Integer, Double>> result = new ArrayList<>();
 		for (int id: getClusterIds()) {
-			result.add(new Duple<>(id, example.distanceTo(getIdealInputFor(id))));
+			result.add(new Duple<>(id, distance(transformed, getIdealInputFor(id))));
 		}
 		Collections.sort(result, (o1, o2) -> o1.getSecond() < o2.getSecond() ? -1 : o1.getSecond() > o2.getSecond() ? 1 : 0);
 		return result;
 	}
 	
-	public T getIdealInputFor(int node);
+	public C getIdealInputFor(int node);
 	
 	public int size();
 	

@@ -32,7 +32,12 @@
                         <TextField fx:id="shrink" prefHeight="26.0" prefWidth="53.0" text="1" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#createBSOC" text="Create BSOC" />
+                  <HBox>
+                     <children>
+                        <ChoiceBox fx:id="distanceFunction" prefHeight="26.0" prefWidth="99.0" />
+                        <Button mnemonicParsing="false" onAction="#createBSOC" text="Create BSOC" />
+                     </children>
+                  </HBox>
                   <Canvas fx:id="node" height="200.0" width="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -41,6 +46,7 @@
                         <Button mnemonicParsing="false" onAction="#nodeRight" text="&gt;" />
                      </children>
                   </HBox>
+                  <CheckBox fx:id="updateWithMovieFrame" mnemonicParsing="false" text="Update with Movie Frame" />
                </children>
             </VBox>
          </children>

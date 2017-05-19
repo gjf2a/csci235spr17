@@ -53,7 +53,7 @@ public class NodeTransitionsTest {
 	
 	public void testBSOCSerial(String filename) throws FileNotFoundException {
 		String original = Util.fileToString(new File("src/" + filename));
-		ShrinkingImageBSOC rebuilt = new ShrinkingImageBSOC(original);
+		ShrinkingImageBSOC rebuilt = ShrinkingImageBSOC.fromString(original);
 		assertEquals(original.trim(), rebuilt.toString());
 	}
 }

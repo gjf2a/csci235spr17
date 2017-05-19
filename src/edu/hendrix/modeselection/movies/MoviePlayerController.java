@@ -5,8 +5,12 @@ import java.util.Optional;
 
 import edu.hendrix.modeselection.gui.AdaptedYUYVRenderer;
 import edu.hendrix.modeselection.gui.Alerter;
+import edu.hendrix.modeselection.util.AIReflector;
+import edu.hendrix.modeselection.vision.ImageDistanceFunc;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 
@@ -25,6 +29,12 @@ public class MoviePlayerController {
 	TextField numNodes;
 	@FXML
 	TextField shrink;
+	
+	@FXML
+	CheckBox updateWithMovieFrame;
+	
+	@FXML
+	ChoiceBox<String> distanceFunction;
 	
 	Optional<NodeSelector> bsocNodes = Optional.empty();
 	Optional<Movie> movie = Optional.empty();
@@ -84,8 +94,10 @@ public class MoviePlayerController {
 		AdaptedYUYVRenderer.placeOnCanvas(m.getFrame(), frame);
 		frameNum.setText(Integer.toString(m.getFrameIndex()));
 		bsocNodes.ifPresent(nodes -> {
-			nodes.jumpTo(m.getFrame());
-			showNode(nodes);
+			if (updateWithMovieFrame.isSelected()) {
+				nodes.jumpTo(m.getFrame());
+				showNode(nodes);
+			}
 		});
 	}
 	
@@ -110,8 +122,13 @@ public class MoviePlayerController {
 		nodeNum.setText(Integer.toString(nodes.nodeNum()));
 	}
 	
+	AIReflector<ImageDistanceFunc> funcFactory = new AIReflector<>(ImageDistanceFunc.class, "edu.hendrix.modeselection.vision.distances");
+	
 	@FXML
 	void initialize() {
-		// Intentionally left blank
+		for (String name: funcFactory.getTypeNames()) {
+			distanceFunction.getItems().add(name);
+		}
+		distanceFunction.getSelectionModel().select(0);
 	}
 }
