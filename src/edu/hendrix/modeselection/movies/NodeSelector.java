@@ -21,7 +21,6 @@ public class NodeSelector extends Navigator<AdaptedYUYVImage> {
 	public void remove() {
 		Util.assertState(bsoc.size() > 1, "Only one node left!\nTry starting over.");
 		bsoc.delete(getCurrentNode());
-		next();
 	}
 	
 	public void jumpTo(AdaptedYUYVImage input) {
