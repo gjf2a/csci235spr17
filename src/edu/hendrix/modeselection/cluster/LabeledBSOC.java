@@ -38,6 +38,10 @@ public class LabeledBSOC<C extends Clusterable<C> & DeepCopyable<C>, I, E extend
 					toUpdate.setCountFor(label.getKey(), label.getValue() + toUpdate.getCountFor(label.getKey()));
 				}
 				node2counts.remove(target);
+			}
+			@Override
+			public void removingNode(int node) {
+				node2counts.remove(node);
 			}});
 	}
 	

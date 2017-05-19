@@ -69,6 +69,11 @@ public class NodeTransitions implements DeepCopyable<NodeTransitions>, BSOCListe
 	public void addingNode(int node) {}
 
 	@Override
+	public void removingNode(int node) {
+		transitions.remove(node);
+	}
+
+	@Override
 	public void replacingNode(int target, int replacement) {
 		replaceToTarget(target, replacement);
 		replaceFromTarget(target, replacement);

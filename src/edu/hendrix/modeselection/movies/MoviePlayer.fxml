@@ -47,6 +47,7 @@
                      </children>
                   </HBox>
                   <CheckBox fx:id="updateWithMovieFrame" mnemonicParsing="false" text="Update with Movie Frame" />
+                  <Button mnemonicParsing="false" onAction="#destroyCurrentNode" text="Destroy Current Node" />
                </children>
             </VBox>
          </children>

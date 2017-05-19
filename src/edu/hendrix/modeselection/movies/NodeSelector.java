@@ -3,12 +3,12 @@ package edu.hendrix.modeselection.movies;
 import java.util.TreeMap;
 
 import edu.hendrix.modeselection.cluster.ShrinkingImageBSOC;
+import edu.hendrix.modeselection.gui.Navigator;
 import edu.hendrix.modeselection.util.Util;
 import edu.hendrix.modeselection.vision.AdaptedYUYVImage;
 
-public class NodeSelector {
+public class NodeSelector extends Navigator<AdaptedYUYVImage> {
 	private ShrinkingImageBSOC bsoc;
-	private int index;
 	private TreeMap<Integer,Integer> node2index = new TreeMap<>(); 
 	
 	public NodeSelector(ShrinkingImageBSOC bsoc) {
@@ -16,26 +16,27 @@ public class NodeSelector {
 		for (int i = 0; i < bsoc.getClusterIds().size(); i++) {
 			node2index.put(bsoc.getClusterIds().get(i), i);
 		}
-		this.index = 0;
 	}
 	
-	public void next() {
-		index = Util.modInc(index, bsoc.size());
-	}
-	
-	public void prev() {
-		index = Util.modDec(index, bsoc.size());
+	public void remove() {
+		Util.assertState(bsoc.size() > 1, "Only one node left!\nTry starting over.");
+		bsoc.delete(getCurrentNode());
+		next();
 	}
 	
 	public void jumpTo(AdaptedYUYVImage input) {
-		index = node2index.get(bsoc.getClosestMatchFor(input));
+		setIndexTo(node2index.get(bsoc.getClosestMatchFor(input)));
 	}
 	
-	public int nodeNum() {
-		return bsoc.getClusterIds().get(index);
+	public AdaptedYUYVImage getCurrent() {
+		return bsoc.getIdealInputFor(getCurrentIndex());
 	}
 	
-	public AdaptedYUYVImage referenceInput() {
-		return bsoc.getIdealInputFor(nodeNum());
+	public int getCurrentNode() {
+		return bsoc.getClusterIds().get(getCurrentIndex());
+	}
+	
+	public int size() {
+		return bsoc.size();
 	}
 }

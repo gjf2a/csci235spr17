@@ -240,6 +240,17 @@ public class BoundedSelfOrgCluster<C extends Clusterable<C> & DeepCopyable<C>, I
 		removeAllEdgesFor(target);
 		return nodes.remove(target);
 	}
+	
+	public void delete(int node) {
+		removeNode(node);
+		notifyDelete(node);
+	}
+
+	private void notifyDelete(int node) {
+		for (BSOCListener listener: listeners) {
+			listener.removingNode(node);
+		}
+	}
 
 	private void notifyAdd(int added) {
 		for (BSOCListener listener: listeners) {

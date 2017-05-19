@@ -29,7 +29,17 @@ public class Util {
 	 * - 1 (mod n)
 	 */
 	public static int modDec(int x, int n) {
-		return (x + n - 1) % n;
+		return trueMod(x - 1, n);
+	}
+	
+	/**
+	 * Always returns a positive modulus
+	 */
+	public static int trueMod(int x, int n) {
+		while (x < 0) {
+			x += n;
+		}
+		return x % n;
 	}
 	
 	/**

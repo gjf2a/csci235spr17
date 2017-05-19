@@ -91,11 +91,11 @@ public class MoviePlayerController {
 	}
 	
 	void showFrame(Movie m) {
-		AdaptedYUYVRenderer.placeOnCanvas(m.getFrame(), frame);
-		frameNum.setText(Integer.toString(m.getFrameIndex()));
+		AdaptedYUYVRenderer.placeOnCanvas(m.getCurrent(), frame);
+		frameNum.setText(Integer.toString(m.getFrameNumber()));
 		bsocNodes.ifPresent(nodes -> {
 			if (updateWithMovieFrame.isSelected()) {
-				nodes.jumpTo(m.getFrame());
+				nodes.jumpTo(m.getCurrent());
 				showNode(nodes);
 			}
 		});
@@ -117,9 +117,21 @@ public class MoviePlayerController {
 		});
 	}
 	
+	@FXML
+	void destroyCurrentNode() {
+		bsocNodes.ifPresent(nodes -> {
+			try {
+				nodes.remove();
+				showNode(nodes);
+			} catch (IllegalStateException exc) {
+				Alerter.errorBox(exc.getMessage());
+			}
+		});
+	}
+	
 	void showNode(NodeSelector nodes) {
-		AdaptedYUYVRenderer.placeOnCanvas(nodes.referenceInput(), node);
-		nodeNum.setText(Integer.toString(nodes.nodeNum()));
+		AdaptedYUYVRenderer.placeOnCanvas(nodes.getCurrent(), node);
+		nodeNum.setText(Integer.toString(nodes.getCurrentNode()));
 	}
 	
 	AIReflector<ImageDistanceFunc> funcFactory = new AIReflector<>(ImageDistanceFunc.class, "edu.hendrix.modeselection.vision.distances");
