@@ -16,7 +16,7 @@ public class NodeSelectorTest {
 		assertEquals(1, sample.getCurrentIndex());
 		
 		NodeSelector ns = new NodeSelector(sample.createFrom(4, 1));
-		assertEquals(4, ns.getNumNodes());
+		assertEquals(4, ns.size());
 		
 		
 	}

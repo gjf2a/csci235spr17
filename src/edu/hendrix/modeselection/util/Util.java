@@ -36,10 +36,8 @@ public class Util {
 	 * Always returns a positive modulus
 	 */
 	public static int trueMod(int x, int n) {
-		while (x < 0) {
-			x += n;
-		}
-		return x % n;
+		int result = x % n;
+		return result + (result < 0 ? n : 0);
 	}
 	
 	/**

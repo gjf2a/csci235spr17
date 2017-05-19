@@ -5,11 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.hendrix.modeselection.util.Util;
+
 public class NavigatorTest {
 	private ArrayNavigator<String> nav = new ArrayNavigator<>();
 
 	@Before
-	void setup() {
+	public void setup() {
 		for (String s: new String[]{"a", "b", "c", "d"}) {
 			nav.add(s);
 		}
@@ -24,10 +26,11 @@ public class NavigatorTest {
 		}
 	}
 	
+	@Test
 	public void testPrev() {
 		for (int i = nav.size() - 1; i > -nav.size(); i--) {
 			nav.prev();
-			assertEquals()
+			assertEquals(Util.trueMod(i, nav.size()), nav.getCurrentIndex());
 		}
 	}
 	
