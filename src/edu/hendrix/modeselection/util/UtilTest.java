@@ -30,4 +30,13 @@ public class UtilTest {
 			assertEquals(parts[i], parted.get(i));
 		}
 	}
+	
+	@Test
+	public void testMod() {
+		int target = 0;
+		for (int i = -30; i < 30; i++) {
+			assertEquals(target, Util.trueMod(i, 5));
+			target = (target + 1) % 5;
+		}
+	}
 }
