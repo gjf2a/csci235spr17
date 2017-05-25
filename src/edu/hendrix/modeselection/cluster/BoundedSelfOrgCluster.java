@@ -18,15 +18,18 @@ import edu.hendrix.modeselection.util.Util;
 // Our goal here is to create an online learning algorithm with fast and predictable 
 // runtime performance, suitable for both supervised and unsupervised learning.
 
-public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & Measurable<T>> implements Clusterer<T>, DeepCopyable<BoundedSelfOrgCluster<T>> {
+public class BoundedSelfOrgCluster<C extends Clusterable<C> & DeepCopyable<C>, I> implements Clusterer<C,I>, DeepCopyable<BoundedSelfOrgCluster<C,I>> {
 	// Object state
-	private FixedSizeArray<Node<T>> nodes;
-	private ArrayList<TreeSet<Edge<T>>> nodes2edges;
-	private TreeSet<Edge<T>> edges;
+	private FixedSizeArray<Node<C>> nodes;
+	private ArrayList<TreeSet<Edge<C>>> nodes2edges;
+	private TreeSet<Edge<C>> edges;
 	private NodeTransitions transitions;
 	
 	// Alternative distance function
-	private DistanceFunc<T> dist;
+	private DistanceFunc<C> dist;
+	
+	// Input transformation function
+	private Function<I,C> transformer;
 	
 	// Tracking for transitions
 	private Optional<Integer> lastMatchingNode;
@@ -37,14 +40,14 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	private ArrayList<BSOCListener> listeners = new ArrayList<>();
 
 	@Override
-	public BoundedSelfOrgCluster<T> deepCopy() {
-		BoundedSelfOrgCluster<T> result = new BoundedSelfOrgCluster<>(size());
+	public BoundedSelfOrgCluster<C,I> deepCopy() {
+		BoundedSelfOrgCluster<C,I> result = new BoundedSelfOrgCluster<>(size(), dist, transformer);
 		deepCopyHelp(result);
 		return result;
 	}
 	
-	protected void deepCopyHelp(BoundedSelfOrgCluster<T> result) {
-		for (Edge<T> edge: this.edges) {
+	protected void deepCopyHelp(BoundedSelfOrgCluster<C,I> result) {
+		for (Edge<C> edge: this.edges) {
 			result.edges.add(edge.deepCopy());
 		}
 		result.nodes = this.nodes.deepCopy();
@@ -52,12 +55,14 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		result.lastMatchingNode = this.lastMatchingNode;
 	}
 
-	public BoundedSelfOrgCluster(int maxNumNodes) {
-		setupBasic();
+	public BoundedSelfOrgCluster(int maxNumNodes, DistanceFunc<C> dist, Function<I,C> transformer) {
+		setupBasic(dist, transformer);
 		setupAvailable(maxNumNodes);
 	}
 	
-	private void setupBasic() {
+	private void setupBasic(DistanceFunc<C> dist, Function<I,C> transformer) {
+		this.dist = dist;
+		this.transformer = transformer;
 		this.edges = new TreeSet<>();		
 		this.nodes2edges = new ArrayList<>();
 		this.lastMatchingNode = Optional.empty();
@@ -74,13 +79,13 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		Util.assertState(size() == 0, "size() should be zero, but is " + size());
 	}
 	
-	public BoundedSelfOrgCluster(String src, Function<String,T> extractor) {
-		setupBasic();
+	public BoundedSelfOrgCluster(String src, Function<String,C> extractor, DistanceFunc<C> dist, Function<I,C> transformer) {
+		setupBasic(dist, transformer);
 		ArrayList<String> topLevel = Util.debrace(src);
 		fromStringHelp(topLevel, extractor);
 	}
 	
-	protected void fromStringHelp(ArrayList<String> topLevel, Function<String,T> extractor) {
+	protected void fromStringHelp(ArrayList<String> topLevel, Function<String,C> extractor) {
 		rebuildAvailable(topLevel.get(0));
 		if (topLevel.size() > 1) {
 			rebuildNodes(topLevel.get(1), extractor);
@@ -91,11 +96,6 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		setupTransitions(topLevel.size() > 3 
 				? new NodeTransitions(topLevel.get(3)) 
 				: new NodeTransitions(maxNumNodes()));
-	}
-	
-	public BoundedSelfOrgCluster<T> distanceFunc(DistanceFunc<T> alternative) {
-		this.dist = alternative;
-		return this;
 	}
 	
 	@Override
@@ -110,7 +110,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			result.append('}');
 		});
 		result.append("}\n{");
-		for (Edge<T> edge: edges) {
+		for (Edge<C> edge: edges) {
 			result.append('{');
 			result.append(edge.toString());
 			result.append('}');
@@ -135,9 +135,9 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		setupAvailable(maxNumNodes);
 	}
 	
-	private void rebuildNodes(String nodeStr, Function<String,T> extractor) {
+	private void rebuildNodes(String nodeStr, Function<String,C> extractor) {
 		for (String node: Util.debrace(nodeStr)) {
-			Node<T> newNode = new Node<>(node, extractor);
+			Node<C> newNode = new Node<>(node, extractor);
 			nodes.put(newNode.getID(), newNode);
 			nodes2edges.add(new TreeSet<>());
 		}
@@ -145,7 +145,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	
 	private void rebuildEdges(String edgeStr) {
 		for (String edge: Util.debrace(edgeStr)) {
-			Edge<T> newEdge = new Edge<>(edge);
+			Edge<C> newEdge = new Edge<>(edge);
 			edges.add(newEdge);
 			nodes2edges.get(newEdge.getNode1()).add(newEdge);
 			nodes2edges.get(newEdge.getNode2()).add(newEdge);
@@ -156,15 +156,17 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	
 	public int getStartingLabel() {return 0;}
 	
-	private long distance(Node<T> n1, Node<T> n2) {
-		if (dist == null) {
-			dist = (one, two) -> one.distanceTo(two);
-		}
-		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * dist.distance(n1.getCluster(), n2.getCluster());
+	@Override
+	public double distance(C one, C two) {
+		return dist.distance(one, two);
+	}
+	
+	private double distance(Node<C> n1, Node<C> n2) {
+		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * distance(n1.getCluster(), n2.getCluster());
 	}
 	
 	private void removeAllEdgesFor(int node) {
-		for (Edge<T> edge: nodes2edges.get(node)) {
+		for (Edge<C> edge: nodes2edges.get(node)) {
 			edges.remove(edge);
 			nodes2edges.get(edge.getOtherNode(node)).remove(edge);
 		}
@@ -174,8 +176,8 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	private void createEdgesFor(int node) {
 		for (int i = nodes.getLowestInUse(); i < nodes.capacity(); i = nodes.nextInUse(i)) {
 			if (i != node) {
-				long distance = distance(nodes.get(i), nodes.get(node));
-				Edge<T> edge = new Edge<>(Math.min(i, node), Math.max(i, node), distance);
+				double distance = distance(nodes.get(i), nodes.get(node));
+				Edge<C> edge = new Edge<>(Math.min(i, node), Math.max(i, node), distance);
 				edges.add(edge);
 				nodes2edges.get(node).add(edge);
 				nodes2edges.get(i).add(edge);
@@ -184,9 +186,10 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	}
 	
 	@Override
-	public int train(T example) {
+	public int train(I example) {
+		C transformed = transformer.apply(example);
 		int where = nodes.getLowestAvailable();
-		insert(new Node<>(where, example));
+		insert(new Node<>(where, transformed));
 		notifyAdd(where);
 		if (nodes.size() > maxNumNodes()) {
 			where = removeAndMerge();
@@ -200,7 +203,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		return match;
 	}
 	
-	private void insert(Node<T> example) {
+	private void insert(Node<C> example) {
 		nodes.put(example.getID(), example);
 		Util.assertState(example == nodes.get(example.getID()), "Went to the wrong place");
 		Util.assertState(nodes2edges.size() >= example.getID(), String.format("nodes2edges mismatch! exampleID: %d nodes2edges.size: %d", example.getID(), nodes2edges.size()));
@@ -211,29 +214,29 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	}
 
 	private int removeAndMerge() {
-		Edge<T> smallest = edges.first();
-		Node<T> removedNode = removeNode(smallest.getNode2());
-		Node<T> absorberNode = removeNode(smallest.getNode1());
+		Edge<C> smallest = edges.first();
+		Node<C> removedNode = removeNode(smallest.getNode2());
+		Node<C> absorberNode = removeNode(smallest.getNode1());
 		
-		Node<T> merged = absorberNode.mergedWith(removedNode);
+		Node<C> merged = absorberNode.mergedWith(removedNode);
 		insert(merged);
 		notifyReplace(removedNode.getID(), absorberNode.getID());
 		return placeMergedNode(removedNode, absorberNode);
 	}
 	
-	private int placeMergedNode(Node<T> removedNode, Node<T> absorberNode) {
+	private int placeMergedNode(Node<C> removedNode, Node<C> absorberNode) {
 		int unused = removedNode.getID();
 		if (unused > nodes.getHighestInUse()) {
 			return absorberNode.getID();
 		} else {
-			Node<T> tooHighNode = removeNode(nodes.getHighestInUse());
+			Node<C> tooHighNode = removeNode(nodes.getHighestInUse());
 			tooHighNode.renumber(unused);
 			insert(tooHighNode);
 			return tooHighNode.getID();
 		}		
 	}
 	
-	private Node<T> removeNode(int target) {
+	private Node<C> removeNode(int target) {
 		removeAllEdgesFor(target);
 		return nodes.remove(target);
 	}
@@ -253,7 +256,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	public boolean edgeRepresentationConsistent() {
 		for (int i = 0; i < nodes2edges.size(); i++) {
 			if (nodeExists(i)) {
-				for (Edge<T> edge: nodes2edges.get(i)) {
+				for (Edge<C> edge: nodes2edges.get(i)) {
 					if (!edges.contains(edge)) {
 						return false;
 					}
@@ -265,7 +268,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 			}
 		}
 		
-		for (Edge<T> edge: edges) {
+		for (Edge<C> edge: edges) {
 			if (!nodeExists(edge.getNode1())) {return false;}
 			if (!nodes2edges.get(edge.getNode1()).contains(edge)) {return false;}
 			if (!nodeExists(edge.getNode2())) {return false;}
@@ -276,7 +279,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	}
 	
 	@Override
-	public T getIdealInputFor(int node) {
+	public C getIdealInputFor(int node) {
 		Util.assertArgument(nodes.containsKey(node), "Node " + node + " not present");
 		return nodes.get(node).getCluster();
 	}
@@ -288,7 +291,7 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	
 	public int getTotalSourceInputs() {
 		int total = 0;
-		for (Node<T> node: nodes.values()) {
+		for (Node<C> node: nodes.values()) {
 			total += node.getNumInputs();
 		}
 		return total;
@@ -299,9 +302,9 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 		return nodes.indices();
 	}
 	
-	public ArrayList<T> getIdealInputs() {
-		ArrayList<T> result = new ArrayList<T>();
-		for (Node<T> n: nodes.values()) {
+	public ArrayList<C> getIdealInputs() {
+		ArrayList<C> result = new ArrayList<C>();
+		for (Node<C> n: nodes.values()) {
 			result.add(n.getCluster());
 		}
 		return result;
@@ -319,5 +322,10 @@ public class BoundedSelfOrgCluster<T extends Clusterable<T> & DeepCopyable<T> & 
 	@Override
 	public int hashCode() {
 		return toString().hashCode();
+	}
+
+	@Override
+	public C transform(I input) {
+		return transformer.apply(input);
 	}
 }

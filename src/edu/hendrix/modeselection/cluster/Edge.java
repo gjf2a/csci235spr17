@@ -5,9 +5,9 @@ import edu.hendrix.modeselection.util.Util;
 
 public class Edge<T extends Clusterable<T> & DeepCopyable<T>> implements Comparable<Edge<T>>, DeepCopyable<Edge<T>> {
 	private int id1, id2;
-	private long distance;
+	private double distance;
 	
-	Edge(int myId, int otherId, long otherDistance) {
+	Edge(int myId, int otherId, double otherDistance) {
 		Util.assertArgument(myId < otherId, "ids out of order");
 		this.id1 = myId;
 		this.id2 = otherId;
@@ -18,7 +18,7 @@ public class Edge<T extends Clusterable<T> & DeepCopyable<T>> implements Compara
 		String[] parts = edgeStr.split(";");
 		id1 = Integer.parseInt(parts[0]);
 		id2 = Integer.parseInt(parts[1]);
-		distance = Long.parseLong(parts[2]);
+		distance = Double.parseDouble(parts[2]);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class Edge<T extends Clusterable<T> & DeepCopyable<T>> implements Compara
 	
 	int getNode1() {return id1;}
 	int getNode2() {return id2;}
-	long getDistance() {return distance;}
+	double getDistance() {return distance;}
 	int getOtherNode(int id) {
 		Util.assertArgument(id == id1 || id == id2, id + " not part of edge " + toString());
 		return id == id1 ? id2 : id1;

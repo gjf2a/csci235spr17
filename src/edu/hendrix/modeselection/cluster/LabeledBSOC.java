@@ -11,8 +11,8 @@ import edu.hendrix.modeselection.util.Util;
 
 import java.util.TreeMap;
 
-public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable<T>, E extends Enum<E>> {
-	private BoundedSelfOrgCluster<T> bsoc;
+public class LabeledBSOC<C extends Clusterable<C> & DeepCopyable<C>, I, E extends Enum<E>> {
+	private BoundedSelfOrgCluster<C,I> bsoc;
 	private TreeMap<Integer,EnumHistogram<E>> node2counts;
 	private Class<E> enumClass;
 	private E previous;
@@ -22,9 +22,9 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 		node2counts = new TreeMap<>();
 	}
 	
-	public LabeledBSOC(Class<E> enumClass, int maxNumNodes, E startLabel) {
+	public LabeledBSOC(Class<E> enumClass, DistanceFunc<C> dist, Function<I,C> transformer, int maxNumNodes, E startLabel) {
 		this(enumClass);
-		bsoc = new BoundedSelfOrgCluster<>(maxNumNodes);
+		bsoc = new BoundedSelfOrgCluster<>(maxNumNodes, dist, transformer);
 		previous = startLabel;
 		bsoc.addListener(new BSOCListener(){
 			@Override
@@ -45,7 +45,7 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 		node2counts.put(node, new EnumHistogram<>(enumClass));
 	}
 	
-	public void train(T example, E label) {
+	public void train(I example, E label) {
 		int node = bsoc.train(example);
 		// This shouldn't happen, but it did happen.
 		if (!node2counts.containsKey(node)) {
@@ -61,7 +61,7 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 	
 	public int size() {return bsoc.size();}
 	
-	public E bestMatchFor(T example) {
+	public E bestMatchFor(I example) {
 		EnumHistogram<E> counts = getCountsFor(example);
 		if (counts.getNumKeys() == 1) {
 			previous = counts.getHighestCounted();
@@ -69,7 +69,7 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 		return previous;
 	}
 	
-	public EnumHistogram<E> getCountsFor(T example) {
+	public EnumHistogram<E> getCountsFor(I example) {
 		Util.assertArgument(example != null, "No example!");
 		int node = bsoc.getClosestMatchFor(example);
 		return node2counts.get(node).deepCopy();
@@ -94,10 +94,10 @@ public class LabeledBSOC<T extends Clusterable<T> & DeepCopyable<T> & Measurable
 		return result.toString();
 	}
 	
-	public LabeledBSOC(Class<E> enumClass, String src, Function<String,T> extractor) {
+	public LabeledBSOC(Class<E> enumClass, String src, Function<String,C> extractor, DistanceFunc<C> dist, Function<I,C> transformer) {
 		this(enumClass);
 		ArrayList<String> parts = Util.debrace(src);
-		bsoc = new BoundedSelfOrgCluster<T>(parts.get(0), extractor);
+		bsoc = new BoundedSelfOrgCluster<C,I>(parts.get(0), extractor, dist, transformer);
 		previous = Util.toEnum(enumClass, parts.get(1));
 		for (int i = 2; i < parts.size(); i++) {
 			ArrayList<String> treeParts = Util.debrace(parts.get(i));

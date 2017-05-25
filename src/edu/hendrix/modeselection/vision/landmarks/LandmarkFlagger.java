@@ -17,7 +17,7 @@ import edu.hendrix.modeselection.vision.SubFlagger;
 public class LandmarkFlagger<C extends Enum<C>> implements SubFlagger<C> {
 	private ShrinkingImageBSOC bsoc;
 	private Map<Integer,LandmarkPredicate<C>> conditions;
-	private Duple<Integer,Long> prevMatch;
+	private Duple<Integer,Double> prevMatch;
 	private C prevCondition;
 	
 	public LandmarkFlagger(int nodes, int shrink) {
@@ -30,14 +30,14 @@ public class LandmarkFlagger<C extends Enum<C>> implements SubFlagger<C> {
 	}
 	
 	public LandmarkFlagger(String bsocFile) throws FileNotFoundException {
-		this(Util.fileToObject(new File(bsocFile), ShrinkingImageBSOC::new));
+		this(Util.fileToObject(new File(bsocFile), ShrinkingImageBSOC::fromString));
 	}
 	
 	public void train(AdaptedYUYVImage img) {
 		bsoc.train(img);
 	}
 	
-	public LandmarkFlagger<C> add(C flag, int node, Predicate<Long> matcher) {
+	public LandmarkFlagger<C> add(C flag, int node, Predicate<Double> matcher) {
 		conditions.put(node, new LandmarkPredicate<>(matcher, flag));
 		return this;
 	}

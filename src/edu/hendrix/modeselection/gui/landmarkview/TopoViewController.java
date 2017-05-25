@@ -59,7 +59,7 @@ public class TopoViewController {
 		File file = chooser.showOpenDialog(null);
 		if (file != null) {
 			try {
-				map = Util.fileToObject(file, ShrinkingImageBSOC::new);
+				map = Util.fileToObject(file, ShrinkingImageBSOC::fromString);
 				nodeNum.getItems().clear();
 				for (int node: map.getClusterIds()) {
 					nodeNum.getItems().add(node);
