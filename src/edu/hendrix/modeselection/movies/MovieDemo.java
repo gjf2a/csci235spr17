@@ -2,6 +2,6 @@ package edu.hendrix.modeselection.movies;
 
 public class MovieDemo {
 	public static void main(String[] args) {
-		new MovieRecorder("cameraUp").run();
+		new MovieRecorder("brickPitSun").run();
 	}
 }
