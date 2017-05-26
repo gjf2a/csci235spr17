@@ -18,11 +18,8 @@ public class AIReflector<T> {
 	private void addFrom(Class superType, String packageName) throws UnsupportedEncodingException {
 		String targetDirName = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		String packageDir = targetDirName + packageName.replace('.', File.separatorChar);
-		System.out.println("packageDir:" + packageDir);
 		packageDir = URLDecoder.decode(packageDir, "UTF-8");
-		System.out.println("revised packageDir: " + packageDir);
 		File targetDir = new File(packageDir);
-		System.out.println("targetDir: " + targetDir);
 		if (!targetDir.isDirectory()) {throw new IllegalArgumentException(targetDir + " is not a directory");}
 		for (File f: targetDir.listFiles(filter)) {
 			String name = f.getName();
