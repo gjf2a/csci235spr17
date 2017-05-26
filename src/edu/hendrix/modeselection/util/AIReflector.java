@@ -3,6 +3,8 @@ package edu.hendrix.modeselection.util;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
 
 @SuppressWarnings("rawtypes")
@@ -13,9 +15,14 @@ public class AIReflector<T> {
 	
 	private FilenameFilter filter = (dir, name) -> name.endsWith(suffix);
 		
-	private void addFrom(Class superType, String packageName) {
+	private void addFrom(Class superType, String packageName) throws UnsupportedEncodingException {
 		String targetDirName = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-		File targetDir = new File(targetDirName + packageName.replace('.', File.separatorChar));
+		String packageDir = targetDirName + packageName.replace('.', File.separatorChar);
+		System.out.println("packageDir:" + packageDir);
+		packageDir = URLDecoder.decode(packageDir, "UTF-8");
+		System.out.println("revised packageDir: " + packageDir);
+		File targetDir = new File(packageDir);
+		System.out.println("targetDir: " + targetDir);
 		if (!targetDir.isDirectory()) {throw new IllegalArgumentException(targetDir + " is not a directory");}
 		for (File f: targetDir.listFiles(filter)) {
 			String name = f.getName();
@@ -38,7 +45,11 @@ public class AIReflector<T> {
 	public AIReflector(Class superType, String... packageNames) {
 		this.name2type = new TreeMap<String,Class>();
 		for (String packageName: packageNames) {
-			addFrom(superType, packageName);
+			try {
+				addFrom(superType, packageName);
+			} catch (UnsupportedEncodingException e) {
+				// Intentionally left blank
+			}
 		}
 	}
 	
