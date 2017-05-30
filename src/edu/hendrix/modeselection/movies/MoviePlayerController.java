@@ -36,6 +36,9 @@ public class MoviePlayerController {
 	@FXML
 	ChoiceBox<String> distanceFunction;
 	
+	@FXML
+	TextField distance;
+	
 	Optional<NodeSelector> bsocNodes = Optional.empty();
 	Optional<Movie> movie = Optional.empty();
 	
@@ -132,6 +135,7 @@ public class MoviePlayerController {
 	void showNode(NodeSelector nodes) {
 		AdaptedYUYVRenderer.placeOnCanvas(nodes.getCurrent(), node);
 		nodeNum.setText(Integer.toString(nodes.getCurrentNode()));
+		distance.setText(Double.toString(nodes.getCurrentDistance()));
 	}
 	
 	AIReflector<ImageDistanceFunc> funcFactory = new AIReflector<>(ImageDistanceFunc.class, "edu.hendrix.modeselection.vision.distances");

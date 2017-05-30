@@ -4,12 +4,14 @@ import java.util.TreeMap;
 
 import edu.hendrix.modeselection.cluster.ShrinkingImageBSOC;
 import edu.hendrix.modeselection.gui.Navigator;
+import edu.hendrix.modeselection.util.Duple;
 import edu.hendrix.modeselection.util.Util;
 import edu.hendrix.modeselection.vision.AdaptedYUYVImage;
 
 public class NodeSelector extends Navigator<AdaptedYUYVImage> {
 	private ShrinkingImageBSOC bsoc;
 	private TreeMap<Integer,Integer> node2index = new TreeMap<>(); 
+	private double currentDistance;
 	
 	public NodeSelector(ShrinkingImageBSOC bsoc) {
 		this.bsoc = bsoc;
@@ -24,7 +26,13 @@ public class NodeSelector extends Navigator<AdaptedYUYVImage> {
 	}
 	
 	public void jumpTo(AdaptedYUYVImage input) {
-		setIndexTo(node2index.get(bsoc.getClosestMatchFor(input)));
+		Duple<Integer,Double> match = bsoc.getClosestNodeDistanceFor(input);
+		setIndexTo(node2index.get(match.getFirst()));
+		currentDistance = match.getSecond();
+	}
+	
+	public double getCurrentDistance() {
+		return currentDistance;
 	}
 	
 	public AdaptedYUYVImage getCurrent() {

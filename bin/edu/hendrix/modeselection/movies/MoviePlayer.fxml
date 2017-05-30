@@ -46,6 +46,12 @@
                         <Button mnemonicParsing="false" onAction="#nodeRight" text="&gt;" />
                      </children>
                   </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="16.0" prefWidth="72.0" text="Distance" />
+                        <TextField fx:id="distance" />
+                     </children>
+                  </HBox>
                   <CheckBox fx:id="updateWithMovieFrame" mnemonicParsing="false" text="Update with Movie Frame" />
                   <Button mnemonicParsing="false" onAction="#destroyCurrentNode" text="Destroy Current Node" />
                </children>
