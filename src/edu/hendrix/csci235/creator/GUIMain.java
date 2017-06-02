@@ -18,7 +18,7 @@ public class GUIMain extends Application {
 		loader.setLocation(GUIMain.class.getResource("Main.fxml"));
 		AnchorPane root = (AnchorPane) loader.load();
 
-		Scene scene = new Scene(root, 279, 341);
+		Scene scene = new Scene(root, 617, 600);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
