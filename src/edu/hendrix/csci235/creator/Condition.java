@@ -1,7 +1,11 @@
 package edu.hendrix.csci235.creator;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -9,9 +13,9 @@ import java.util.TreeMap;
 public class Condition {
 	private TreeMap<String, FlaggerInfo> conditions = new TreeMap<String, FlaggerInfo>();
 	
-	public void add(String condition, String flaggerName, String flaggerType, Boolean trueOrFalse, String inequality,
+	public void add(String condition, String flaggerName, String flaggerType, String sensorPort, String bumpOrSensor, String motor, Boolean trueOrFalse, String inequality,
 			int value) throws IOException{
-		conditions.put(condition, new FlaggerInfo(flaggerName, flaggerType, trueOrFalse,
+		conditions.put(condition, new FlaggerInfo(flaggerName, flaggerType, sensorPort, bumpOrSensor, motor, trueOrFalse,
 				inequality, value));
 	}
 	
@@ -21,6 +25,14 @@ public class Condition {
 	
 	public Set<String> getKeys(){
 		return conditions.keySet();
+	}
+	
+	public Collection<FlaggerInfo> getValues(){
+		return conditions.values();
+	}
+	
+	public int size(){
+		return conditions.size();
 	}
 	
 	public void printKeys() {
