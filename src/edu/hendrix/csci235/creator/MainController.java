@@ -98,6 +98,12 @@ public class MainController {
 	Button addMode;
 	
 	@FXML
+	RadioButton startMode;
+	
+	@FXML
+	RadioButton notStartMode;
+	
+	@FXML
 	ChoiceBox transitionCondition;
 	
 	@FXML
@@ -124,6 +130,7 @@ public class MainController {
 	final ToggleGroup motorGroup1 = new ToggleGroup();
 	final ToggleGroup motorGroup2 = new ToggleGroup();
 	final ToggleGroup sensorFlaggerInfo = new ToggleGroup();
+	final ToggleGroup startingMode = new ToggleGroup();
 
 	
 	@FXML
@@ -169,6 +176,10 @@ public class MainController {
 		bump.setToggleGroup(sensorFlaggerInfo);
 		sonar.setToggleGroup(sensorFlaggerInfo);
 		bump.setSelected(true);
+		
+		startMode.setToggleGroup(startingMode);
+		notStartMode.setToggleGroup(startingMode);
+		notStartMode.setSelected(true);
 	}
 	
 	private void addConditionButtonHandler(){
@@ -226,16 +237,17 @@ public class MainController {
             		String toogleGroupValue1 = selectedRadioButton1.getText();
             		
             		RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
-            		String toogleGroupValue2 = selectedRadioButton1.getText();
+            		String toogleGroupValue2 = selectedRadioButton2.getText();
+            		
+            		RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
+            		String toogleGroupValue3 = selectedRadioButton3.getText();
             		
 					modes.add(modeName.getText(), 
 							motor1.getSelectionModel().getSelectedItem().toString(),
 							toogleGroupValue1,
 							motor2.getSelectionModel().getSelectedItem().toString(),
-							toogleGroupValue2
-							);
-					//modes.printKeys();
-					//System.out.println(modes.getModes().toString());
+							toogleGroupValue2,
+							toogleGroupValue3);
 					clearAllMode();
 					populateModeTransition();
 				} catch (NumberFormatException e) {
@@ -255,6 +267,7 @@ public class MainController {
 		forwardMotor1.setSelected(true);
 		forwardMotor2.setSelected(true);
 		motor2.getSelectionModel().select(0);
+		notStartMode.setSelected(true);
 		
 	}
 	

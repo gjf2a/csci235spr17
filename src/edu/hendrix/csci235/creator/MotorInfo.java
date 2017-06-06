@@ -2,13 +2,14 @@ package edu.hendrix.csci235.creator;
 
 public class MotorInfo {
 
-	private String motor1, motor2, forwardOrBackward1, forwardOrBackward2;
+	private String motor1, motor2, forwardOrBackward1, forwardOrBackward2, startingOrNot;
 	
-	public MotorInfo(String motor1, String forwardOrBackward1, String motor2, String forwardOrBackward2){
+	public MotorInfo(String motor1, String forwardOrBackward1, String motor2, String forwardOrBackward2, String startingOrNot){
 		this.motor1 = motor1;
 		this.forwardOrBackward1 = forwardOrBackward1;
 		this.motor2 = motor2;
 		this.forwardOrBackward2 = forwardOrBackward2;
+		this.startingOrNot = startingOrNot;
 	}
 
 	public String getMotor1() {
@@ -43,6 +44,14 @@ public class MotorInfo {
 		this.forwardOrBackward2 = forwardOrBackward2;
 	}
 	
+	public String getStartingOrNot() {
+		return startingOrNot;
+	}
+
+	public void setStartingOrNot(String startingOrNot) {
+		this.startingOrNot = startingOrNot;
+	}
+
 	@Override
 	public String toString(){
 		return(motor1.toString() + ", " + forwardOrBackward1.toString() +

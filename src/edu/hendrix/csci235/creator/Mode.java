@@ -1,6 +1,7 @@
 package edu.hendrix.csci235.creator;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
@@ -9,8 +10,8 @@ public class Mode {
 	private TreeMap<String, MotorInfo> modes = new TreeMap<String, MotorInfo>();
 	
 	public void add(String mode, String motor1, String forwardOrBackward1, 
-			String motor2, String forwardOrBackward2) throws IOException{
-		modes.put(mode, new MotorInfo(motor1, forwardOrBackward1, motor2, forwardOrBackward2));
+			String motor2, String forwardOrBackward2, String startingOrNot) throws IOException{
+		modes.put(mode, new MotorInfo(motor1, forwardOrBackward1, motor2, forwardOrBackward2, startingOrNot));
 	}
 	
 	public TreeMap<String, MotorInfo> getModes(){
@@ -19,6 +20,10 @@ public class Mode {
 	
 	public Set<String> getKeys(){
 		return modes.keySet();
+	}
+	
+	public Collection<MotorInfo> getValues(){
+		return modes.values();
 	}
 	
 	public void printKeys() {

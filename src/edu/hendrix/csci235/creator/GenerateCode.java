@@ -48,7 +48,7 @@ public class GenerateCode {
 			
 			flaggerConditions = flaggerConditions + "\n		" + key + ".add2(Condition." +
 					trueCondition.toUpperCase() + ", Condition." + falseCondition.toUpperCase() + 
-					", v -> v " + inequality + " " + number + ");";
+					", v -> v " + inequality + " " + number + ");\n";
 					
 		}
 		code = code + flaggerConditions;
@@ -56,9 +56,38 @@ public class GenerateCode {
 		return code;
 	}
 	
+	public String generateModeSelector(){
+		TreeMap<String, MotorInfo> rawModes = modes.getModes();
+		/*String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
+				+ "(Condition.class, Mode.class, Mode." ;*/
+		String firstPart = "";
+		String thirdPart = "";
+		for(Map.Entry<String, MotorInfo> entry : rawModes.entrySet()){
+			String key = entry.getKey().toString();
+			MotorInfo value = entry.getValue();
+			String motor1 = value.getMotor1();
+			String motor2 = value.getMotor2();
+			String forwardOrBackward1 = value.getForwardOrBackward1();
+			String forwardOrBackward2 = value.getForwardOrBackward2();
+			String startingOrNot = value.getStartingOrNot();
+			
+			thirdPart = thirdPart + "\n			.mode(Mode." + key + ",\n				transitionTable,\n				() ->{"
+					+ "\n					Motor." + motor1 + "." + forwardOrBackward1.toLowerCase() + "();\n					"
+					+ "Motor." + motor2 + "." + forwardOrBackward2.toLowerCase() + "\n				})";
+			
+			if(startingOrNot.equals("Starting Mode")){
+				firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
+						+ "(Condition.class, Mode.class, Mode." + key + ")";
+			} 
+		}
+		
+		
+		return firstPart + thirdPart + ";\n			controller.control();}}";
+	}
+	
 	public String generate(){
 		String code = "";
-		code = code + generateFlaggers();
+		code = code + generateFlaggers() + generateModeSelector();
 		
 		return code;
 	}
