@@ -46,4 +46,19 @@ public class Condition {
 		FlaggerInfo info = conditions.get(key);
 		System.out.println(info.toString());
 	}
+	
+	public ArrayList<String> conditionsArrayList(){
+		Set<String> keySet = conditions.keySet();
+		Object[] keys = keySet.toArray();
+		
+		Collection<FlaggerInfo> valueSet = conditions.values();
+		Object[] vals = valueSet.toArray();
+		ArrayList<String> toReturn = new ArrayList<String>();
+		for(int i = 0; i < keys.length; i++){
+			String toAdd = keys[i] + "-> " + vals[i];
+			toReturn.add(toAdd);
+		}
+		
+		return toReturn;
+	}
 }

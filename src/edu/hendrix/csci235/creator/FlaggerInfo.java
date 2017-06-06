@@ -76,19 +76,61 @@ public class FlaggerInfo {
 		this.value = value;
 	}
 	
+	public String addFlaggers(){
+		if(trueOrFalse == true){
+			if(flaggerType.equals("Sensor")){
+				if(bumpOrSonar.equals("RadioButton[id=bump, styleClass=radio-button]'Bump'")){
+						return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
+								flaggerType +"Flagger<>(new EV3touchSensor(SensorPort." + sensorPort +");\n");
+				} else {
+					return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
+							flaggerType +"Flagger<>(new EV3UltraSonicSensor(SensorPort." + sensorPort +"), s -> s.getDistanceMode());\n");
+				}
+			} else if(flaggerType.equals("Motor")){
+				return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
+						flaggerType +"Flagger<>(Motor " + motor + ");\n");
+			}
+		}
+		else{
+			return("");
+		} return("");
+	}
+	
+	public String convertValueFormat(){
+		if(flaggerType.equals("Sensor")){
+			if(trueOrFalse == true){
+				return  flaggerName + " - sensor - t";
+			} else {
+				return  flaggerName + " - sensor - f";
+			}
+		} else if(flaggerType.equals("Motor")){
+			if(trueOrFalse == true){
+				return  flaggerName + " - motor - t";
+			} else{
+				return  flaggerName + " - motor - f";
+			}
+		}
+		else{
+			return("~ something is wrong ~");
+		}
+	}
+	
+	
+	
 	@Override
 	public String toString(){
 		if(flaggerType.equals("Sensor")){
-			if(bumpOrSonar.equals("RadioButton[id=bump, styleClass=radio-button]'Bump'")){
-				return(flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-						flaggerType +"Flagger<>(new EV3touchSensor(SensorPort." + sensorPort +");");
-			} else{
-				return(flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-						flaggerType +"Flagger<>(new EV3UltraSonicSensor(SensorPort." + sensorPort +"), s -> s.getDistanceMode());");
+			if(trueOrFalse == true){
+				return  flaggerName + " - sensor - t";
+			} else {
+				return  flaggerName + " - sensor - f";
 			}
 		} else if(flaggerType.equals("Motor")){
-			return(flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-					flaggerType +"Flagger<>(Motor " + motor + ");");
+			if(trueOrFalse == true){
+				return  flaggerName + " - motor - t";
+			} else{
+				return  flaggerName + " - motor - f";
+			}
 		}
 		else{
 			return("~ something is wrong ~");

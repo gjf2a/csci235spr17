@@ -35,6 +35,8 @@ public class MainController {
 	
 	Transition transitions = new Transition();
 	
+	FlaggerMap flaggerMap = new FlaggerMap();
+	
 	@FXML
 	TextField programName;
 	
@@ -193,7 +195,13 @@ public class MainController {
 							false,
 							inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
 							Integer.parseInt(value.getText()));
+					flaggerMap.add(flaggerName.getText(), 
+							trueCondition.getText(), 
+							falseCondition.getText(),
+							inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+							value.getText());
 					//conditions.printKeys();
+					flaggerMap.toString();
 					clearAllCondition();
 					
 					populateConditionTransition();
@@ -355,10 +363,9 @@ public class MainController {
             				programName.getText(),
             				transitions,
             				conditions,
+            				flaggerMap,
             				modes);
-					//System.out.println(codeGenerator.generate());
 					codeOutput.setText(codeGenerator.generate().toString());
-					//System.out.println(codeGenerator.rawFlaggers.toString());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
