@@ -137,6 +137,7 @@ public class MainController {
 	public void initialize() {
 		conditions.getConditions();
 		modes.getModes();
+		transitions.getTransitions();
 		
 		setButtonGroups();
 		

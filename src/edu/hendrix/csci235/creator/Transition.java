@@ -9,5 +9,9 @@ public class Transition {
 		transitions.put(condition, mode);
 	}
 	
+	public TreeMap<String, String> getTransitions(){
+		return transitions;
+	}
+	
 
 }

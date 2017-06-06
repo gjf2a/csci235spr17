@@ -24,6 +24,13 @@ public class GenerateCode {
 		this.modes = modes;
 	}
 	
+	public String addImports(){
+		return "import java.io.IOException;\nimport lejos.hardware.Button;"
+				+ "\nimport lejos.hardware.motor.Motor;\nimport lejos.hardware.port.SensorPort;"
+				+ "\nimport lejos.hardware.sensor.EV3UltrasonicSensor;\nimport lejos.hardware.sensor.EV3TouchSensor;"
+				+ "\nimport modeselection.ModeSelector;\nimport modeselection.SensorFlagger;\nimport modeselection.Transitions;\n";
+	}
+	
 	public String generateFlaggers(){
 		String code = "public class " + programName + "{\n	public static void main(String[] args) throws IOException {\n";
 		
@@ -56,6 +63,24 @@ public class GenerateCode {
 		return code;
 	}
 	
+	public String generateTransitionTable(){
+		TreeMap<String, String> rawTransitions = transitions.transitions; 
+		String toReturn =  "\n		Transitions<Condition,Mode> transitions = new Transitions<>();";
+		
+		for(Map.Entry<String, String> entry : rawTransitions.entrySet()){
+			String condition = entry.getKey().toString();
+			String mode = entry.getValue().toString();
+			
+			toReturn = toReturn + "\n		transitions.add(Condition." + condition.toUpperCase() + ", Mode." +
+					mode.toUpperCase() + ")";
+		}
+		
+		return toReturn + ";\n";
+		
+		
+
+	}
+	
 	public String generateModeSelector(){
 		TreeMap<String, MotorInfo> rawModes = modes.getModes();
 		/*String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
@@ -82,12 +107,13 @@ public class GenerateCode {
 		}
 		
 		
-		return firstPart + thirdPart + ";\n			controller.control();}}";
+		return firstPart + thirdPart + ";\n			controller.control();"
+				+ "\n	}\n}";
 	}
 	
 	public String generate(){
 		String code = "";
-		code = code + generateFlaggers() + generateModeSelector();
+		code = code + addImports() + generateFlaggers() + generateTransitionTable() + generateModeSelector();
 		
 		return code;
 	}
