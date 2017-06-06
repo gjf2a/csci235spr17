@@ -33,7 +33,8 @@ public class MainController {
 	
 	Mode modes = new Mode();
 	
-	Transition transitions = new Transition();
+	Transition transitions1 = new Transition();
+	Transition transitions2 = new Transition();
 	
 	FlaggerMap flaggerMap = new FlaggerMap();
 	
@@ -104,13 +105,22 @@ public class MainController {
 	RadioButton notStartMode;
 	
 	@FXML
-	ChoiceBox transitionCondition;
+	ChoiceBox transitionCondition1;
 	
 	@FXML
-	ChoiceBox transitionMode;
+	ChoiceBox transitionMode1;
 	
 	@FXML
-	Button addTransitionTable;
+	Button addTransitionTable1;
+	
+	@FXML
+	ChoiceBox transitionCondition2;
+	
+	@FXML
+	ChoiceBox transitionMode2;
+	
+	@FXML
+	Button addTransitionTable2;
 	
 	@FXML
 	Button previewCode;
@@ -137,7 +147,8 @@ public class MainController {
 	public void initialize() {
 		conditions.getConditions();
 		modes.getModes();
-		transitions.getTransitions();
+		transitions1.getTransitions();
+		transitions2.getTransitions();
 		
 		setButtonGroups();
 		
@@ -148,7 +159,8 @@ public class MainController {
 		
 		addConditionButtonHandler();
 		addModeButtonHandler();
-		addTransitionHandler();
+		addTransition1Handler();
+		addTransition2Handler();
 		previewCodeHandler();
 		
 		flaggerSelector.getSelectionModel().selectedItemProperty()
@@ -335,30 +347,57 @@ public class MainController {
 	private void populateConditionTransition() {
 		Set<String> conditionsTransition = conditions.getKeys();
 		
+		transitionCondition1.getItems().add("Condition");
+		transitionCondition2.getItems().add("Condition");
+		
         for(String condition: conditionsTransition){
-			transitionCondition.getItems().add(condition);
+			transitionCondition1.getItems().add(condition);
+			transitionCondition2.getItems().add(condition);
 		}
-		transitionCondition.getSelectionModel().select(0);
+		transitionCondition1.getSelectionModel().select(0);
+		transitionCondition2.getSelectionModel().select(0);
 	}
 	
 	private void populateModeTransition() {
 		Set<String> modesTransition = modes.getKeys();
 		
+		transitionMode1.getItems().add("Mode");
+		transitionMode2.getItems().add("Mode");
+		
 		for(String mode: modesTransition){
-			transitionMode.getItems().add(mode);
+			transitionMode1.getItems().add(mode);
+			transitionMode2.getItems().add(mode);
 		}
-		transitionMode.getSelectionModel().select(0);
+		transitionMode1.getSelectionModel().select(0);
+		transitionMode2.getSelectionModel().select(0);
 
 	}
 	
-	private void addTransitionHandler(){
-		addTransitionTable.setOnAction(new EventHandler<ActionEvent>() {
+	private void addTransition1Handler(){
+		addTransitionTable1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
-					transitions.add(
-							transitionCondition.getSelectionModel().getSelectedItem().toString(),
-							transitionMode.getSelectionModel().getSelectedItem().toString());
+					transitions1.add(
+							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+							transitionMode1.getSelectionModel().getSelectedItem().toString());
+					//System.out.println(transitions.transitions.toString());
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+	}
+	
+	private void addTransition2Handler(){
+		addTransitionTable2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	try {
+					transitions2.add(
+							transitionCondition2.getSelectionModel().getSelectedItem().toString(),
+							transitionMode2.getSelectionModel().getSelectedItem().toString());
 					//System.out.println(transitions.transitions.toString());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -375,7 +414,8 @@ public class MainController {
             	try {
             		GenerateCode codeGenerator = new GenerateCode(
             				programName.getText(),
-            				transitions,
+            				transitions1,
+            				transitions2,
             				conditions,
             				flaggerMap,
             				modes);

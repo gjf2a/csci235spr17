@@ -9,16 +9,18 @@ import java.util.TreeMap;
 
 public class GenerateCode {
 	private String programName;
-	private Transition transitions;
+	private Transition transitions1;
+	private Transition transitions2;
 	private Condition conditions;
 	private FlaggerMap flagMapping;
 	private Mode modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
-	public GenerateCode(String programName, Transition transitions, 
+	public GenerateCode(String programName, Transition transitions1, Transition transitions2, 
 			Condition conditions, FlaggerMap flagMapping, Mode modes ){
 		this.programName = programName;
-		this.transitions = transitions;
+		this.transitions1 = transitions1;
+		this.transitions2 = transitions2;
 		this.conditions = conditions;
 		this.flagMapping = flagMapping;
 		this.modes = modes;
@@ -63,19 +65,29 @@ public class GenerateCode {
 		return code;
 	}
 	
-	public String generateTransitionTable(){
-		TreeMap<String, String> rawTransitions = transitions.transitions; 
-		String toReturn =  "\n		Transitions<Condition,Mode> transitions = new Transitions<>();";
+	public String generateTransitionTables(){
+		TreeMap<String, String> rawTransitions1 = transitions1.transitions; 
+		TreeMap<String, String> rawTransitions2 = transitions2.transitions;
+		String toReturn1 =  "\n		Transitions<Condition,Mode> transitions1 = new Transitions<>();";
+		String toReturn2 =  "\n		Transitions<Condition,Mode> transitions2 = new Transitions<>();";
 		
-		for(Map.Entry<String, String> entry : rawTransitions.entrySet()){
+		for(Map.Entry<String, String> entry : rawTransitions1.entrySet()){
 			String condition = entry.getKey().toString();
 			String mode = entry.getValue().toString();
 			
-			toReturn = toReturn + "\n		transitions.add(Condition." + condition.toUpperCase() + ", Mode." +
+			toReturn1 = toReturn1 + "\n		transitions1.add(Condition." + condition.toUpperCase() + ", Mode." +
 					mode.toUpperCase() + ")";
 		}
 		
-		return toReturn + ";\n";
+		for(Map.Entry<String, String> entry : rawTransitions2.entrySet()){
+			String condition = entry.getKey().toString();
+			String mode = entry.getValue().toString();
+			
+			toReturn2 = toReturn2 + "\n		transitions2.add(Condition." + condition.toUpperCase() + ", Mode." +
+					mode.toUpperCase() + ")";
+		}
+		
+		return toReturn1 + ";\n\n" + toReturn2 + ";\n";
 		
 		
 
@@ -113,7 +125,7 @@ public class GenerateCode {
 	
 	public String generate(){
 		String code = "";
-		code = code + addImports() + generateFlaggers() + generateTransitionTable() + generateModeSelector();
+		code = code + addImports() + generateFlaggers() + generateTransitionTables() + generateModeSelector();
 		
 		return code;
 	}
