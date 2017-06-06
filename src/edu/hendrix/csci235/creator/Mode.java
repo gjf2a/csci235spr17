@@ -9,9 +9,9 @@ import java.util.TreeMap;
 public class Mode {
 	private TreeMap<String, MotorInfo> modes = new TreeMap<String, MotorInfo>();
 	
-	public void add(String mode, String motor1, String forwardOrBackward1, 
-			String motor2, String forwardOrBackward2, String startingOrNot) throws IOException{
-		modes.put(mode, new MotorInfo(motor1, forwardOrBackward1, motor2, forwardOrBackward2, startingOrNot));
+	public void add(String mode, String motor1, String forwardStopBackward1, 
+			String motor2, String forwardStopBackward2, String startingOrNot) throws IOException{
+		modes.put(mode, new MotorInfo(motor1, forwardStopBackward1, motor2, forwardStopBackward2, startingOrNot));
 	}
 	
 	public TreeMap<String, MotorInfo> getModes(){

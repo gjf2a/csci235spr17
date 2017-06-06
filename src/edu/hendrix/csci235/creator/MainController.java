@@ -18,7 +18,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -82,6 +85,12 @@ public class MainController {
 	
 	@FXML
 	RadioButton backwardMotor1;
+	
+	@FXML
+	RadioButton stopMotor1;
+	
+	@FXML
+	RadioButton stopMotor2;
 	
 	@FXML
 	RadioButton forwardMotor2;
@@ -180,10 +189,12 @@ public class MainController {
 	private void setButtonGroups(){
 		forwardMotor1.setToggleGroup(motorGroup1);
 		backwardMotor1.setToggleGroup(motorGroup1);
+		stopMotor1.setToggleGroup(motorGroup1);
 		forwardMotor1.setSelected(true);
 		
 		forwardMotor2.setToggleGroup(motorGroup2);
 		backwardMotor2.setToggleGroup(motorGroup2);
+		stopMotor2.setToggleGroup(motorGroup2);
 		forwardMotor2.setSelected(true);
 		
 		bump.setToggleGroup(sensorFlaggerInfo);
@@ -201,32 +212,34 @@ public class MainController {
             public void handle(ActionEvent event) {
             	try {
             		// There could be a bug here... not sure yet
-					conditions.add(trueCondition.getText(), 
-							flaggerName.getText(),
-							flaggerSelector.getSelectionModel().getSelectedItem().toString(),
-							sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
-							sensorFlaggerInfo.getSelectedToggle().toString(),
-							motorSelector.getSelectionModel().getSelectedItem().toString(),
-							true,
-							inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-							Integer.parseInt(value.getText()));
-					conditions.add(falseCondition.getText(), 
-							flaggerName.getText(),
-							flaggerSelector.getSelectionModel().getSelectedItem().toString(),
-							sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
-							sensorFlaggerInfo.getSelectedToggle().toString(),
-							motorSelector.getSelectionModel().getSelectedItem().toString(),
-							false,
-							inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-							Integer.parseInt(value.getText()));
-					flaggerMap.add(flaggerName.getText(), 
-							trueCondition.getText(), 
-							falseCondition.getText(),
-							inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-							value.getText());
-					//conditions.printKeys();
-					flaggerMap.toString();
-					clearAllCondition();
+            		if(checkConditions() == true){
+            			conditions.add(trueCondition.getText(), 
+            					flaggerName.getText(),
+            					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
+            					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
+            					sensorFlaggerInfo.getSelectedToggle().toString(),
+            					motorSelector.getSelectionModel().getSelectedItem().toString(),
+            					true,
+            					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+            					Integer.parseInt(value.getText()));
+            			conditions.add(falseCondition.getText(), 
+            					flaggerName.getText(),
+            					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
+            					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
+            					sensorFlaggerInfo.getSelectedToggle().toString(),
+            					motorSelector.getSelectionModel().getSelectedItem().toString(),
+            					false,
+            					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+            					Integer.parseInt(value.getText()));
+            			flaggerMap.add(flaggerName.getText(), 
+            					trueCondition.getText(), 
+            					falseCondition.getText(),
+            					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+            					value.getText());
+            			//conditions.printKeys();
+            			flaggerMap.toString();
+            			clearAllCondition();
+            		} 
 					
 					populateConditionTransition();
 				} catch (NumberFormatException e) {
@@ -412,8 +425,16 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
+            		String className = programName.getText();
+            		if(className.equals(null)){
+            			className = "ProgramName";
+            		} else {
+            			String firstLetter = className.substring(0,1).toUpperCase();
+            			String restOfWord = className.substring(1);
+            			className = firstLetter + restOfWord;
+            		}
             		GenerateCode codeGenerator = new GenerateCode(
-            				programName.getText(),
+            				className,
             				transitions1,
             				transitions2,
             				conditions,
@@ -426,6 +447,18 @@ public class MainController {
 				}
             }
         });
+	}
+	
+	private boolean checkConditions(){
+		if(conditions.getKeys().contains(trueCondition.getText()) || conditions.getKeys().contains(falseCondition.getText()) || 
+				trueCondition.getText().equals(falseCondition.getText())){
+			Alert alert = new Alert(AlertType.ERROR, "That condition already exists - No two conditions should have the same name.\nPlease try again.", ButtonType.OK);
+			alert.showAndWait();
+			return false;
+
+		} else {
+			return true;
+		}
 	}
 
 

@@ -183,12 +183,12 @@
                   <Font name="Courier New" size="12.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="backwardMotor11" layoutX="33.0" layoutY="493.0" mnemonicParsing="false" text="Stop">
+            <RadioButton fx:id="stopMotor1" layoutX="33.0" layoutY="493.0" mnemonicParsing="false" text="Stop">
                <font>
                   <Font name="Courier New" size="12.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="backwardMotor111" layoutX="147.0" layoutY="491.0" mnemonicParsing="false" text="Stop">
+            <RadioButton fx:id="stopMotor2" layoutX="147.0" layoutY="491.0" mnemonicParsing="false" text="Stop">
                <font>
                   <Font name="Courier New" size="12.0" />
                </font>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class GenerateCode {
@@ -88,9 +89,6 @@ public class GenerateCode {
 		}
 		
 		return toReturn1 + ";\n\n" + toReturn2 + ";\n";
-		
-		
-
 	}
 	
 	public String generateModeSelector(){
@@ -123,11 +121,50 @@ public class GenerateCode {
 				+ "\n	}\n}";
 	}
 	
+	public String generateModeEnum() {
+		String code = "private enum Mode{";
+		Set<String> modeSet = modes.getModes().keySet();
+		
+		int i = 0;
+		for(String mode : modeSet){
+			if(i != modeSet.size() - 1){
+				code = code + "\n	" + mode.toUpperCase() + ",";
+			} else{
+				code = code + "\n	" + mode.toUpperCase() + ";";
+			}
+			
+			i++;
+			
+		}
+				
+		return code + "\n}";
+	}
+
+	public String generateConditionEnum() {
+		String code = "private enum Condition{";
+		Set<String> conditionSet = conditions.getConditions().keySet();
+		
+		int i = 0;
+		for(String condition : conditionSet){
+			if(i != conditionSet.size() - 1){
+				code = code + "\n	" + condition.toUpperCase() + ",";
+			} else{
+				code = code + "\n	" + condition.toUpperCase() + ";";
+			}
+			
+			i++;
+			
+		}
+				
+		return code + "\n}";
+	}
+	
 	public String generate(){
 		String code = "";
-		code = code + addImports() + generateFlaggers() + generateTransitionTables() + generateModeSelector();
+		code = code + addImports() + generateFlaggers() + generateTransitionTables() + generateModeSelector() + "\n" + generateConditionEnum() + "\n" + generateModeEnum();
 		
 		return code;
 	}
+
 
 }
