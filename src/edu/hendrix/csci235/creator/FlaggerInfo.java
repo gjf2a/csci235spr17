@@ -81,10 +81,10 @@ public class FlaggerInfo {
 			if(flaggerType.equals("Sensor")){
 				if(bumpOrSonar.equals("RadioButton[id=bump, styleClass=radio-button]'Bump'")){
 						return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-								flaggerType +"Flagger<>(new EV3touchSensor(SensorPort." + sensorPort +");\n");
+								flaggerType +"Flagger<>(new EV3TouchSensor(SensorPort.S" + sensorPort +"));\n");
 				} else {
 					return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-							flaggerType +"Flagger<>(new EV3UltraSonicSensor(SensorPort." + sensorPort +"), s -> s.getDistanceMode());\n");
+							flaggerType +"Flagger<>(new EV3UltraSonicSensor(SensorPort.S" + sensorPort +"), s -> s.getDistanceMode());\n");
 				}
 			} else if(flaggerType.equals("Motor")){
 				return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
@@ -121,15 +121,15 @@ public class FlaggerInfo {
 	public String toString(){
 		if(flaggerType.equals("Sensor")){
 			if(trueOrFalse == true){
-				return  flaggerName + " - sensor - t";
+				return  flaggerName;
 			} else {
-				return  flaggerName + " - sensor - f";
+				return  flaggerName;
 			}
 		} else if(flaggerType.equals("Motor")){
 			if(trueOrFalse == true){
-				return  flaggerName + " - motor - t";
+				return  flaggerName;
 			} else{
-				return  flaggerName + " - motor - f";
+				return  flaggerName;
 			}
 		}
 		else{

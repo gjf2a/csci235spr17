@@ -1,7 +1,9 @@
 package edu.hendrix.csci235.creator;
 
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,6 +42,8 @@ public class MainController {
 	Transition transitions2 = new Transition();
 	
 	FlaggerMap flaggerMap = new FlaggerMap();
+	
+	RunCode codeRunner;
 	
 	@FXML
 	TextField programName;
@@ -171,6 +175,7 @@ public class MainController {
 		addTransition1Handler();
 		addTransition2Handler();
 		previewCodeHandler();
+		executeCodeHandler();
 		
 		flaggerSelector.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
@@ -461,6 +466,28 @@ public class MainController {
 		}
 	}
 
+	private void executeCodeHandler(){
+		executeCode.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	try {
+            		codeRunner = new RunCode(programName.getText(), codeOutput.getText());
+            		codeRunner.writeToFile();
+            		codeRunner.run();
+					
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+	}
 
 
 }
