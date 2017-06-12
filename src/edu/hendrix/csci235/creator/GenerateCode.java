@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class GenerateCode {
+	
+	// This class builds all of the programs using strings. 
+	
 	private String programName;
 	private Transition transitions1;
 	private Transition transitions2;

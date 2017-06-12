@@ -7,6 +7,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class Mode {
+	
+	// Maps a mode to all of its relevant information.
+	
 	private TreeMap<String, MotorInfo> modes = new TreeMap<String, MotorInfo>();
 	
 	public void add(String mode, String motor1, String forwardStopBackward1, 

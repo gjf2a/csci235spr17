@@ -1,6 +1,8 @@
 package edu.hendrix.csci235.creator;
 
 public class MotorInfo {
+	
+	// Holds all info about a specific mode.
 
 	private String motor1, motor2, forwardOrBackward1, forwardOrBackward2, startingOrNot;
 	

@@ -2,6 +2,8 @@ package edu.hendrix.csci235.creator;
 
 public class TrueFalse {
 	
+	// patch up class that helped to identify a flags relevant information.
+	
 	private String trueCondition, falseCondition, inequality, number;
 	
 	public TrueFalse(String trueCondition, String falseCondition, String inequality, String number){

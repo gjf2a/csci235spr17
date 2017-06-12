@@ -32,6 +32,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import sun.reflect.generics.tree.IntSignature;
 
 public class MainController {
 	Condition conditions = new Condition();
@@ -46,114 +47,47 @@ public class MainController {
 	RunCode codeRunner;
 	
 	@FXML
-	TextField programName;
+	TextField programName, flaggerName, modeName;
 	
 	@FXML
-	TextField flaggerName;
+	ChoiceBox flaggerSelector, sensorPortSelector, motorSelector, inequalitySelector;
 	
 	@FXML
-	ChoiceBox flaggerSelector;
-	
-	@FXML
-	ChoiceBox sensorPortSelector;
-	
-	@FXML
-	ChoiceBox motorSelector;
-	
-	@FXML
-	TextField trueCondition;
-	
-	@FXML
-	TextField falseCondition;
-	
-	@FXML
-	ChoiceBox inequalitySelector;
+	TextField trueCondition, falseCondition;
 	
 	@FXML
 	TextField value;
 	
 	@FXML
-	Button addCondition;
+	Button addCondition, addMode, addTransitionTable1, addTransitionTable2, previewCode, executeCode;
 	
 	@FXML
-	TextField modeName;
+	ChoiceBox motor1, motor2;
 	
 	@FXML
-	ChoiceBox motor1;
+	RadioButton forwardMotor1, forwardMotor2, backwardMotor1, backwardMotor2;
 	
 	@FXML
-	ChoiceBox motor2;
+	RadioButton stopMotor1, stopMotor2;
 	
 	@FXML
-	RadioButton forwardMotor1;
+	RadioButton bump, sonar;
 	
 	@FXML
-	RadioButton backwardMotor1;
+	CheckBox startMode;
 	
 	@FXML
-	RadioButton stopMotor1;
-	
-	@FXML
-	RadioButton stopMotor2;
-	
-	@FXML
-	RadioButton forwardMotor2;
-	
-	@FXML
-	RadioButton backwardMotor2;
-	
-	@FXML
-	RadioButton bump;
-	
-	@FXML
-	RadioButton sonar;
-	
-	@FXML 
-	Button addMode;
-	
-	@FXML
-	RadioButton startMode;
-	
-	@FXML
-	RadioButton notStartMode;
-	
-	@FXML
-	ChoiceBox transitionCondition1;
-	
-	@FXML
-	ChoiceBox transitionMode1;
-	
-	@FXML
-	Button addTransitionTable1;
-	
-	@FXML
-	ChoiceBox transitionCondition2;
-	
-	@FXML
-	ChoiceBox transitionMode2;
-	
-	@FXML
-	Button addTransitionTable2;
-	
-	@FXML
-	Button previewCode;
-	
-	@FXML
-	Button executeCode;
+	ChoiceBox transitionCondition1, transitionCondition2, transitionMode1, transitionMode2;
 	
 	@FXML
 	TextArea codeOutput;
 
 	@FXML
-	Label sensorPort;
-	
-	@FXML
-	Label motor;
+	Label sensorPort, motor;
 	
 	final ToggleGroup motorGroup1 = new ToggleGroup();
 	final ToggleGroup motorGroup2 = new ToggleGroup();
 	final ToggleGroup sensorFlaggerInfo = new ToggleGroup();
-	final ToggleGroup startingMode = new ToggleGroup();
 
 	
 	@FXML
@@ -205,10 +139,6 @@ public class MainController {
 		bump.setToggleGroup(sensorFlaggerInfo);
 		sonar.setToggleGroup(sensorFlaggerInfo);
 		bump.setSelected(true);
-		
-		startMode.setToggleGroup(startingMode);
-		notStartMode.setToggleGroup(startingMode);
-		notStartMode.setSelected(true);
 	}
 	
 	private void addConditionButtonHandler(){
@@ -216,8 +146,7 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		// There could be a bug here... not sure yet
-            		if(checkConditions() == true){
+            		if(checkConditions() == true && validateValue(value.getText()) && checkFlaggers() == true){
             			conditions.add(trueCondition.getText(), 
             					flaggerName.getText(),
             					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
@@ -258,29 +187,47 @@ public class MainController {
         });
 	}
 	
+	private boolean validateValue(String value){
+		try{
+			Integer.parseInt(value);
+			return true;
+		} catch(NumberFormatException nfe){
+			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid number in the value text box.", ButtonType.OK);
+			alert.showAndWait();
+			return false;
+		}
+	}
+	
 	private void addModeButtonHandler(){
 		addMode.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		// There could be a bug here... not sure yet
-            		RadioButton selectedRadioButton1 = (RadioButton) motorGroup1.getSelectedToggle();
-            		String toogleGroupValue1 = selectedRadioButton1.getText();
+            		if(checkModes() == true){
+            			RadioButton selectedRadioButton1 = (RadioButton) motorGroup1.getSelectedToggle();
+                		String toogleGroupValue1 = selectedRadioButton1.getText();
+                		
+                		RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
+                		String toogleGroupValue2 = selectedRadioButton2.getText();
+                		
+                		//RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
+                		//String toogleGroupValue3 = selectedRadioButton3.getText();
+                		
+                		String isStart = "";
+                		if(startMode.isSelected()){
+                			isStart = "Starting Mode";
+                		}
+                		
+    					modes.add(modeName.getText(), 
+    							motor1.getSelectionModel().getSelectedItem().toString(),
+    							toogleGroupValue1,
+    							motor2.getSelectionModel().getSelectedItem().toString(),
+    							toogleGroupValue2,
+    							isStart);
+    					clearAllMode();
+    					populateModeTransition();
+            		}
             		
-            		RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
-            		String toogleGroupValue2 = selectedRadioButton2.getText();
-            		
-            		RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
-            		String toogleGroupValue3 = selectedRadioButton3.getText();
-            		
-					modes.add(modeName.getText(), 
-							motor1.getSelectionModel().getSelectedItem().toString(),
-							toogleGroupValue1,
-							motor2.getSelectionModel().getSelectedItem().toString(),
-							toogleGroupValue2,
-							toogleGroupValue3);
-					clearAllMode();
-					populateModeTransition();
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -298,7 +245,7 @@ public class MainController {
 		forwardMotor1.setSelected(true);
 		forwardMotor2.setSelected(true);
 		motor2.getSelectionModel().select(0);
-		notStartMode.setSelected(true);
+		startMode.setSelected(false);
 		
 	}
 	
@@ -399,6 +346,8 @@ public class MainController {
 					transitions1.add(
 							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
 							transitionMode1.getSelectionModel().getSelectedItem().toString());
+					transitionCondition1.getSelectionModel().select(0);
+					transitionMode1.getSelectionModel().select(0);
 					//System.out.println(transitions.transitions.toString());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -416,6 +365,8 @@ public class MainController {
 					transitions2.add(
 							transitionCondition2.getSelectionModel().getSelectedItem().toString(),
 							transitionMode2.getSelectionModel().getSelectedItem().toString());
+					transitionCondition2.getSelectionModel().select(0);
+					transitionMode2.getSelectionModel().select(0);
 					//System.out.println(transitions.transitions.toString());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -465,23 +416,38 @@ public class MainController {
 			return true;
 		}
 	}
+	
+	private boolean checkFlaggers(){
+		if(flaggerMap.getKeys().contains(flaggerName.getText())){
+			Alert alert = new Alert(AlertType.ERROR, "That flagger already exists - No two flaggers should have the same name.\nPlease try again.", ButtonType.OK);
+			alert.showAndWait();
+			return false;
 
+		} else {
+			return true;
+		}
+	}
+	
+	private boolean checkModes(){
+		if(modes.getKeys().contains(modeName.getText())){
+			Alert alert = new Alert(AlertType.ERROR, "That mode already exists - No two modes should have the same name.\nPlease try again.", ButtonType.OK);
+			alert.showAndWait();
+			return false;
+
+		} else {
+			return true;
+		}
+	}
 	private void executeCodeHandler(){
 		executeCode.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
             		codeRunner = new RunCode(programName.getText(), codeOutput.getText());
-            		codeRunner.writeToFile();
+            		//codeRunner.writeToFile();
             		codeRunner.run();
 					
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

@@ -3,6 +3,9 @@ package edu.hendrix.csci235.creator;
 import java.util.Optional;
 
 public class FlaggerInfo {
+	
+	// Holds all of the relevant info for a specific flag
+	
 	private String flaggerName, flaggerType, sensorPort, bumpOrSonar, motor, inequality;
 	private Boolean trueOrFalse;
 	private int value;
@@ -109,6 +112,12 @@ public class FlaggerInfo {
 			} else{
 				return  flaggerName + " - motor - f";
 			}
+		}else if(flaggerType.equals("Button")){
+			if(trueOrFalse == true){
+				return  flaggerName + " - motor - t";
+			} else{
+				return  flaggerName + " - motor - f";
+			}
 		}
 		else{
 			return("~ something is wrong ~");
@@ -131,13 +140,18 @@ public class FlaggerInfo {
 			} else{
 				return  flaggerName;
 			}
+		} else if(flaggerType.equals("Button")){
+			if(trueOrFalse == true){
+				return  flaggerName;
+			} else{
+				return  flaggerName;
+			}
 		}
 		else{
 			return("~ something is wrong ~");
 		}
-		//return(flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-				//flaggerType +"Flagger<>(new EV3UltraSonicSensor(SensorPort.S2), s -> s.getDistanceMode());");
 	}
+	
 	
 	
 }

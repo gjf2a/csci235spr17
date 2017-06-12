@@ -11,6 +11,8 @@ import java.util.TreeMap;
 
 
 public class Condition {
+	// This maps a condition to its flagger information
+	
 	private TreeMap<String, FlaggerInfo> conditions = new TreeMap<String, FlaggerInfo>();
 	
 	public void add(String condition, String flaggerName, String flaggerType, String sensorPort, String bumpOrSensor, String motor, Boolean trueOrFalse, String inequality,
