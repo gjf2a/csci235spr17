@@ -56,8 +56,8 @@ public class MotorInfo {
 
 	@Override
 	public String toString(){
-		return(motor1.toString() + ", " + forwardOrBackward1.toString() +
-				", " + motor2.toString() + ", " + forwardOrBackward2.toString());
+		return("Motor " + motor1.toString() + ": " + forwardOrBackward1.toString() +
+				" & " + "Motor " + motor2.toString() + ": " + forwardOrBackward2.toString());
 	}
 	
 	

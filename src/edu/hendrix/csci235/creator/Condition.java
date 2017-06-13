@@ -15,10 +15,10 @@ public class Condition {
 	
 	private TreeMap<String, FlaggerInfo> conditions = new TreeMap<String, FlaggerInfo>();
 	
-	public void add(String condition, String flaggerName, String flaggerType, String sensorPort, String bumpOrSensor, String motor, Boolean trueOrFalse, String inequality,
+	public void add(String condition, String flaggerName, String flaggerType, String sensorPort, String bumpOrSensor, String motor, Boolean trueOrFalse, int uLow, int uHigh, int vLow, int vHigh, String inequality,
 			int value) throws IOException{
 		conditions.put(condition, new FlaggerInfo(flaggerName, flaggerType, sensorPort, bumpOrSensor, motor, trueOrFalse,
-				inequality, value));
+				inequality, uLow, uHigh, vLow, vHigh, value));
 	}
 	
 	public TreeMap<String, FlaggerInfo> getConditions(){

@@ -4,9 +4,10 @@ public class TrueFalse {
 	
 	// patch up class that helped to identify a flags relevant information.
 	
-	private String trueCondition, falseCondition, inequality, number;
+	private String flaggerType, trueCondition, falseCondition, inequality, number;
 	
-	public TrueFalse(String trueCondition, String falseCondition, String inequality, String number){
+	public TrueFalse(String flaggerType, String trueCondition, String falseCondition, String inequality, String number){
+		this.flaggerType = flaggerType;
 		this.trueCondition = trueCondition;
 		this.falseCondition = falseCondition;
 		this.inequality = inequality;
@@ -44,6 +45,18 @@ public class TrueFalse {
 
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	
+
+	@Override
+	public String toString(){
+		return "The current true condition is " + trueCondition + " until the value(v) is " + inequality + 
+				" " + number + ". When the value is " + inequality + 
+				" " + number + ", the new currently true condition will be " + falseCondition + ".";
+	}
+
+	public String getFlaggerType() {
+		return flaggerType;
 	}
 	
 	

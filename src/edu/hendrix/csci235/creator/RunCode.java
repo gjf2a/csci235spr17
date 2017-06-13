@@ -129,8 +129,8 @@ public class RunCode {
 			  // Process pro2 = Runtime.getRuntime().exec("jar cvf " + programName + ".jar " +  programName + ".mf ", null, theFile);
 			   /*Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + ".class");
 			   Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Condition.class");
-			   Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Mode.class");
-*/			   
+			   Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Mode.class");*/		
+			   
 			   //Process pro3 = Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + ".class", null, theFile);
 			   //Process pro4 = Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Condition.class", null, theFile);
 			   //Process pro5 = Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Mode.class", null, theFile);

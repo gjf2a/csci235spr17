@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class GenerateCode {
+public class GenerateSourceCode {
 	
 	// This class builds all of the programs using strings. 
 	
@@ -20,7 +20,7 @@ public class GenerateCode {
 	private Mode modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
-	public GenerateCode(String programName, Transition transitions1, Transition transitions2, 
+	public GenerateSourceCode(String programName, Transition transitions1, Transition transitions2, 
 			Condition conditions, FlaggerMap flagMapping, Mode modes ){
 		this.programName = programName;
 		this.transitions1 = transitions1;
@@ -58,10 +58,18 @@ public class GenerateCode {
 			String falseCondition = value.getFalseCondition();
 			String inequality = value.getInequality();
 			String number = value.getNumber();
+			String flaggerType = value.getFlaggerType();
 			
-			flaggerConditions = flaggerConditions + "\n		" + key + ".add2(Condition." +
-					trueCondition.toUpperCase() + ", Condition." + falseCondition.toUpperCase() + 
-					", v -> v " + inequality + " " + number + ");\n";
+			if(!flaggerType.equals("ColorCount")){
+				flaggerConditions = flaggerConditions + "\n		" + key + ".add2(Condition." +
+						trueCondition.toUpperCase() + ", Condition." + falseCondition.toUpperCase() + 
+						", v -> v " + inequality + " " + number + ");\n";
+			} else{
+				flaggerConditions = flaggerConditions + "\n		" + key + ".add2(Condition." +
+						trueCondition.toUpperCase() + ", Condition." + falseCondition.toUpperCase() + 
+						", v -> v.getTotal() " + inequality + " " + number + ");\n";
+			}
+			
 					
 		}
 		code = code + flaggerConditions;

@@ -8,10 +8,10 @@ public class FlaggerInfo {
 	
 	private String flaggerName, flaggerType, sensorPort, bumpOrSonar, motor, inequality;
 	private Boolean trueOrFalse;
-	private int value;
+	private int uLow, uHigh, vLow, vHigh, value;
 
 	public FlaggerInfo(String flaggerName, String flaggerType, String sensorPort, String bumpOrSonar, String motor, Boolean trueOrFalse,
-			String inequality, int value){
+			String inequality, int uLow, int uHigh, int vLow, int vHigh, int value){
 		this.flaggerName = flaggerName;
 		this.flaggerType = flaggerType;
 		this.sensorPort = sensorPort;
@@ -19,6 +19,10 @@ public class FlaggerInfo {
 		this.trueOrFalse = trueOrFalse;
 		this.bumpOrSonar = bumpOrSonar;
 		this.inequality = inequality;
+		this.uLow = uLow;
+		this.uHigh = uHigh;
+		this.vLow = vLow;
+		this.vHigh = vHigh;
 		this.value = value;
 	}
 
@@ -75,6 +79,38 @@ public class FlaggerInfo {
 		return inequality;
 	}
 
+	public int getuLow() {
+		return uLow;
+	}
+
+	public void setuLow(int uLow) {
+		this.uLow = uLow;
+	}
+
+	public int getuHigh() {
+		return uHigh;
+	}
+
+	public void setuHigh(int uHigh) {
+		this.uHigh = uHigh;
+	}
+
+	public int getvLow() {
+		return vLow;
+	}
+
+	public void setvLow(int vLow) {
+		this.vLow = vLow;
+	}
+
+	public int getvHigh() {
+		return vHigh;
+	}
+
+	public void setvHigh(int vHigh) {
+		this.vHigh = vHigh;
+	}
+
 	public void setValue(int value) {
 		this.value = value;
 	}
@@ -92,6 +128,9 @@ public class FlaggerInfo {
 			} else if(flaggerType.equals("Motor")){
 				return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
 						flaggerType +"Flagger<>(Motor " + motor + ");\n");
+			} else if(flaggerType.equals("ColorCount")){
+				return( "		CameraFlagger<Condition> camera = new CameraFlagger<>();\n" + "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
+						flaggerType +"Flagger<>(" + uLow + ", " + uHigh + ", " + vLow + ", " + vHigh + ");\n		camera.addSub(" + flaggerName + ");");
 			}
 		}
 		else{
