@@ -29,6 +29,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
@@ -42,6 +44,9 @@ public class MainController {
 	
 	Transition transitions1 = new Transition();
 	Transition transitions2 = new Transition();
+	Transition transitions3 = new Transition();
+	Transition transitions4 = new Transition();
+	Transition transitions5 = new Transition();
 	
 	FlaggerMap flaggerMap = new FlaggerMap();
 	
@@ -90,13 +95,16 @@ public class MainController {
 	CheckBox startMode;
 	
 	@FXML
-	ChoiceBox transitionCondition1, transitionCondition2, transitionMode1, transitionMode2;
+	ChoiceBox transitionCondition1, transitionMode1;
 	
 	@FXML
 	TextArea codeOutput;
 
 	@FXML
 	Label sensorPort, motor;
+	
+	@FXML
+	Spinner tableNumber;
 	
 	final ToggleGroup motorGroup1 = new ToggleGroup();
 	final ToggleGroup motorGroup2 = new ToggleGroup();
@@ -123,9 +131,11 @@ public class MainController {
 		addConditionButtonHandler();
 		addModeButtonHandler();
 		addTransition1Handler();
-		addTransition2Handler();
+		//addTransition2Handler();
 		addCodeViewHandler();
 		executeCodeHandler();
+		
+		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		
 		flaggerSelector.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
@@ -200,7 +210,7 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		if(checkConditions() == true && validateValue(value.getText()) && checkFlaggers() == true){
+            		if(/*checkConditions() == true &&*/ validateValue(value.getText()) && checkFlaggers() == true){
             			conditions.add(trueCondition.getText(), 
             					flaggerName.getText(),
             					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
@@ -213,7 +223,7 @@ public class MainController {
             					Integer.parseInt(vLowText.getText()),
             					Integer.parseInt(vHighText.getText()),
             					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-            					Integer.parseInt(value.getText()));
+            					Double.parseDouble(value.getText()));
             			conditions.add(falseCondition.getText(), 
             					flaggerName.getText(),
             					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
@@ -226,7 +236,7 @@ public class MainController {
             					Integer.parseInt(vLowText.getText()),
             					Integer.parseInt(vHighText.getText()),
             					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-            					Integer.parseInt(value.getText()));
+            					Double.parseDouble(value.getText()));
             			flaggerMap.add(flaggerName.getText(),
             					(String) flaggerSelector.getSelectionModel().getSelectedItem(),
             					trueCondition.getText(), 
@@ -254,7 +264,8 @@ public class MainController {
 	
 	private boolean validateValue(String value){
 		try{
-			Integer.parseInt(value);
+			Double.parseDouble(value);
+			//Integer.parseInt(value);
 			return true;
 		} catch(NumberFormatException nfe){
 			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid number in the value text box.", ButtonType.OK);
@@ -385,36 +396,44 @@ public class MainController {
 		motorSelector.getSelectionModel().select(0);
 	}
 	
+	
+	
 
 	@SuppressWarnings("unchecked")
 	private void populateConditionTransition() {
+		transitionCondition1.getItems().removeAll(conditions.getKeys());
+		//transitionCondition2.getItems().removeAll(conditions.getKeys());
+		
 		Set<String> conditionsTransition = conditions.getKeys();
 		
 		transitionCondition1.getItems().add("Condition");
-		transitionCondition2.getItems().add("Condition");
+		//transitionCondition2.getItems().add("Condition");
 		
         for(String condition: conditionsTransition){
 			transitionCondition1.getItems().add(condition);
-			transitionCondition2.getItems().add(condition);
+			//transitionCondition2.getItems().add(condition);
 		}
 		transitionCondition1.getSelectionModel().select(0);
-		transitionCondition2.getSelectionModel().select(0);
+		//transitionCondition2.getSelectionModel().select(0);
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	private void populateModeTransition() {
+		transitionMode1.getItems().removeAll(modes.getKeys());
+		//transitionMode2.getItems().removeAll(modes.getKeys());
+		
 		Set<String> modesTransition = modes.getKeys();
 		
 		transitionMode1.getItems().add("Mode");
-		transitionMode2.getItems().add("Mode");
+		//transitionMode2.getItems().add("Mode");
 		
 		for(String mode: modesTransition){
 			transitionMode1.getItems().add(mode);
 			//transitionMode2.getItems().add(mode);
 		}
 		transitionMode1.getSelectionModel().select(0);
-		transitionMode2.getSelectionModel().select(0);
+		//transitionMode2.getSelectionModel().select(0);
 
 	}
 	
@@ -424,12 +443,43 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-					transitions1.add(
-							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-							transitionMode1.getSelectionModel().getSelectedItem().toString());
-					transitionCondition1.getSelectionModel().select(0);
-					transitionMode1.getSelectionModel().select(0);
-					previewCode();
+            		if(tableNumber.getValue().equals(1)){
+            			transitions1.add(
+    							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+    							transitionMode1.getSelectionModel().getSelectedItem().toString());
+    					transitionCondition1.getSelectionModel().select(0);
+    					transitionMode1.getSelectionModel().select(0);
+    					previewCode();
+            		} else if(tableNumber.getValue().equals(2)){
+            			transitions2.add(
+    							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+    							transitionMode1.getSelectionModel().getSelectedItem().toString());
+    					transitionCondition1.getSelectionModel().select(0);
+    					transitionMode1.getSelectionModel().select(0);
+    					previewCode();
+            		} else if(tableNumber.getValue().equals(3)){
+            			transitions3.add(
+    							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+    							transitionMode1.getSelectionModel().getSelectedItem().toString());
+    					transitionCondition1.getSelectionModel().select(0);
+    					transitionMode1.getSelectionModel().select(0);
+    					previewCode();
+            		} else if(tableNumber.getValue().equals(4)){
+            			transitions4.add(
+    							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+    							transitionMode1.getSelectionModel().getSelectedItem().toString());
+    					transitionCondition1.getSelectionModel().select(0);
+    					transitionMode1.getSelectionModel().select(0);
+    					previewCode();
+            		} else if(tableNumber.getValue().equals(5)){
+            			transitions5.add(
+    							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+    							transitionMode1.getSelectionModel().getSelectedItem().toString());
+    					transitionCondition1.getSelectionModel().select(0);
+    					transitionMode1.getSelectionModel().select(0);
+    					previewCode();
+            		}
+					
 					//System.out.println(transitions.transitions.toString());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -450,7 +500,7 @@ public class MainController {
 		    });
 	}
 	
-	private void addTransition2Handler(){
+	/*private void addTransition2Handler(){
 		addTransitionTable2.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -468,14 +518,14 @@ public class MainController {
 				}
             }
         });
-	}
+	}*/
 	
 	
 	private void previewCode(){
 		try {
 			if(codeView.getSelectedToggle().equals(sourceCode)){
 				String className = programName.getText();
-				if(className.equals(null)){
+				if(className.equals("")){
 					className = "ProgramName";
 				} else {
 					String firstLetter = className.substring(0,1).toUpperCase();
@@ -486,14 +536,17 @@ public class MainController {
 						className,
 						transitions1,
 						transitions2,
+						transitions3,
+						transitions4,
+						transitions5,
 						conditions,
 						flaggerMap,
 						modes);
 				codeOutput.setText(codeGenerator.generate().toString());
-				theCode = codeGenerator.generate().toString();
+				theCode = codeOutput.getText();
 			} else {
 				String className = programName.getText();
-				if(className.equals(null)){
+				if(className.equals("")){
 					className = "ProgramName";
 				} else {
 					String firstLetter = className.substring(0,1).toUpperCase();
@@ -504,6 +557,9 @@ public class MainController {
 						className,
 						transitions1,
 						transitions2,
+						transitions3,
+						transitions4,
+						transitions5,
 						conditions,
 						flaggerMap,
 						modes);
@@ -511,6 +567,9 @@ public class MainController {
 						className,
 						transitions1,
 						transitions2,
+						transitions3,
+						transitions4,
+						transitions5,
 						conditions,
 						flaggerMap,
 						modes);
@@ -525,7 +584,7 @@ public class MainController {
 	}
 	
 	
-	private boolean checkConditions(){
+	/*private boolean checkConditions(){
 		if(conditions.getKeys().contains(trueCondition.getText()) || conditions.getKeys().contains(falseCondition.getText()) || 
 				trueCondition.getText().equals(falseCondition.getText())){
 			Alert alert = new Alert(AlertType.ERROR, "That condition already exists - No two conditions should have the same name.\nPlease try again.", ButtonType.OK);
@@ -535,7 +594,7 @@ public class MainController {
 		} else {
 			return true;
 		}
-	}
+	}*/
 	
 	
 	private boolean checkFlaggers(){

@@ -15,16 +15,22 @@ public class GenerateSourceCode {
 	private String programName;
 	private Transition transitions1;
 	private Transition transitions2;
+	private Transition transitions3;
+	private Transition transitions4;
+	private Transition transitions5;
 	private Condition conditions;
 	private FlaggerMap flagMapping;
 	private Mode modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
 	public GenerateSourceCode(String programName, Transition transitions1, Transition transitions2, 
-			Condition conditions, FlaggerMap flagMapping, Mode modes ){
+			Transition transitions3, Transition transitions4, Transition transitions5, Condition conditions, FlaggerMap flagMapping, Mode modes ){
 		this.programName = programName;
 		this.transitions1 = transitions1;
 		this.transitions2 = transitions2;
+		this.transitions3 = transitions3;
+		this.transitions4 = transitions4;
+		this.transitions5 = transitions5;
 		this.conditions = conditions;
 		this.flagMapping = flagMapping;
 		this.modes = modes;
@@ -78,28 +84,86 @@ public class GenerateSourceCode {
 	}
 	
 	public String generateTransitionTables(){
-		TreeMap<String, String> rawTransitions1 = transitions1.transitions; 
-		TreeMap<String, String> rawTransitions2 = transitions2.transitions;
-		String toReturn1 =  "\n		Transitions<Condition,Mode> transitions1 = new Transitions<>();";
-		String toReturn2 =  "\n		Transitions<Condition,Mode> transitions2 = new Transitions<>();";
+		//TreeMap<String, String> rawTransitions1 = transitions1.transitions; 
+		//TreeMap<String, String> rawTransitions2 = transitions2.transitions;
+		ArrayList<ConditionModePair> rawTransitions1 = transitions1.getTransitions();
+		ArrayList<ConditionModePair> rawTransitions2 = transitions2.getTransitions();
+		ArrayList<ConditionModePair> rawTransitions3 = transitions3.getTransitions();
+		ArrayList<ConditionModePair> rawTransitions4 = transitions4.getTransitions();
+		ArrayList<ConditionModePair> rawTransitions5 = transitions5.getTransitions();
 		
-		for(Map.Entry<String, String> entry : rawTransitions1.entrySet()){
-			String condition = entry.getKey().toString();
-			String mode = entry.getValue().toString();
+		String toReturn2 = "";
+		String toReturn3 = "";
+		String toReturn4 = "";
+		String toReturn5 = "";
+		
+		if(transitions2.isEmpty() == false){
+			toReturn2 =  "\n		Transitions<Condition,Mode> transitions2 = new Transitions<>();";
+		}
+		if(transitions3.isEmpty() == false){
+			toReturn3 =  "\n		Transitions<Condition,Mode> transitions3 = new Transitions<>();";
+		}
+
+		if(transitions4.isEmpty() == false){
+			toReturn4 =  "\n		Transitions<Condition,Mode> transitions4 = new Transitions<>();";
+		}
+		if(transitions5.isEmpty() == false){
+			toReturn5 =  "\n		Transitions<Condition,Mode> transitions5 = new Transitions<>();";
+		}
+
+		String toReturn1 =  "\n		Transitions<Condition,Mode> transitions1 = new Transitions<>();";
+		
+		
+		
+		for(ConditionModePair cmp : rawTransitions1){
+			String condition = cmp.getCondition();
+			String mode = cmp.getMode();
 			
 			toReturn1 = toReturn1 + "\n		transitions1.add(Condition." + condition.toUpperCase() + ", Mode." +
 					mode.toUpperCase() + ");";
 		}
 		
-		for(Map.Entry<String, String> entry : rawTransitions2.entrySet()){
-			String condition = entry.getKey().toString();
-			String mode = entry.getValue().toString();
-			
-			toReturn2 = toReturn2 + "\n		transitions2.add(Condition." + condition.toUpperCase() + ", Mode." +
-					mode.toUpperCase() + ");";
+		if(transitions2.isEmpty() == false){
+			for(ConditionModePair cmp : rawTransitions2){
+				String condition = cmp.getCondition();
+				String mode = cmp.getMode();
+				
+				toReturn2 = toReturn2 + "\n		transitions2.add(Condition." + condition.toUpperCase() + ", Mode." +
+						mode.toUpperCase() + ");";
+			}
 		}
 		
-		return toReturn1 + "\n\n" + toReturn2 + "\n";
+		if(transitions3.isEmpty() == false){
+			for(ConditionModePair cmp : rawTransitions3){
+				String condition = cmp.getCondition();
+				String mode = cmp.getMode();
+				
+				toReturn3 = toReturn3 + "\n		transitions3.add(Condition." + condition.toUpperCase() + ", Mode." +
+						mode.toUpperCase() + ");";
+			}
+		}
+		
+		if(transitions4.isEmpty() == false){
+			for(ConditionModePair cmp : rawTransitions4){
+				String condition = cmp.getCondition();
+				String mode = cmp.getMode();
+				
+				toReturn4 = toReturn4 + "\n		transitions4.add(Condition." + condition.toUpperCase() + ", Mode." +
+						mode.toUpperCase() + ");";
+			}
+		}
+		
+		if(transitions5.isEmpty() == false){
+			for(ConditionModePair cmp : rawTransitions5){
+				String condition = cmp.getCondition();
+				String mode = cmp.getMode();
+				
+				toReturn5 = toReturn5 + "\n		transitions5.add(Condition." + condition.toUpperCase() + ", Mode." +
+						mode.toUpperCase() + ");";
+			}
+		}
+		
+		return toReturn1 + "\n\n" + toReturn2 + "\n\n" + toReturn3 + "\n\n" + toReturn4 + "\n\n" + toReturn5 +"\n";
 	}
 	
 	public String generateModeSelector(){
@@ -116,8 +180,39 @@ public class GenerateSourceCode {
 			String forwardOrBackward1 = value.getForwardOrBackward1();
 			String forwardOrBackward2 = value.getForwardOrBackward2();
 			String startingOrNot = value.getStartingOrNot();
+			String transitionTable = "";
 			
-			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				transitions1,\n				() ->{"
+			for(int i = 0; i < transitions1.getTransitions().size(); i ++){
+				if(transitions1.get(i).getMode() == key){
+					transitionTable = "transitionTable1";
+				}
+			}
+			
+			for(int j = 0; j < transitions2.getTransitions().size(); j ++){
+				if(transitions2.get(j).getMode() == key){
+					transitionTable = "transitionTable2";
+				}
+			}
+			
+			for(int j = 0; j < transitions3.getTransitions().size(); j ++){
+				if(transitions3.get(j).getMode() == key){
+					transitionTable = "transitionTable3";
+				}
+			}
+			
+			for(int j = 0; j < transitions4.getTransitions().size(); j ++){
+				if(transitions4.get(j).getMode() == key){
+					transitionTable = "transitionTable4";
+				}
+			}
+			
+			for(int j = 0; j < transitions5.getTransitions().size(); j ++){
+				if(transitions5.get(j).getMode() == key){
+					transitionTable = "transitionTable5";
+				}
+			}
+			
+			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				"+ transitionTable + ",\n				() ->{"
 					+ "\n					Motor." + motor1 + "." + forwardOrBackward1.toLowerCase() + "();\n					"
 					+ "Motor." + motor2 + "." + forwardOrBackward2.toLowerCase() + "();\n				})";
 			

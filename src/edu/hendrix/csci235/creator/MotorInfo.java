@@ -53,12 +53,14 @@ public class MotorInfo {
 	public void setStartingOrNot(String startingOrNot) {
 		this.startingOrNot = startingOrNot;
 	}
+	
 
 	@Override
 	public String toString(){
-		return("Motor " + motor1.toString() + ": " + forwardOrBackward1.toString() +
-				" & " + "Motor " + motor2.toString() + ": " + forwardOrBackward2.toString());
+		return("\n      ~ Motor " + motor1.toString() + ": " + forwardOrBackward1.toString()  + "\n      ~ Motor " + motor2.toString() + ": " + forwardOrBackward2.toString());
 	}
+
+	
 	
 	
 	

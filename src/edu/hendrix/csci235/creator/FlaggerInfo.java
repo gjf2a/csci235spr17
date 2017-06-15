@@ -8,10 +8,11 @@ public class FlaggerInfo {
 	
 	private String flaggerName, flaggerType, sensorPort, bumpOrSonar, motor, inequality;
 	private Boolean trueOrFalse;
-	private int uLow, uHigh, vLow, vHigh, value;
+	private int uLow, uHigh, vLow, vHigh;
+	private double value;
 
 	public FlaggerInfo(String flaggerName, String flaggerType, String sensorPort, String bumpOrSonar, String motor, Boolean trueOrFalse,
-			String inequality, int uLow, int uHigh, int vLow, int vHigh, int value){
+			String inequality, int uLow, int uHigh, int vLow, int vHigh, double value){
 		this.flaggerName = flaggerName;
 		this.flaggerType = flaggerType;
 		this.sensorPort = sensorPort;
@@ -30,7 +31,7 @@ public class FlaggerInfo {
 		this.inequality = inequality; 
 	}
 
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 
@@ -123,14 +124,14 @@ public class FlaggerInfo {
 								flaggerType +"Flagger<>(new EV3TouchSensor(SensorPort.S" + sensorPort +"));\n");
 				} else {
 					return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-							flaggerType +"Flagger<>(new EV3UltraSonicSensor(SensorPort.S" + sensorPort +"), s -> s.getDistanceMode());\n");
+							flaggerType +"Flagger<>(new EV3UltrasonicSensor(SensorPort.S" + sensorPort +"), s -> s.getDistanceMode());\n");
 				}
 			} else if(flaggerType.equals("Motor")){
 				return( "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
 						flaggerType +"Flagger<>(Motor " + motor + ");\n");
 			} else if(flaggerType.equals("ColorCount")){
 				return( "		CameraFlagger<Condition> camera = new CameraFlagger<>();\n" + "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-						flaggerType +"Flagger<>(" + uLow + ", " + uHigh + ", " + vLow + ", " + vHigh + ");\n		camera.addSub(" + flaggerName + ");");
+						flaggerType +"Flagger<>(" + uLow + ", " + uHigh + ", " + vLow + ", " + vHigh + ");\n		camera.addSub(" + flaggerName + "");
 			}
 		}
 		else{
