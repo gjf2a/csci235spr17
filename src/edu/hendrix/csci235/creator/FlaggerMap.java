@@ -28,6 +28,11 @@ public class FlaggerMap {
 	public Collection<TrueFalse> getValues(){
 		return flagMapping.values();
 	}
+
+	public void remove(String key) {
+		flagMapping.remove(key);
+		
+	}
 	
 
 }

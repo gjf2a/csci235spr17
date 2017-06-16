@@ -25,6 +25,10 @@ public class Condition {
 		return conditions;
 	}
 	
+	public void remove(String key) {
+		conditions.remove(key);
+	}
+	
 	public Set<String> getKeys(){
 		return conditions.keySet();
 	}

@@ -13,8 +13,8 @@ public class Mode {
 	private TreeMap<String, MotorInfo> modes = new TreeMap<String, MotorInfo>();
 	
 	public void add(String mode, String motor1, String forwardStopBackward1, 
-			String motor2, String forwardStopBackward2, String startingOrNot) throws IOException{
-		modes.put(mode, new MotorInfo(motor1, forwardStopBackward1, motor2, forwardStopBackward2, startingOrNot));
+			String motor2, String forwardStopBackward2, String startingOrNot, int transitionTableNumber) throws IOException{
+		modes.put(mode, new MotorInfo(motor1, forwardStopBackward1, motor2, forwardStopBackward2, startingOrNot, transitionTableNumber));
 	}
 	
 	public TreeMap<String, MotorInfo> getModes(){
@@ -39,6 +39,11 @@ public class Mode {
 	public void printValues(String key) {
 		MotorInfo info = modes.get(key);
 		System.out.println(info.toString());
+	}
+
+	public void remove(String key) {
+		modes.remove(key);
+		
 	}
 
 }

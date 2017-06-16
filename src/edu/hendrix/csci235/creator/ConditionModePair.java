@@ -25,5 +25,10 @@ public class ConditionModePair {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
+	
+	@Override
+	public String toString(){
+		return "Condition: " + condition + "\nMode: " + mode + "\n\n";
+	}
 
 }

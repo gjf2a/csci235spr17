@@ -5,13 +5,15 @@ public class MotorInfo {
 	// Holds all info about a specific mode.
 
 	private String motor1, motor2, forwardOrBackward1, forwardOrBackward2, startingOrNot;
+	private int transitionTableNumber;
 	
-	public MotorInfo(String motor1, String forwardOrBackward1, String motor2, String forwardOrBackward2, String startingOrNot){
+	public MotorInfo(String motor1, String forwardOrBackward1, String motor2, String forwardOrBackward2, String startingOrNot, int transitionTableNumber){
 		this.motor1 = motor1;
 		this.forwardOrBackward1 = forwardOrBackward1;
 		this.motor2 = motor2;
 		this.forwardOrBackward2 = forwardOrBackward2;
 		this.startingOrNot = startingOrNot;
+		this.transitionTableNumber = transitionTableNumber;
 	}
 
 	public String getMotor1() {
@@ -53,11 +55,19 @@ public class MotorInfo {
 	public void setStartingOrNot(String startingOrNot) {
 		this.startingOrNot = startingOrNot;
 	}
-	
+
+	public int getTransitionTableNumber() {
+		return transitionTableNumber;
+	}
+
+	public void setTransitionTableNumber(int transitionTableNumber) {
+		this.transitionTableNumber = transitionTableNumber;
+	}
 
 	@Override
 	public String toString(){
-		return("\n      ~ Motor " + motor1.toString() + ": " + forwardOrBackward1.toString()  + "\n      ~ Motor " + motor2.toString() + ": " + forwardOrBackward2.toString());
+		return("\n      > Motor " + motor1.toString() + ": " + forwardOrBackward1.toString()  + "\n      > Motor " + motor2.toString() + ": " + forwardOrBackward2.toString()
+				+ "\n      > Transition table " + transitionTableNumber + "\n");
 	}
 
 	

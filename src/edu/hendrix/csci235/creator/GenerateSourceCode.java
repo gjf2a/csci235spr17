@@ -103,7 +103,6 @@ public class GenerateSourceCode {
 		if(transitions3.isEmpty() == false){
 			toReturn3 =  "\n		Transitions<Condition,Mode> transitions3 = new Transitions<>();";
 		}
-
 		if(transitions4.isEmpty() == false){
 			toReturn4 =  "\n		Transitions<Condition,Mode> transitions4 = new Transitions<>();";
 		}
@@ -180,39 +179,11 @@ public class GenerateSourceCode {
 			String forwardOrBackward1 = value.getForwardOrBackward1();
 			String forwardOrBackward2 = value.getForwardOrBackward2();
 			String startingOrNot = value.getStartingOrNot();
-			String transitionTable = "";
+			int transitionTableNumber = value.getTransitionTableNumber();
 			
-			for(int i = 0; i < transitions1.getTransitions().size(); i ++){
-				if(transitions1.get(i).getMode() == key){
-					transitionTable = "transitionTable1";
-				}
-			}
 			
-			for(int j = 0; j < transitions2.getTransitions().size(); j ++){
-				if(transitions2.get(j).getMode() == key){
-					transitionTable = "transitionTable2";
-				}
-			}
 			
-			for(int j = 0; j < transitions3.getTransitions().size(); j ++){
-				if(transitions3.get(j).getMode() == key){
-					transitionTable = "transitionTable3";
-				}
-			}
-			
-			for(int j = 0; j < transitions4.getTransitions().size(); j ++){
-				if(transitions4.get(j).getMode() == key){
-					transitionTable = "transitionTable4";
-				}
-			}
-			
-			for(int j = 0; j < transitions5.getTransitions().size(); j ++){
-				if(transitions5.get(j).getMode() == key){
-					transitionTable = "transitionTable5";
-				}
-			}
-			
-			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				"+ transitionTable + ",\n				() ->{"
+			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				transitionTable"+ transitionTableNumber + ",\n				() ->{"
 					+ "\n					Motor." + motor1 + "." + forwardOrBackward1.toLowerCase() + "();\n					"
 					+ "Motor." + motor2 + "." + forwardOrBackward2.toLowerCase() + "();\n				})";
 			

@@ -34,6 +34,20 @@ public class Transition {
 			return false;
 		}
 	}
+	
+	public ArrayList<ConditionModePair> clear(){
+		transitions.clear();
+		return transitions;
+	}
+	
+	public void replace(int i, ConditionModePair cmp){
+		for(int m = 0; m < transitions.size(); m++){
+			if(m == i){
+				transitions.set(i, cmp);
+			}
+		}
+	}
+	
 	/*public Set<String> getKeys(){
 		return transitions.keySet();
 	}
@@ -42,5 +56,14 @@ public class Transition {
 		return transitions.values();
 	}*/
 	
+	@Override
+	public String toString(){
+		String toReturn = "";
+		for(int i = 0; i < transitions.size(); i++){
+			toReturn = toReturn + transitions.get(i).toString();
+		}
+		
+		return toReturn;
+	}
 
 }
