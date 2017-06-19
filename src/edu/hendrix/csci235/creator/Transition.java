@@ -12,6 +12,13 @@ public class Transition {
 		transitions.add(new ConditionModePair(condition, mode));
 	}
 	
+	public void regenerate(Iterable<TempTableData> data) {
+		transitions.clear();
+		for (TempTableData dat: data) {
+			transitions.add(dat.getPair());
+		}
+	}
+	
 	public ArrayList<ConditionModePair> getTransitions(){
 		return transitions;
 	}
@@ -22,6 +29,10 @@ public class Transition {
 	
 	public ConditionModePair get(int index){
 		return transitions.get(index);
+	}
+	
+	public ConditionModePair getLast() {
+		return get(size() - 1);
 	}
 	
 	public boolean isEmpty(){

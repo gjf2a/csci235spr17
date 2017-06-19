@@ -7,10 +7,18 @@ public class TempTableData {
 	private SimpleStringProperty condition;
 	private SimpleStringProperty mode;
 	public int begIndex = 23;
+	
+	public TempTableData(ConditionModePair cmp) {
+		this(cmp.getCondition(), cmp.getMode());
+	}
 
 	public TempTableData(String condition, String mode){
 	    this.condition = new SimpleStringProperty(condition);
 	    this.mode = new SimpleStringProperty(mode);
+	}
+	
+	public ConditionModePair getPair() {
+		return new ConditionModePair(getCondition(), getMode());
 	}
 
 	public String getCondition() {

@@ -10,18 +10,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
-import javafx.collections.*;
 
 public class MainController {
 	Condition conditions = new Condition();
 	
 	Mode modes = new Mode();
 	
-	Transition transitions1 = new Transition();
-	Transition transitions2 = new Transition();
-	Transition transitions3 = new Transition();
-	Transition transitions4 = new Transition();
-	Transition transitions5 = new Transition();
+	Transition[] transitions = new Transition[]{new Transition(), new Transition(), new Transition(), new Transition(), new Transition()};
 	
 	FlaggerMap flaggerMap = new FlaggerMap();
 	
@@ -107,8 +102,6 @@ public class MainController {
 
 	String theCode = "";
 	
-	ObservableList<TempTableData> tempDataList = FXCollections.observableArrayList();
-	
 	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 	
 	@FXML
@@ -121,8 +114,6 @@ public class MainController {
 		
 		conditions.getConditions();
 		modes.getModes();
-		transitions1.getTransitions();
-		transitions2.getTransitions();
 		
 		flaggerName.getItems().add("");
 		modeName.getItems().add("");
@@ -174,40 +165,14 @@ public class MainController {
 	    });
 		
 		tableNumber.valueProperty().addListener((obs, oldValue, newValue) -> {
-			if(tableNumber.getValueFactory().getValue().equals(1)){
-				if(transitions1.transitions.size() > 0){
-					for(int i = 0; i < transitions1.getTransitions().size(); i++){
-						tempDataList.add(new TempTableData(transitions1.getTransitions().get(i).getCondition(), transitions1.getTransitions().get(i).getMode()));
-					}
-				}
-			} else if(tableNumber.getValueFactory().getValue().equals(2)){
-				if(transitions2.transitions.size() > 0){
-					for(int i = 0; i < transitions2.getTransitions().size(); i++){
-						tempDataList.add(new TempTableData(transitions2.getTransitions().get(i).getCondition(), transitions2.getTransitions().get(i).getMode()));					
-					}	
-				}
-			} else if(tableNumber.getValueFactory().getValue().equals(3)){
-				if(transitions3.transitions.size() > 0){
-					for(int i = 0; i < transitions3.getTransitions().size(); i++){
-						tempDataList.add(new TempTableData(transitions3.getTransitions().get(i).getCondition(), transitions3.getTransitions().get(i).getMode()));
-					}
-				}
-			} else if(tableNumber.getValueFactory().getValue().equals(4)){
-				if(transitions4.transitions.size() > 0){
-					for(int i = 0; i < transitions4.getTransitions().size(); i++){
-						tempDataList.add(new TempTableData(transitions4.getTransitions().get(i).getCondition(), transitions4.getTransitions().get(i).getMode()));					
-					}
-				}
-			} else if(tableNumber.getValueFactory().getValue().equals(5)){
-				if(transitions5.transitions.size() > 0){
-					for(int i = 0; i < transitions5.getTransitions().size(); i++){
-						tempDataList.add(new TempTableData(transitions5.getTransitions().get(i).getCondition(), transitions5.getTransitions().get(i).getMode()));
+			int tableNum = tableNumber.getValueFactory().getValue() - 1;
+			if (tableNum >= 0 && tableNum < transitions.length) {
+				if(transitions[tableNum].transitions.size() > 0){
+					for(int i = 0; i < transitions[tableNum].size(); i++){
+						transitionTableViewer.getItems().add(new TempTableData(transitions[tableNum].get(i)));
 					}
 				}
 			}
-			
-			transitionTableViewer.setItems(tempDataList);
-			
 		});
 		
 		flaggerName.getSelectionModel().selectedItemProperty()
@@ -302,11 +267,11 @@ public class MainController {
                     }
 
                     transitionTableViewer.getItems().add(dropIndex, draggedItem1);
-
+                    transitions[tableNumber.getValue() - 1].regenerate(transitionTableViewer.getItems());
                     event.setDropCompleted(true);
                     transitionTableViewer.getSelectionModel().select(dropIndex);
                     event.consume();
-                    
+                    previewCode();
                 }
             });        
             return row ;
@@ -611,65 +576,19 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		tempDataList = transitionTableViewer.getItems();
-            		if(!(transitionCondition1.getSelectionModel().getSelectedItem().equals("Condition") || transitionMode1.getSelectionModel().getSelectedItem().equals("Mode"))){
-            			if(tableNumber.getValue().equals(1)){
-                			transitions1.add(
+            		if(!transitionCondition1.getSelectionModel().getSelectedItem().equals("Condition") && !transitionMode1.getSelectionModel().getSelectedItem().equals("Mode")){
+            			int tableNum = tableNumber.getValue() - 1;
+            			if (tableNum >= 0 && tableNum < transitions.length) {
+                			transitions[tableNum].add(
         							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
-        					for(int i = 0; i < tempDataList.size(); i++){
-        						transitions1.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
-        					}
-                		} else if(tableNumber.getValue().equals(2)){
-                			transitions2.add(
-        							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-        							transitionMode1.getSelectionModel().getSelectedItem().toString());
-        					transitionCondition1.getSelectionModel().select(0);
-        					transitionMode1.getSelectionModel().select(0);
-        					for(int i = 0; i < tempDataList.size(); i++){
-        						transitions2.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
-        					}
-                		} else if(tableNumber.getValue().equals(3)){
-                			transitions3.add(
-        							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-        							transitionMode1.getSelectionModel().getSelectedItem().toString());
-        					transitionCondition1.getSelectionModel().select(0);
-        					transitionMode1.getSelectionModel().select(0);
-        					for(int i = 0; i < tempDataList.size(); i++){
-        						transitions3.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
-        					}
-                		} else if(tableNumber.getValue().equals(4)){
-                			transitions4.add(
-        							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-        							transitionMode1.getSelectionModel().getSelectedItem().toString());
-        					transitionCondition1.getSelectionModel().select(0);
-        					transitionMode1.getSelectionModel().select(0);
-        					for(int i = 0; i < tempDataList.size(); i++){
-        						transitions4.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
-        					}
-                		} else if(tableNumber.getValue().equals(5)){
-                			transitions5.add(
-        							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-        							transitionMode1.getSelectionModel().getSelectedItem().toString());
-        					transitionCondition1.getSelectionModel().select(0);
-        					transitionMode1.getSelectionModel().select(0);
-        					for(int i = 0; i < tempDataList.size(); i++){
-        						transitions5.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
-        					}
-                		}
+        					transitionTableViewer.getItems().add(new TempTableData(transitions[tableNum].getLast()));
+            			}
             		}
             		
 					previewCode();
-					//tempDataList = transitionTableViewer.getItems();
-					//System.out.println("In transition handler" + tempDataList);
-					for(int i = 0; i < tempDataList.size(); i++){
-						transitions1.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
-					}
-					
-					System.out.println(transitions1.toString());
-					//System.out.println(transitions.transitions.toString());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -702,11 +621,11 @@ public class MainController {
 				}
 				GenerateSourceCode codeGenerator = new GenerateSourceCode(
 						className,
-						transitions1,
-						transitions2,
-						transitions3,
-						transitions4,
-						transitions5,
+						transitions[0],
+						transitions[1],
+						transitions[2],
+						transitions[3],
+						transitions[4],
 						conditions,
 						flaggerMap,
 						modes);
@@ -723,21 +642,21 @@ public class MainController {
 				}
 				GenerateSourceCode codeSourceGenerator = new GenerateSourceCode(
 						className,
-						transitions1,
-						transitions2,
-						transitions3,
-						transitions4,
-						transitions5,
+						transitions[0],
+						transitions[1],
+						transitions[2],
+						transitions[3],
+						transitions[4],
 						conditions,
 						flaggerMap,
 						modes);
 				GenerateSimpleCode codeSimpleGenerator = new GenerateSimpleCode(
 						className,
-						transitions1,
-						transitions2,
-						transitions3,
-						transitions4,
-						transitions5,
+						transitions[0],
+						transitions[1],
+						transitions[2],
+						transitions[3],
+						transitions[4],
 						conditions,
 						flaggerMap,
 						modes);

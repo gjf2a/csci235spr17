@@ -194,7 +194,6 @@ public class GenerateSourceCode {
 		Collection<FlaggerInfo> flaggerSet = conditions.getValues();
 	
 		for(FlaggerInfo flagger : flaggerSet){
-			String name = flagger.getFlaggerName();
 			firstPart = firstPart + "\n			.flagger(" + flagger + ")";
 		}
 		
