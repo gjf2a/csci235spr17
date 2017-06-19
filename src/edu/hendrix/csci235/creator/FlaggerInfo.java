@@ -1,7 +1,5 @@
 package edu.hendrix.csci235.creator;
 
-import java.util.Optional;
-
 public class FlaggerInfo {
 	
 	// Holds all of the relevant info for a specific flag

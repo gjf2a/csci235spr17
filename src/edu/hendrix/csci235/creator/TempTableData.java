@@ -1,6 +1,5 @@
 package edu.hendrix.csci235.creator;
 
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class TempTableData {

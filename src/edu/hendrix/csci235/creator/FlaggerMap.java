@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javafx.scene.Node;
-
 public class FlaggerMap {
 	
 	// This was a patch up class that made it easier to work with the flaggers. It just maps a condition to either being true or false.

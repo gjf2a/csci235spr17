@@ -1,50 +1,16 @@
 package edu.hendrix.csci235.creator;
 
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import javax.lang.model.element.Modifier;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.beans.value.*;
+import javafx.event.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.DataFormat;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.scene.input.*;
+import javafx.collections.*;
 
 public class MainController {
 	Condition conditions = new Condition();
@@ -65,13 +31,13 @@ public class MainController {
 	TextField programName;
 	
 	@FXML
-	ComboBox flaggerName;
+	ComboBox<String> flaggerName;
 	
 	@FXML
-	ComboBox modeName;
+	ComboBox<String> modeName;
 	
 	@FXML
-	ChoiceBox flaggerSelector, sensorPortSelector, motorSelector, inequalitySelector;
+	ChoiceBox<String> flaggerSelector, sensorPortSelector, motorSelector, inequalitySelector;
 	
 	@FXML
 	TextField trueCondition, falseCondition;
@@ -89,7 +55,7 @@ public class MainController {
 	Button addCondition, addMode, addTransitionTable1, addTransitionTable2, previewCode, executeCode;
 	
 	@FXML
-	ChoiceBox motor1, motor2;
+	ChoiceBox<String> motor1, motor2;
 	
 	@FXML
 	RadioButton forwardMotor1, forwardMotor2, backwardMotor1, backwardMotor2;
@@ -110,7 +76,7 @@ public class MainController {
 	CheckBox startMode;
 	
 	@FXML
-	ChoiceBox transitionCondition1, transitionMode1;
+	ChoiceBox<String> transitionCondition1, transitionMode1;
 	
 	@FXML
 	TextArea codeOutput;
@@ -119,10 +85,10 @@ public class MainController {
 	Label sensorPort, motor;
 	
 	@FXML
-	Spinner tableNumber;
+	Spinner<Integer> tableNumber;
 	
 	@FXML
-	Spinner modeTableNumber;
+	Spinner<Integer> modeTableNumber;
 	
 	@FXML
 	TableView<TempTableData> transitionTableViewer;
@@ -145,7 +111,6 @@ public class MainController {
 	
 	private static final DataFormat SERIALIZED_MIME_TYPE = new DataFormat("application/x-java-serialized-object");
 	
-	@SuppressWarnings("unchecked")
 	@FXML
 	public void initialize() {
 		transitionTableCondition.setCellValueFactory(
@@ -287,7 +252,7 @@ public class MainController {
 	    			motorGroup2.selectToggle(stopMotor2);
 	    		} 
 	    		
-	    		modeTableNumber.getValueFactory().setValue((Object) modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getTransitionTableNumber());
+	    		modeTableNumber.getValueFactory().setValue(modes.getModes().get(modeName.getSelectionModel().getSelectedItem()).getTransitionTableNumber());
 	    		
 	    	}
 	    	
@@ -536,7 +501,6 @@ public class MainController {
 		
 	}
 
-	@SuppressWarnings("unchecked")
 	private void populateSensorPortselector() {
 		List<String> ports = new ArrayList<>(Arrays.asList("Port", "1", "2"
 				, "3", "4"));
@@ -546,9 +510,6 @@ public class MainController {
 		sensorPortSelector.getSelectionModel().select(0);
 	}
 	
-
-	
-	@SuppressWarnings("unchecked")
 	private void populateInequalitySelector() {
 		List<String> inequalities = new ArrayList<>(Arrays.asList("==", "<=", 
 				">="));
@@ -559,9 +520,6 @@ public class MainController {
 		
 	}
 	
-	
-
-	@SuppressWarnings("unchecked")
 	private void populateFlaggerSelector() {
 		List<String> flaggerTypes = new ArrayList<>(Arrays.asList("Flagger", "Motor", 
 				"Sensor", "Button", "ColorCount"));
@@ -612,7 +570,6 @@ public class MainController {
 	
 	}
 
-	@SuppressWarnings("unchecked")
 	private void populateConditionTransition() {
 		transitionCondition1.getItems().removeAll(conditions.getKeys());
 		//transitionCondition2.getItems().removeAll(conditions.getKeys());
@@ -630,9 +587,6 @@ public class MainController {
 		//transitionCondition2.getSelectionModel().select(0);
 	}
 	
-	
-	
-	@SuppressWarnings("unchecked")
 	private void populateModeTransition() {
 		transitionMode1.getItems().removeAll(modes.getKeys());
 		//transitionMode2.getItems().removeAll(modes.getKeys());
@@ -734,9 +688,6 @@ public class MainController {
 		      }
 		    });
 	}
-	
-
-	
 	
 	private void previewCode(){
 		try {

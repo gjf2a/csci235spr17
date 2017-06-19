@@ -1,9 +1,6 @@
 package edu.hendrix.csci235.creator;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
-import java.util.TreeMap;
 
 public class Transition {
 	
