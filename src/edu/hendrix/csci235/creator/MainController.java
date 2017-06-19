@@ -13,8 +13,6 @@ import java.util.Set;
 
 import javax.lang.model.element.Modifier;
 
-import com.squareup.javapoet.TypeSpec;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -45,7 +43,6 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import sun.reflect.generics.tree.IntSignature;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
