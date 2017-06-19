@@ -660,6 +660,7 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
+            		tempDataList = transitionTableViewer.getItems();
             		if(!(transitionCondition1.getSelectionModel().getSelectedItem().equals("Condition") || transitionMode1.getSelectionModel().getSelectedItem().equals("Mode"))){
             			if(tableNumber.getValue().equals(1)){
                 			transitions1.add(
@@ -667,35 +668,50 @@ public class MainController {
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
+        					for(int i = 0; i < tempDataList.size(); i++){
+        						transitions1.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
+        					}
                 		} else if(tableNumber.getValue().equals(2)){
                 			transitions2.add(
         							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
+        					for(int i = 0; i < tempDataList.size(); i++){
+        						transitions2.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
+        					}
                 		} else if(tableNumber.getValue().equals(3)){
                 			transitions3.add(
         							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
+        					for(int i = 0; i < tempDataList.size(); i++){
+        						transitions3.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
+        					}
                 		} else if(tableNumber.getValue().equals(4)){
                 			transitions4.add(
         							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
+        					for(int i = 0; i < tempDataList.size(); i++){
+        						transitions4.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
+        					}
                 		} else if(tableNumber.getValue().equals(5)){
                 			transitions5.add(
         							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
+        					for(int i = 0; i < tempDataList.size(); i++){
+        						transitions5.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
+        					}
                 		}
             		}
             		
 					previewCode();
-					tempDataList = transitionTableViewer.getItems();
+					//tempDataList = transitionTableViewer.getItems();
 					//System.out.println("In transition handler" + tempDataList);
 					for(int i = 0; i < tempDataList.size(); i++){
 						transitions1.replace(i,new ConditionModePair(tempDataList.get(i).getCondition(), tempDataList.get(i).getMode() ));
