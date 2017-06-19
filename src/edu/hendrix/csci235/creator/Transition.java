@@ -1,8 +1,9 @@
 package edu.hendrix.csci235.creator;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Transition {
+public class Transition implements Iterable<ConditionModePair> {
 	
 	// Maps a condition to a mode for a transition table.
 	
@@ -72,6 +73,11 @@ public class Transition {
 		}
 		
 		return toReturn;
+	}
+
+	@Override
+	public Iterator<ConditionModePair> iterator() {
+		return transitions.iterator();
 	}
 
 }

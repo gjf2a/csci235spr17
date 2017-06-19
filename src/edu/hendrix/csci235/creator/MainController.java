@@ -584,7 +584,10 @@ public class MainController {
         							transitionMode1.getSelectionModel().getSelectedItem().toString());
         					transitionCondition1.getSelectionModel().select(0);
         					transitionMode1.getSelectionModel().select(0);
-        					transitionTableViewer.getItems().add(new TempTableData(transitions[tableNum].getLast()));
+        					transitionTableViewer.getItems().clear();
+        					for (ConditionModePair cmp: transitions[tableNum]) {
+        						transitionTableViewer.getItems().add(new TempTableData(cmp));
+        					}
             			}
             		}
             		
