@@ -598,7 +598,6 @@ public class MainController {
             						transitionTableViewer.getItems().add(new TempTableData(cmp));
             					}
             				}
-        					//if(transitions[tableNum].transitionCondition1.getSelectionModel().getSelectedItem()
             			}
             		}
             		
