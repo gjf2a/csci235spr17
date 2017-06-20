@@ -323,7 +323,6 @@ public class MainController {
             	try {
             		if(/*checkConditions() == true &&*/ validateValue(value.getText())){
             			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
-            				//System.out.println(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
             				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
             				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
             				flaggerMap.remove(flaggerName.getSelectionModel().getSelectedItem().toString());
