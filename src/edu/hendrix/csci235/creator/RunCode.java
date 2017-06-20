@@ -1,7 +1,9 @@
 package edu.hendrix.csci235.creator;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -106,9 +108,13 @@ public class RunCode {
 	public void run(){
 		   try {
 			   String path = "c:\\Program Files\\Java\\jdk1.8.0_131\\bin\\";
-			   File theFile = writeToFile();
-			   Process pro = Runtime.getRuntime().exec(path + "javac -cp \".;c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar\" " + programName + ".java",
-					   null, theFile);
+			   File fileDir = writeToFile();
+			   Process pro = Runtime.getRuntime().exec(path + "javac -cp \".;c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar;c:\\Users\\ferrer\\Desktop\\GitHub\\csci235spr17\\src\" " + programName + ".java",
+					   null, fileDir);
+			   BufferedReader reader = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+			   reader.lines().forEach(s -> System.out.println(s));
+			   System.out.println(pro.waitFor());
+			   System.out.println("Done compiling");
 			   createManifest();
 			   
 			   // TODO: when I try to make .jar file eveything goes crazy!!! HELp!!!

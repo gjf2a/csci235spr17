@@ -106,6 +106,8 @@ public class MainController {
 	
 	@FXML
 	public void initialize() {
+		programName.setText("ProgramName");
+		
 		transitionTableCondition.setCellValueFactory(
 			    new PropertyValueFactory<TempTableData,String>("Condition"));
 		transitionTableMode.setCellValueFactory(

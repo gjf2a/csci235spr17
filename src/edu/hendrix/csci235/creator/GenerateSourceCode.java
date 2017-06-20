@@ -38,7 +38,7 @@ public class GenerateSourceCode {
 		return "import java.io.IOException;\nimport lejos.hardware.Button;"
 				+ "\nimport lejos.hardware.motor.Motor;\nimport lejos.hardware.port.SensorPort;"
 				+ "\nimport lejos.hardware.sensor.EV3UltrasonicSensor;\nimport lejos.hardware.sensor.EV3TouchSensor;"
-				+ "\nimport modeselection.ModeSelector;\nimport modeselection.SensorFlagger;\nimport modeselection.Transitions;\n";
+				+ "\nimport edu.hendrix.modeselection.ModeSelector;\nimport edu.hendrix.modeselection.SensorFlagger;\nimport edu.hendrix.modeselection.Transitions;\n";
 	}
 	
 	public String generateFlaggers(){
@@ -165,8 +165,9 @@ public class GenerateSourceCode {
 	
 	public String generateModeSelector(){
 		TreeMap<String, MotorInfo> rawModes = modes.getModes();
-		String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
-				+ "(Condition.class, Mode.class, Mode." ;
+		/*String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
+				+ "(Condition.class, Mode.class, Mode." ;*/
+		String firstPart = "";
 		String thirdPart = "";
 		for(Map.Entry<String, MotorInfo> entry : rawModes.entrySet()){
 			String key = entry.getKey().toString();
@@ -180,7 +181,7 @@ public class GenerateSourceCode {
 			
 			
 			
-			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				transitionTable"+ transitionTableNumber + ",\n				() ->{"
+			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				transitions"+ transitionTableNumber + ",\n				() ->{"
 					+ "\n					Motor." + motor1 + "." + forwardOrBackward1.toLowerCase() + "();\n					"
 					+ "Motor." + motor2 + "." + forwardOrBackward2.toLowerCase() + "();\n				})";
 			
