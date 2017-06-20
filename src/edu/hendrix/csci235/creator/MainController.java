@@ -579,15 +579,26 @@ public class MainController {
             		if(!transitionCondition1.getSelectionModel().getSelectedItem().equals("Condition") && !transitionMode1.getSelectionModel().getSelectedItem().equals("Mode")){
             			int tableNum = tableNumber.getValue() - 1;
             			if (tableNum >= 0 && tableNum < transitions.length) {
-                			transitions[tableNum].add(
-        							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-        							transitionMode1.getSelectionModel().getSelectedItem().toString());
-        					transitionCondition1.getSelectionModel().select(0);
-        					transitionMode1.getSelectionModel().select(0);
-        					transitionTableViewer.getItems().clear();
-        					for (ConditionModePair cmp: transitions[tableNum]) {
-        						transitionTableViewer.getItems().add(new TempTableData(cmp));
-        					}
+            				if(transitions[tableNum].contains(transitionCondition1.getSelectionModel().getSelectedItem())){
+            					int num = transitions[tableNum].whichIndex(transitionCondition1.getSelectionModel().getSelectedItem());
+            					transitions[tableNum].replace(num, new ConditionModePair(transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+        							transitionMode1.getSelectionModel().getSelectedItem().toString()));
+            					transitionTableViewer.getItems().clear();
+            					for (ConditionModePair cmp: transitions[tableNum]) {
+            						transitionTableViewer.getItems().add(new TempTableData(cmp));
+            					}
+            				} else {
+            					transitions[tableNum].add(
+            							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
+            							transitionMode1.getSelectionModel().getSelectedItem().toString());
+            					transitionCondition1.getSelectionModel().select(0);
+            					transitionMode1.getSelectionModel().select(0);
+            					transitionTableViewer.getItems().clear();
+            					for (ConditionModePair cmp: transitions[tableNum]) {
+            						transitionTableViewer.getItems().add(new TempTableData(cmp));
+            					}
+            				}
+        					//if(transitions[tableNum].transitionCondition1.getSelectionModel().getSelectedItem()
             			}
             		}
             		

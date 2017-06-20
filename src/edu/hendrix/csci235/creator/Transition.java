@@ -44,6 +44,26 @@ public class Transition implements Iterable<ConditionModePair> {
 		}
 	}
 	
+	public boolean contains(String condition){
+		for(int i = 0; i < transitions.size(); i++){
+			if(transitions.get(i).getCondition().equals(condition)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public int whichIndex(String condition){
+		for(int i = 0; i < transitions.size(); i++){
+			if(transitions.get(i).getCondition().equals(condition)){
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	
 	public ArrayList<ConditionModePair> clear(){
 		transitions.clear();
 		return transitions;
