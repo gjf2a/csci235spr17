@@ -11,7 +11,7 @@ import javafx.stage.FileChooser;
 
 public class RunCode {
 	private String programName, code;
-	FileChooser chooser = new FileChooser();
+	//FileChooser chooser = new FileChooser();
 	
 	public String pathInfo;
 	public ArrayList<String> pathInfoArray = new ArrayList<String>();
@@ -25,12 +25,13 @@ public class RunCode {
 	// Saves the program in a specified location. Allows the user to select location.
 	// This is a bit tricky. The save file needs to be saved in sentence case.
 	public File writeToFile() throws FileNotFoundException, UnsupportedEncodingException {
-		chooser.setTitle("Save Program");
+		//chooser.setTitle("Save Program");
 		String programNameCaps = programName.substring(0, 1).toUpperCase();
 		String temp = programName.substring(1);
 		programNameCaps = programNameCaps + temp;
-		chooser.setInitialFileName(programNameCaps + ".java");
-		File chosen = chooser.showSaveDialog(null);
+		//chooser.setInitialFileName(programNameCaps + ".java");
+		//File chosen = chooser.showSaveDialog(null);
+		File chosen = new File("c:\\Users\\ferrer\\Desktop\\GitHub\\csci235spr17\\bin\\" + programNameCaps + ".java");
 		PrintWriter out = new PrintWriter(chosen.getAbsolutePath());
 		out.println(code);
 		out.close();
@@ -109,14 +110,18 @@ public class RunCode {
 		   try {
 			   String path = "c:\\Program Files\\Java\\jdk1.8.0_131\\bin\\";
 			   File fileDir = writeToFile();
-			   Process pro = Runtime.getRuntime().exec(path + "javac -cp \".;c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar;c:\\Users\\ferrer\\Desktop\\GitHub\\csci235spr17\\src\" " + programName + ".java",
+			   Process pro = Runtime.getRuntime().exec(path + "javac -cp \".;c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar;c:\\Users\\ferrer\\Desktop\\GitHub\\csci235spr17\\bin\" " + programName + ".java",
 					   null, fileDir);
-			   BufferedReader reader = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
-			   reader.lines().forEach(s -> System.out.println(s));
-			   System.out.println(pro.waitFor());
+			   waitAndPrint(pro);
 			   System.out.println("Done compiling");
 			   createManifest();
 			   
+			   System.out.println("Starting jar...");
+			   String jarCmd = path + "jar -cvfm " + programName + ".jar " + programName + ".mf " + programName + ".class " + programName + "$Condition.class " + programName + "$Mode.class edu\\hendrix\\modeselection\\*";
+			   System.out.println("jarCmd: " + jarCmd);
+			   Process jarPro = Runtime.getRuntime().exec(jarCmd, null, fileDir);
+			   //waitAndPrint(jarPro);
+			   System.out.println("Jar should be ready");
 			   // TODO: when I try to make .jar file eveything goes crazy!!! HELp!!!
 			   
 			  // Process pro2 = Runtime.getRuntime().exec("jar cvf " + programName + ".jar " +  programName + ".mf ", null, theFile);
@@ -132,6 +137,12 @@ public class RunCode {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+	}
+	
+	void waitAndPrint(Process pro) throws InterruptedException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(pro.getErrorStream()));
+		reader.lines().forEach(s -> System.out.println(s));
+		System.out.println(pro.waitFor());
 	}
 
 }
