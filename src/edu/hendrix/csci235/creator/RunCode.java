@@ -115,7 +115,8 @@ public class RunCode {
 			   waitAndPrint(pro);
 			   System.out.println("Done compiling");
 			   createManifest();
-			   
+			   /*
+			   // Curses, foiled again!
 			   System.out.println("Starting jar...");
 			   String jarCmd = path + "jar -cvfm " + programName + ".jar " + programName + ".mf " + programName + ".class " + programName + "$Condition.class " + programName + "$Mode.class edu\\hendrix\\modeselection\\*";
 			   System.out.println("jarCmd: " + jarCmd);
@@ -123,6 +124,7 @@ public class RunCode {
 			   //waitAndPrint(jarPro);
 			   System.out.println("Jar should be ready");
 			   // TODO: when I try to make .jar file eveything goes crazy!!! HELp!!!
+			   */
 			   
 			  // Process pro2 = Runtime.getRuntime().exec("jar cvf " + programName + ".jar " +  programName + ".mf ", null, theFile);
 			   /*Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + ".class");
