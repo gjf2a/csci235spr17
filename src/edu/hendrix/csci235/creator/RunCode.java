@@ -105,8 +105,9 @@ public class RunCode {
 	// It will then generate a manifest and add everything to a .jar file.
 	public void run(){
 		   try {
+			   String path = "c:\\Program Files\\Java\\jdk1.8.0_131\\bin\\";
 			   File theFile = writeToFile();
-			   Process pro = Runtime.getRuntime().exec("javac -cp \".;c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar\" " + programName + ".java",
+			   Process pro = Runtime.getRuntime().exec(path + "javac -cp \".;c:\\Program Files\\leJOS EV3\\lib\\ev3\\ev3classes.jar\" " + programName + ".java",
 					   null, theFile);
 			   createManifest();
 			   

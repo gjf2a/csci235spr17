@@ -165,9 +165,8 @@ public class GenerateSourceCode {
 	
 	public String generateModeSelector(){
 		TreeMap<String, MotorInfo> rawModes = modes.getModes();
-		/*String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
-				+ "(Condition.class, Mode.class, Mode." ;*/
-		String firstPart = "";
+		String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
+				+ "(Condition.class, Mode.class, Mode." ;
 		String thirdPart = "";
 		for(Map.Entry<String, MotorInfo> entry : rawModes.entrySet()){
 			String key = entry.getKey().toString();
