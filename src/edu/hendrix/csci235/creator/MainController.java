@@ -329,6 +329,9 @@ public class MainController {
             		} else if( flaggerSelector.getSelectionModel().getSelectedItem().equals("Flagger")){
             			Alert alert = new Alert(AlertType.ERROR, "Please select a flagger type.", ButtonType.OK);
             			alert.showAndWait();
+            		} else if(flaggerName.getSelectionModel().isEmpty()){
+            			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid flagger Name.", ButtonType.OK);
+            			alert.showAndWait();
             		} else {
             			if(/*checkConditions() == true &&*/ validateValue(value.getText())){
                 			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
@@ -406,7 +409,7 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		if(modeName.getSelectionModel().getSelectedItem().equals("")){
+            		if(modeName.getSelectionModel().isEmpty()){
             			Alert alert = new Alert(AlertType.ERROR, "Please enter a mode name.", ButtonType.OK);
             			alert.showAndWait();
             		} else {
