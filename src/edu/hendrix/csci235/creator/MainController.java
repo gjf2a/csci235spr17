@@ -401,6 +401,9 @@ public class MainController {
             			Alert alert = new Alert(AlertType.ERROR, "Please enter a mode name.", ButtonType.OK);
             			alert.showAndWait();
             		} else {
+            			if(modes.getModes().isEmpty()){
+            				startMode.setSelected(true);
+            			}
             			if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
             				//System.out.println(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
             				modes.remove(modeName.getSelectionModel().getSelectedItem().toString());
