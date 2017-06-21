@@ -323,50 +323,59 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		if(/*checkConditions() == true &&*/ validateValue(value.getText())){
-            			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
-            				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
-            				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
-            				flaggerMap.remove(flaggerName.getSelectionModel().getSelectedItem().toString());
-            			}
-            			conditions.add(trueCondition.getText().toUpperCase(), 
-            					flaggerName.getSelectionModel().getSelectedItem().toString(),
-            					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
-            					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
-            					sensorFlaggerInfo.getSelectedToggle().toString(),
-            					motorSelector.getSelectionModel().getSelectedItem().toString(),
-            					true,
-            					Integer.parseInt(uLowText.getText()),
-            					Integer.parseInt(uHighText.getText()),
-            					Integer.parseInt(vLowText.getText()),
-            					Integer.parseInt(vHighText.getText()),
-            					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-            					Double.parseDouble(value.getText()));
-            			conditions.add(falseCondition.getText().toUpperCase(), 
-            					flaggerName.getSelectionModel().getSelectedItem().toString(),
-            					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
-            					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
-            					sensorFlaggerInfo.getSelectedToggle().toString(),
-            					motorSelector.getSelectionModel().getSelectedItem().toString(),
-            					false,
-            					Integer.parseInt(uLowText.getText()),
-            					Integer.parseInt(uHighText.getText()),
-            					Integer.parseInt(vLowText.getText()),
-            					Integer.parseInt(vHighText.getText()),
-            					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-            					Double.parseDouble(value.getText()));
-            			flaggerMap.add(flaggerName.getSelectionModel().getSelectedItem().toString(),
-            					(String) flaggerSelector.getSelectionModel().getSelectedItem(),
-            					trueCondition.getText().toUpperCase(), 
-            					falseCondition.getText().toUpperCase(),
-            					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-            					value.getText());
-            			//conditions.printKeys();
-            			populateFlaggerNameSelector();
-            			flaggerMap.toString();
-            			previewCode();
-            			clearAllCondition();
-            		} 
+            		if(trueCondition.getText().equals("") || falseCondition.getText().equals("")){
+            			Alert alert = new Alert(AlertType.ERROR, "Please enter a name for both conditions.", ButtonType.OK);
+            			alert.showAndWait();
+            		} else if( flaggerSelector.getSelectionModel().getSelectedItem().equals("Flagger")){
+            			Alert alert = new Alert(AlertType.ERROR, "Please select a flagger type.", ButtonType.OK);
+            			alert.showAndWait();
+            		} else {
+            			if(/*checkConditions() == true &&*/ validateValue(value.getText())){
+                			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
+                				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
+                				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
+                				flaggerMap.remove(flaggerName.getSelectionModel().getSelectedItem().toString());
+                			}
+                			conditions.add(trueCondition.getText().toUpperCase(), 
+                					flaggerName.getSelectionModel().getSelectedItem().toString(),
+                					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
+                					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
+                					sensorFlaggerInfo.getSelectedToggle().toString(),
+                					motorSelector.getSelectionModel().getSelectedItem().toString(),
+                					true,
+                					Integer.parseInt(uLowText.getText()),
+                					Integer.parseInt(uHighText.getText()),
+                					Integer.parseInt(vLowText.getText()),
+                					Integer.parseInt(vHighText.getText()),
+                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+                					Double.parseDouble(value.getText()));
+                			conditions.add(falseCondition.getText().toUpperCase(), 
+                					flaggerName.getSelectionModel().getSelectedItem().toString(),
+                					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
+                					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
+                					sensorFlaggerInfo.getSelectedToggle().toString(),
+                					motorSelector.getSelectionModel().getSelectedItem().toString(),
+                					false,
+                					Integer.parseInt(uLowText.getText()),
+                					Integer.parseInt(uHighText.getText()),
+                					Integer.parseInt(vLowText.getText()),
+                					Integer.parseInt(vHighText.getText()),
+                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+                					Double.parseDouble(value.getText()));
+                			flaggerMap.add(flaggerName.getSelectionModel().getSelectedItem().toString(),
+                					(String) flaggerSelector.getSelectionModel().getSelectedItem(),
+                					trueCondition.getText().toUpperCase(), 
+                					falseCondition.getText().toUpperCase(),
+                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+                					value.getText());
+                			//conditions.printKeys();
+                			populateFlaggerNameSelector();
+                			flaggerMap.toString();
+                			previewCode();
+                			clearAllCondition();
+                		} 
+            		}
+            		
 					
 					populateConditionTransition();
 				} catch (NumberFormatException e) {
