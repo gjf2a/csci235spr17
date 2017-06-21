@@ -117,8 +117,10 @@ public class MainController {
 		conditions.getConditions();
 		modes.getModes();
 		
-		flaggerName.getItems().add("");
-		modeName.getItems().add("");
+		flaggerName.getItems().add("Flagger Name");
+		modeName.getItems().add("Mode Name");
+		flaggerName.getSelectionModel().select("Flagger Name");
+		modeName.getSelectionModel().select("Mode Name");
 		
 		setButtonGroups();
 		
@@ -329,7 +331,7 @@ public class MainController {
             		} else if( flaggerSelector.getSelectionModel().getSelectedItem().equals("Flagger")){
             			Alert alert = new Alert(AlertType.ERROR, "Please select a flagger type.", ButtonType.OK);
             			alert.showAndWait();
-            		} else if(flaggerName.getSelectionModel().isEmpty()){
+            		} else if(flaggerName.getSelectionModel().getSelectedItem().equals("Flagger Name")){
             			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid flagger Name.", ButtonType.OK);
             			alert.showAndWait();
             		} else {
@@ -409,7 +411,7 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		if(modeName.getSelectionModel().isEmpty()){
+            		if(modeName.getSelectionModel().getSelectedItem().equals("Mode Name")){
             			Alert alert = new Alert(AlertType.ERROR, "Please enter a mode name.", ButtonType.OK);
             			alert.showAndWait();
             		} else {
