@@ -162,16 +162,23 @@ public class RunCode {
 	// From Stack Overflow:
 	// https://stackoverflow.com/questions/1281229/how-to-use-jaroutputstream-to-create-a-jar-file
 	private void makeJar() throws FileNotFoundException, IOException {
+		printWhere();
+		
 		Manifest manifest = new Manifest();
 		manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
 		manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, "/home/root/lejos/lib/ev3classes.jar /home/root/lejos/lib/opencv-2411.jar /home/root/lejos/lib/dbusjava.jar /home/root/lejos/libjna/usr/share/java/jna.jar");
 		manifest.getMainAttributes().put(Attributes.Name.MAIN_CLASS, programName);
-		JarOutputStream target = new JarOutputStream(new FileOutputStream("output.jar"), manifest);
-		add(new File(programName + ".class"), target);
-		add(new File(programName + "$Condition.class "), target);
-		add(new File(programName + "$Mode.class "), target);
-		add(new File("edu" + File.separatorChar + "hendrix" + File.separatorChar + "modeselection"), target);
+		JarOutputStream target = new JarOutputStream(new FileOutputStream(programName + ".jar"), manifest);
+		add(new File("bin\\" + programName + ".class"), target);
+		add(new File("bin\\" + programName + "$Condition.class"), target);
+		add(new File("bin\\" + programName + "$Mode.class"), target);
+		add(new File("bin\\" + "edu" + File.separatorChar + "hendrix" + File.separatorChar + "modeselection"), target);
 		target.close();
+	}
+	
+	private static void printWhere() {
+		File f = new File(".");
+		System.out.println("pwd:" + f.getAbsolutePath());
 	}
 
 	private static void add(File source, JarOutputStream target) throws IOException
@@ -186,7 +193,7 @@ public class RunCode {
 	      {
 	        if (!name.endsWith("/"))
 	          name += "/";
-	        JarEntry entry = new JarEntry(name);
+	        JarEntry entry = new JarEntry(name.replace("bin/", ""));
 	        entry.setTime(source.lastModified());
 	        target.putNextEntry(entry);
 	        target.closeEntry();
@@ -196,7 +203,8 @@ public class RunCode {
 	      return;
 	    }
 
-	    JarEntry entry = new JarEntry(source.getPath().replace("\\", "/"));
+	    System.out.println("source: " + source.getPath());
+	    JarEntry entry = new JarEntry(source.getPath().replace("\\", "/").replace("bin/", ""));
 	    entry.setTime(source.lastModified());
 	    target.putNextEntry(entry);
 	    in = new BufferedInputStream(new FileInputStream(source));

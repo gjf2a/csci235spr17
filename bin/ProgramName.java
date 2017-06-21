@@ -37,7 +37,7 @@ public class ProgramName{
 			.mode(Mode.STOP,
 				transitions1,
 				() ->{
-					Motor.A.forward();
+					Motor.A.stop();
 					Motor.D.stop();
 				});
 			controller.control();
