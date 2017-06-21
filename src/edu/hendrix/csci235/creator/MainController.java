@@ -397,36 +397,41 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
-        				//System.out.println(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
-        				modes.remove(modeName.getSelectionModel().getSelectedItem().toString());
-        			}
-            		if(checkModes() == true){
-            			RadioButton selectedRadioButton1 = (RadioButton) motorGroup1.getSelectedToggle();
-                		String toogleGroupValue1 = selectedRadioButton1.getText();
-                		
-                		RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
-                		String toogleGroupValue2 = selectedRadioButton2.getText();
-                		//System.out.println(toogleGroupValue2);
-                		
-                		//RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
-                		//String toogleGroupValue3 = selectedRadioButton3.getText();
-                		
-                		String isStart = "";
-                		if(startMode.isSelected()){
-                			isStart = "Starting Mode";
-                		}
-                		
-    					modes.add(modeName.getSelectionModel().getSelectedItem().toString().toUpperCase(), 
-    							motor1.getSelectionModel().getSelectedItem().toString(),
-    							toogleGroupValue1,
-    							motor2.getSelectionModel().getSelectedItem().toString(),
-    							toogleGroupValue2,
-    							isStart, (int) modeTableNumber.getValue());
-    					previewCode();
-    					clearAllMode();
-    					populateModeTransition();
-    					populateModeNameSelector();
+            		if(modeName.getSelectionModel().getSelectedItem().equals("")){
+            			Alert alert = new Alert(AlertType.ERROR, "Please enter a mode name.", ButtonType.OK);
+            			alert.showAndWait();
+            		} else {
+            			if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
+            				//System.out.println(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
+            				modes.remove(modeName.getSelectionModel().getSelectedItem().toString());
+            			}
+            			if(checkModes() == true){
+            				RadioButton selectedRadioButton1 = (RadioButton) motorGroup1.getSelectedToggle();
+            				String toogleGroupValue1 = selectedRadioButton1.getText();
+
+            				RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
+            				String toogleGroupValue2 = selectedRadioButton2.getText();
+            				//System.out.println(toogleGroupValue2);
+
+            				//RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
+            				//String toogleGroupValue3 = selectedRadioButton3.getText();
+
+            				String isStart = "";
+            				if(startMode.isSelected()){
+            					isStart = "Starting Mode";
+            				}
+
+            				modes.add(modeName.getSelectionModel().getSelectedItem().toString().toUpperCase(), 
+            						motor1.getSelectionModel().getSelectedItem().toString(),
+            						toogleGroupValue1,
+            						motor2.getSelectionModel().getSelectedItem().toString(),
+            						toogleGroupValue2,
+            						isStart, (int) modeTableNumber.getValue());
+            				previewCode();
+            				clearAllMode();
+            				populateModeTransition();
+            				populateModeNameSelector();
+            			}
             		}
             		
 				} catch (NumberFormatException e) {

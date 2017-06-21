@@ -66,7 +66,11 @@ public class MotorInfo {
 
 	@Override
 	public String toString(){
-		return("\n      > Motor " + motor1.toString() + ": " + forwardOrBackward1.toString()  + "\n      > Motor " + motor2.toString() + ": " + forwardOrBackward2.toString()
+		String s = "Starting mode";
+		if(!startingOrNot.equals("Starting Mode")){
+			s = "Not starting";
+		}
+		return("\n      > " + s +  "\n      > Motor " + motor1.toString() + ": " + forwardOrBackward1.toString()  + "\n      > Motor " + motor2.toString() + ": " + forwardOrBackward2.toString()
 				+ "\n      > Transition table " + transitionTableNumber + "\n");
 	}
 
