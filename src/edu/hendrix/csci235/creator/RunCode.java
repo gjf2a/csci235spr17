@@ -59,60 +59,6 @@ public class RunCode {
 		return pathName;
 	}
 	
-	
-	// Creates a manifest that must be added to the .jar file.
-	// A manifest basically tells the .jar file how to run.
-	public void createManifest() throws FileNotFoundException{
-		// Come back and change these for loops!
-		for(int i = 0; i < pathInfo.length(); i++){
-			pathInfoArray.add(pathInfo.substring(i, i + 1));
-		}
-		
-		for(String letter : pathInfoArray){
-			if(letter.equals("\\")){
-				pathInfoArrayFinal.add("/");
-				//pathInfoArrayFinal.add("\\");
-			} else {
-				pathInfoArrayFinal.add(letter);
-			}
-		}
-		
-		
-		String pathFinal = "";
-		for(String letter : pathInfoArrayFinal){
-			pathFinal = pathFinal + letter;
-		}
-		
-		/////////////////////////////////////////
-		String whereToStore = pathFinal + programName + ".mf";
-		
-		File manifesto = new File(whereToStore);
-		
-		PrintWriter out = new PrintWriter(manifesto.getAbsolutePath());
-		out.println("Manifest-Version: 1.0");
-		out.println("Class-Path: /home/root/lejos/lib/ev3classes.jar /home/root/lejos/lib/opencv-2411.jar /home/root/lejos/lib/dbusjava.jar /home/root/lejos/libjna/usr/share/java/jna.jar");
-		out.println("Main-Class: " + programName);
-		out.close();
-	}
-	
-	
-	/*private static void runProcess(String command) throws Exception {
-		Process p = Runtime.getRuntime().exec(command);
-		printLines(command + " stdout:", p.getInputStream());
-		printLines(command + " stderr:", p.getErrorStream());
-		p.waitFor();
-		System.out.println(command + " exitValue() " + p.exitValue());
-	}*/
-	
-	/*private static void printLines(String name, InputStream ins) throws Exception {
-	        String line = null;
-	        BufferedReader in = new BufferedReader(
-	                new InputStreamReader(ins));
-	        while ((line = in.readLine()) != null) {
-	            System.out.println(name + " " + line);
-	        }
-	 }*/
-	
 	// Makes calls to the command line that will first compile the program and separate it into its classes.
 	// It will then generate a manifest and add everything to a .jar file.
 	public void run(){
@@ -125,29 +71,6 @@ public class RunCode {
 			   System.out.println("Done compiling");
 			   
 			   makeJar();
-			   
-			   //createManifest();
-			   /*
-			   // Curses, foiled again!
-			   System.out.println("Starting jar...");
-			   String jarCmd = path + "jar -cvfm " + programName + ".jar " + programName + ".mf " + programName + ".class " + programName + "$Condition.class " + programName + "$Mode.class edu\\hendrix\\modeselection\\*";
-			   System.out.println("jarCmd: " + jarCmd);
-			   Process jarPro = Runtime.getRuntime().exec(jarCmd, null, fileDir);
-			   //waitAndPrint(jarPro);
-			   System.out.println("Jar should be ready");
-			   // TODO: when I try to make .jar file eveything goes crazy!!! HELp!!!
-			   */
-			   
-			  // Process pro2 = Runtime.getRuntime().exec("jar cvf " + programName + ".jar " +  programName + ".mf ", null, theFile);
-			   /*Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + ".class");
-			   Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Condition.class");
-			   Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Mode.class");*/		
-			   
-			   //Process pro3 = Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + ".class", null, theFile);
-			   //Process pro4 = Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Condition.class", null, theFile);
-			   //Process pro5 = Runtime.getRuntime().exec("jar uf " + programName + ".jar " +  programName + "$Mode.class", null, theFile);
-			  
-
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
