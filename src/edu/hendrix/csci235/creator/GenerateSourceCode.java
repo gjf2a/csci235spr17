@@ -38,7 +38,10 @@ public class GenerateSourceCode {
 		return "import java.io.IOException;\nimport lejos.hardware.Button;"
 				+ "\nimport lejos.hardware.motor.Motor;\nimport lejos.hardware.port.SensorPort;"
 				+ "\nimport lejos.hardware.sensor.EV3UltrasonicSensor;\nimport lejos.hardware.sensor.EV3TouchSensor;"
-				+ "\nimport edu.hendrix.modeselection.ModeSelector;\nimport edu.hendrix.modeselection.SensorFlagger;\nimport edu.hendrix.modeselection.Transitions;\n";
+				+ "\nimport edu.hendrix.modeselection.ModeSelector;\nimport edu.hendrix.modeselection.SensorFlagger;"
+				+ "\nimport edu.hendrix.modeselection.Transitions;"
+				+ "\nimport edu.hendrix.modeselection.vision.CameraFlagger;"
+				+ "\nimport edu.hendrix.modeselection.vision.color.ColorCountFlagger;\n";
 	}
 	
 	public String generateFlaggers(){
@@ -194,7 +197,9 @@ public class GenerateSourceCode {
 		Collection<FlaggerInfo> flaggerSet = conditions.getValues();
 	
 		for(FlaggerInfo flagger : flaggerSet){
-			firstPart = firstPart + "\n			.flagger(" + flagger + ")";
+			if (flagger.shouldAdd()) {
+				firstPart = firstPart + "\n			.flagger(" + flagger + ")";
+			}
 		}
 		
 		return firstPart + thirdPart + ";\n			controller.control();"
