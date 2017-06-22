@@ -9,13 +9,15 @@ import edu.hendrix.modeselection.SensorFlagger;
 import edu.hendrix.modeselection.Transitions;
 public class ProgramName{
 	public static void main(String[] args) throws IOException {
-		SensorFlagger<Condition> Bump = new SensorFlagger<>(new EV3TouchSensor(SensorPort.S1));
+		CameraFlagger<Condition> camera = new CameraFlagger<>();
+		ColorCountFlagger<Condition> Blue = new ColorCountFlagger<>(121, 128, 118, 122);
+		camera.addSub(Blue);
 
-		Bump.add2(Condition.HIT, Condition.MISS, v -> v == 1);
+		Blue.add2(Condition.BLUE, Condition.NOTBLUE, v -> v.getTotal() >= 1);
 
 		Transitions<Condition,Mode> transitions1 = new Transitions<>();
-		transitions1.add(Condition.HIT, Mode.STOP);
-		transitions1.add(Condition.MISS, Mode.FORWARD);
+		transitions1.add(Condition.BLUE, Mode.STOP);
+		transitions1.add(Condition.NOTBLUE, Mode.FORWARD);
 
 
 
@@ -26,8 +28,8 @@ public class ProgramName{
 
 
 		ModeSelector<Condition,Mode> controller = new ModeSelector<>(Condition.class, Mode.class, Mode.FORWARD)
-			.flagger(Bump)
-			.flagger(Bump)
+			.flagger(Blue)
+			.flagger(Blue)
 			.mode(Mode.FORWARD,
 				transitions1,
 				() ->{
@@ -44,8 +46,8 @@ public class ProgramName{
 	}
 
 	enum Condition{
-		HIT,
-		MISS;
+		BLUE,
+		NOTBLUE;
 	}
 	enum Mode{
 		FORWARD,
