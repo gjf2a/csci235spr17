@@ -114,10 +114,6 @@ public class FlaggerInfo {
 		this.value = value;
 	}
 	
-	public boolean shouldAdd() {
-		return !flaggerType.equals("ColorCount");
-	}
-	
 	public String addFlaggers(){
 		if(trueOrFalse == true){
 			if(flaggerType.equals("Sensor")){
@@ -143,29 +139,10 @@ public class FlaggerInfo {
 	
 	@Override
 	public String toString(){
-		return flaggerName;/*
-		if(flaggerType.equals("Sensor")){
-			if(trueOrFalse == true){
-				return  flaggerName;
-			} else {
-				return  flaggerName;
-			}
-		} else if(flaggerType.equals("Motor")){
-			if(trueOrFalse == true){
-				return  flaggerName;
-			} else{
-				return  flaggerName;
-			}
-		} else if(flaggerType.equals("Button")){
-			if(trueOrFalse == true){
-				return  flaggerName;
-			} else{
-				return  flaggerName;
-			}
+		if (flaggerType.equals("ColorCount")) {
+			return "camera";
 		}
-		else{
-			return("~ something is wrong ~");
-		}*/
+		return flaggerName;
 	}
 	
 	

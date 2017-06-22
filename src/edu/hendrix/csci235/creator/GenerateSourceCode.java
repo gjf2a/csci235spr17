@@ -197,9 +197,7 @@ public class GenerateSourceCode {
 		Collection<FlaggerInfo> flaggerSet = conditions.getValues();
 	
 		for(FlaggerInfo flagger : flaggerSet){
-			if (flagger.shouldAdd()) {
-				firstPart = firstPart + "\n			.flagger(" + flagger + ")";
-			}
+			firstPart = firstPart + "\n			.flagger(" + flagger + ")";
 		}
 		
 		return firstPart + thirdPart + ";\n			controller.control();"
