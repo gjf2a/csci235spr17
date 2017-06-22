@@ -35,7 +35,22 @@ bin/plan1oldtransitions.txt
 
 bin/plan1transitions.txt
 bin/Prog2.java
+<<<<<<< HEAD
+bin/BlueProgram.java
+bin/BlueProgram.java
+bin/ForwardLeft.java
+bin/BlueProgram.java
+bin/ForwardStop.java
+bin/ProgramName.java
+bin/SillyTest.java
+bin/ProgramName.java
+bin/ProgramName.java
+=======
 c:/Users/ferrer/Desktop/GitHub/csci235spr17/bin/ProgramName.java
 c:/Users/ferrer/Desktop/GitHub/csci235spr17/bin/ProgramName.java
 c:/Users/ferrer/Desktop/GitHub/csci235spr17/bin/ProgramName.java
+>>>>>>> bada339290c512af1d2cba737637086526920de2
 c:/Users/ferrer/Desktop/GitHub/csci235spr17/bin/ProgramName.java
+bin/ProgramName.java
+bin/ProgramName.java
+bin/BlueProg.java

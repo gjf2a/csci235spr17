@@ -129,7 +129,7 @@ public class FlaggerInfo {
 						flaggerType +"Flagger<>(Motor " + motor + ");\n");
 			} else if(flaggerType.equals("ColorCount")){
 				return( "		CameraFlagger<Condition> camera = new CameraFlagger<>();\n" + "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
-						flaggerType +"Flagger<>(" + uLow + ", " + uHigh + ", " + vLow + ", " + vHigh + ");\n		camera.addSub(" + flaggerName + "");
+						flaggerType +"Flagger<>(" + uLow + ", " + uHigh + ", " + vLow + ", " + vHigh + ");\n		camera.addSub(" + flaggerName + ");\n");
 			}
 		}
 		else{
@@ -137,57 +137,12 @@ public class FlaggerInfo {
 		} return("");
 	}
 	
-	public String convertValueFormat(){
-		if(flaggerType.equals("Sensor")){
-			if(trueOrFalse == true){
-				return  flaggerName + " - sensor - t";
-			} else {
-				return  flaggerName + " - sensor - f";
-			}
-		} else if(flaggerType.equals("Motor")){
-			if(trueOrFalse == true){
-				return  flaggerName + " - motor - t";
-			} else{
-				return  flaggerName + " - motor - f";
-			}
-		}else if(flaggerType.equals("Button")){
-			if(trueOrFalse == true){
-				return  flaggerName + " - motor - t";
-			} else{
-				return  flaggerName + " - motor - f";
-			}
-		}
-		else{
-			return("~ something is wrong ~");
-		}
-	}
-	
-	
-	
 	@Override
 	public String toString(){
-		if(flaggerType.equals("Sensor")){
-			if(trueOrFalse == true){
-				return  flaggerName;
-			} else {
-				return  flaggerName;
-			}
-		} else if(flaggerType.equals("Motor")){
-			if(trueOrFalse == true){
-				return  flaggerName;
-			} else{
-				return  flaggerName;
-			}
-		} else if(flaggerType.equals("Button")){
-			if(trueOrFalse == true){
-				return  flaggerName;
-			} else{
-				return  flaggerName;
-			}
+		if (flaggerType.equals("ColorCount")) {
+			return "camera";
 		}
-		else{
-			return("~ something is wrong ~");
-		}
+		return flaggerName;
 	}
 	
 	
