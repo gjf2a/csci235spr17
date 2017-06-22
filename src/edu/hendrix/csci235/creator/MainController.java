@@ -463,10 +463,10 @@ public class MainController {
 	}	
 	
 	private void clearAllMode() {
-		motor1.getSelectionModel().select(0);
+		//motor1.getSelectionModel().select(0);
 		forwardMotor1.setSelected(true);
 		forwardMotor2.setSelected(true);
-		motor2.getSelectionModel().select(0);
+		//motor2.getSelectionModel().select(0);
 		startMode.setSelected(false);
 		
 	}
