@@ -23,6 +23,9 @@ public class MainController {
 	RunCode codeRunner;
 	
 	@FXML
+	MenuBar menu;
+	
+	@FXML
 	TextField programName;
 	
 	@FXML
@@ -137,6 +140,17 @@ public class MainController {
 		addCodeViewHandler();
 		executeCodeHandler();
 		
+		MenuItem open = new MenuItem("Open");
+		open.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		        open();
+		    }
+		});
+		
+		file.getItems().add(open);
+		
+		
+		
 		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		
@@ -195,6 +209,12 @@ public class MainController {
 	    	}
 	    	
 	    });
+		
+		programName.textProperty().addListener((observable, oldValue, newValue) -> {
+		    //System.out.println("textfield changed from " + oldValue + " to " + newValue);
+		    //programName
+			previewCode();
+		});
 		
 		modeName.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
@@ -733,6 +753,20 @@ public class MainController {
 				}
             }
         });
+	}
+	
+	void open(){
+		System.out.println("open");
+	}
+	
+	@FXML
+	void save(){
+		System.out.println("save");
+	}
+	
+	@FXML
+	void generateJar(){
+		System.out.println("generateJar");
 	}
 
 
