@@ -32,5 +32,9 @@ public class FlaggerMap {
 		
 	}
 	
+	public void removeAll(){
+		flagMapping.clear();
+	}
+	
 
 }

@@ -20,6 +20,10 @@ public class Mode {
 		return modes;
 	}
 	
+	public void removeAll(){
+		modes.clear();
+	}
+	
 	public Set<String> getKeys(){
 		return modes.keySet();
 	}

@@ -20,6 +20,10 @@ public class Transition implements Iterable<ConditionModePair> {
 		}
 	}
 	
+	public void removeAll(){
+		transitions.clear();
+	}
+	
 	public ArrayList<ConditionModePair> getTransitions(){
 		return transitions;
 	}

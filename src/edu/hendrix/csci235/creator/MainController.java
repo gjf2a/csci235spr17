@@ -1,6 +1,9 @@
 package edu.hendrix.csci235.creator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import javafx.beans.value.*;
@@ -10,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class MainController {
 	Condition conditions = new Condition();
@@ -21,6 +26,9 @@ public class MainController {
 	FlaggerMap flaggerMap = new FlaggerMap();
 	
 	RunCode codeRunner;
+	
+	@FXML
+	MenuBar menuBar;
 	
 	@FXML
 	TextField programName;
@@ -47,7 +55,7 @@ public class MainController {
 	Label uLow, uHigh, vLow, vHigh;
 	
 	@FXML
-	Button addCondition, addMode, addTransitionTable1, addTransitionTable2, previewCode, executeCode;
+	Button addCondition, addMode, addTransitionTable1, addTransitionTable2, executeCode;
 	
 	@FXML
 	ChoiceBox<String> motor1, motor2;
@@ -94,6 +102,58 @@ public class MainController {
 	@FXML
 	TableColumn<TempTableData,String> transitionTableMode;
 	
+	@FXML 
+	MenuItem open;
+	
+	@FXML
+	MenuItem newProgram;
+	
+	@FXML
+	MenuItem buildJar;
+	
+	@FXML
+	void openHandler() {
+		FileChooser chooser = new FileChooser();
+		File chosen = chooser.showOpenDialog(null);
+		System.out.println(chosen.getAbsolutePath());
+	}
+	
+	@FXML
+	void buildJarHandler() {
+		executeCodeHandler();
+	}
+	
+	@FXML
+	void newHandler(){
+		conditions.removeAll();
+		modes.removeAll();
+		flaggerMap.removeAll();
+		for(int i = 0; i < transitions.length;i++){
+			transitions[i].removeAll();
+		}
+		System.out.println(conditions.getKeys());
+		theCode = "";
+		codeOutput.setText("");
+		programName.setText("ProgramName");
+		modeName.getItems().removeAll(modes.getKeys());
+		flaggerName.getItems().removeAll(flaggerMap.getKeys());
+		
+		
+	}
+	
+	// open file chooser and write to a .txt file
+	@FXML
+	void save() throws FileNotFoundException{
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Save Program");
+		chooser.setInitialFileName(programName + ".txt");
+		File chosen = chooser.showSaveDialog(null);
+		PrintWriter out = new PrintWriter(chosen.getAbsolutePath());
+		out.println(codeOutput.getText());
+		out.close();
+
+	}
+	
 	
 	final ToggleGroup motorGroup1 = new ToggleGroup();
 	final ToggleGroup motorGroup2 = new ToggleGroup();
@@ -137,6 +197,8 @@ public class MainController {
 		addCodeViewHandler();
 		executeCodeHandler();
 		
+		 
+		
 		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		
@@ -167,6 +229,10 @@ public class MainController {
 	    	setFalseHelper();
 	    }
 	    });
+		
+		programName.textProperty().addListener((observable, oldValue, newValue) -> {
+		    previewCode();
+		});
 		
 		tableNumber.valueProperty().addListener((obs, oldValue, newValue) -> {
 			int tableNum = tableNumber.getValueFactory().getValue() - 1;
@@ -280,9 +346,8 @@ public class MainController {
             });        
             return row ;
         });
-
+		
 	}
-	
 	private void setFalseHelper(){
 		sensorPortSelector.setVisible(false);
     	sensorPort.setVisible(false);
@@ -471,7 +536,6 @@ public class MainController {
 		
 	}
 	
-	
 	private void clearAllCondition() {
 		//flaggerName.setText("");
 		flaggerSelector.getSelectionModel().select(0);
@@ -510,7 +574,7 @@ public class MainController {
 	
 	private void populateFlaggerSelector() {
 		List<String> flaggerTypes = new ArrayList<>(Arrays.asList("Flagger", "Motor", 
-				"Sensor", "Button", "ColorCount"));
+				"Sensor", "ColorCount"));
         for(String flagger: flaggerTypes){
 			flaggerSelector.getItems().add(flagger);
 		}
@@ -719,13 +783,17 @@ public class MainController {
 	}
 
 	private void executeCodeHandler(){
-		executeCode.setOnAction(new EventHandler<ActionEvent>() {
+		buildJar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
             		codeRunner = new RunCode(programName.getText(), theCode);
             		//codeRunner.writeToFile();
             		codeRunner.run();
+            		if(codeRunner.isJarExist(programName.getText() + ".jar") == false){
+            			Alert alert = new Alert(AlertType.ERROR, "There was an error creating your JAR file.", ButtonType.OK);
+            			alert.showAndWait();
+            		}
 					
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block

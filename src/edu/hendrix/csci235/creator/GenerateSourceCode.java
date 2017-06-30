@@ -23,7 +23,7 @@ public class GenerateSourceCode {
 	
 	public GenerateSourceCode(String programName, Transition transitions1, Transition transitions2, 
 			Transition transitions3, Transition transitions4, Transition transitions5, Condition conditions, FlaggerMap flagMapping, Mode modes ){
-		this.programName = programName;
+		this.programName = programName.replaceAll(" ", "_");
 		this.transitions1 = transitions1;
 		this.transitions2 = transitions2;
 		this.transitions3 = transitions3;
