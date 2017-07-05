@@ -81,14 +81,6 @@ public class Transition implements Iterable<ConditionModePair> {
 		}
 	}
 	
-	/*public Set<String> getKeys(){
-		return transitions.keySet();
-	}
-	
-	public Collection<String> getValues(){
-		return transitions.values();
-	}*/
-	
 	@Override
 	public String toString(){
 		String toReturn = "";
