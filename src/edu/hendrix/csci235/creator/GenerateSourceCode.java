@@ -44,18 +44,16 @@ public class GenerateSourceCode {
 				+ "\nimport edu.hendrix.modeselection.vision.color.ColorCountFlagger;\n";
 	}
 	
-	public String generateFlaggers(){
-		String code = "public class " + programName + "{\n	public static void main(String[] args) throws IOException {\n";
-		
-		// adding flaggers /////////////////////////////////////////////////
+	public String addFlaggers(){
 		String addingFlaggers= "";
 		rawFlaggers = conditions.getValues();
 		for(FlaggerInfo f : rawFlaggers){
 			addingFlaggers = addingFlaggers + f.addFlaggers();
 		}
-		code = code + addingFlaggers; 
-		
-		// adding flagger conditions ///////////////////////////////////////
+		return addingFlaggers;
+	}
+	
+	public String addFlaggerConditions(){
 		String flaggerConditions = "";
 		TreeMap<String, TrueFalse> flaggers = flagMapping.getFlagMapping();
 		for(Map.Entry<String, TrueFalse> entry : flaggers.entrySet()){
@@ -79,14 +77,23 @@ public class GenerateSourceCode {
 			
 					
 		}
+		return flaggerConditions;
+	}
+	
+	public String generateFlaggers(){
+		String code = "public class " + programName + "{\n	public static void main(String[] args) throws IOException {\n";
+		
+		String addingFlaggers= addFlaggers();
+		code = code + addingFlaggers; 
+		
+		String flaggerConditions = addFlaggerConditions();
 		code = code + flaggerConditions;
 		
 		return code;
 	}
 	
+	// TODO: Come back to this and refactor
 	public String generateTransitionTables(){
-		//TreeMap<String, String> rawTransitions1 = transitions1.transitions; 
-		//TreeMap<String, String> rawTransitions2 = transitions2.transitions;
 		ArrayList<ConditionModePair> rawTransitions1 = transitions1.getTransitions();
 		ArrayList<ConditionModePair> rawTransitions2 = transitions2.getTransitions();
 		ArrayList<ConditionModePair> rawTransitions3 = transitions3.getTransitions();
@@ -168,8 +175,6 @@ public class GenerateSourceCode {
 	
 	public String generateModeSelector(){
 		TreeMap<String, MotorInfo> rawModes = modes.getModes();
-		/*String firstPart = "\n		ModeSelector<Condition,Mode> controller = new ModeSelector<>"
-				+ "(Condition.class, Mode.class, Mode." ;*/
 		String firstPart = "";
 		String thirdPart = "";
 		for(Map.Entry<String, MotorInfo> entry : rawModes.entrySet()){

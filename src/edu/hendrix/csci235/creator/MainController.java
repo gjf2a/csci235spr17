@@ -385,22 +385,24 @@ public class MainController {
 		simplified.setSelected(true);
 	}
 	
+	private void throwErrorAlert(String msg){
+		Alert alert = new Alert(AlertType.ERROR, msg, ButtonType.OK);
+		alert.showAndWait();
+	}
+	
 	private void addConditionButtonHandler(){
 		addCondition.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
             		if(trueCondition.getText().equals("") || falseCondition.getText().equals("")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please enter a name for both conditions.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please enter a name for both conditions."); 
             		} else if( flaggerSelector.getSelectionModel().getSelectedItem().equals("Flagger")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please select a flagger type.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please select a flagger type.");
             		} else if(flaggerName.getSelectionModel().getSelectedItem().equals("Flagger Name")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid flagger Name.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please enter a valid flagger Name.");
             		} else {
-            			if(/*checkConditions() == true &&*/ validateValue(value.getText())){
+            			if(validateValue(value.getText())){
                 			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
                 				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
                 				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
@@ -438,15 +440,12 @@ public class MainController {
                 					falseCondition.getText().toUpperCase(),
                 					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
                 					value.getText());
-                			//conditions.printKeys();
                 			populateFlaggerNameSelector();
                 			flaggerMap.toString();
                 			previewCode();
                 			clearAllCondition();
                 		} 
             		}
-            		
-					
 					populateConditionTransition();
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -462,11 +461,9 @@ public class MainController {
 	private boolean validateValue(String value){
 		try{
 			Double.parseDouble(value);
-			//Integer.parseInt(value);
 			return true;
 		} catch(NumberFormatException nfe){
-			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid number in the value text box.", ButtonType.OK);
-			alert.showAndWait();
+			throwErrorAlert("Please enter a valid number in the value text box.");
 			return false;
 		}
 	}
@@ -477,14 +474,12 @@ public class MainController {
             public void handle(ActionEvent event) {
             	try {
             		if(modeName.getSelectionModel().getSelectedItem().equals("Mode Name")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please enter a mode name.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please enter a mode name.");
             		} else {
             			if(modes.getModes().isEmpty()){
             				startMode.setSelected(true);
             			}
             			if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
-            				//System.out.println(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
             				modes.remove(modeName.getSelectionModel().getSelectedItem().toString());
             			}
             			if(checkModes() == true){
@@ -493,15 +488,8 @@ public class MainController {
 
             				RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
             				String toogleGroupValue2 = selectedRadioButton2.getText();
-            				//System.out.println(toogleGroupValue2);
 
-            				//RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
-            				//String toogleGroupValue3 = selectedRadioButton3.getText();
-
-            				String isStart = "";
-            				if(startMode.isSelected()){
-            					isStart = "Starting Mode";
-            				}
+            				String isStart = getStartMode();
 
             				modes.add(modeName.getSelectionModel().getSelectedItem().toString().toUpperCase(), 
             						motor1.getSelectionModel().getSelectedItem().toString(),
@@ -527,17 +515,23 @@ public class MainController {
         });
 	}	
 	
+	private String getStartMode(){
+		String isStart = "";
+		if(startMode.isSelected()){
+			isStart = "Starting Mode";
+		}
+		
+		return isStart;
+	}
+	
 	private void clearAllMode() {
-		//motor1.getSelectionModel().select(0);
 		forwardMotor1.setSelected(true);
 		forwardMotor2.setSelected(true);
-		//motor2.getSelectionModel().select(0);
 		startMode.setSelected(false);
 		
 	}
 	
 	private void clearAllCondition() {
-		//flaggerName.setText("");
 		flaggerSelector.getSelectionModel().select(0);
 		trueCondition.setText("");
 		falseCondition.setText("");
@@ -549,8 +543,6 @@ public class MainController {
     	sonar.setVisible(false);
     	motorSelector.setVisible(false);
     	motor.setVisible(false);
-		
-		
 	}
 
 	private void populateSensorPortselector() {
@@ -569,7 +561,6 @@ public class MainController {
 			inequalitySelector.getItems().add(inequality);
 		}
 		inequalitySelector.getSelectionModel().select(0);
-		
 	}
 	
 	private void populateFlaggerSelector() {
@@ -579,7 +570,6 @@ public class MainController {
 			flaggerSelector.getItems().add(flagger);
 		}
 		flaggerSelector.getSelectionModel().select(0);
-		
 	}
 	
 	
@@ -591,7 +581,6 @@ public class MainController {
 			motor2.getItems().add(motor);
 			motorSelector.getItems().add(motor);		
 		}
-        
 		motor1.getSelectionModel().select(0);
 		motor2.getSelectionModel().select(0);
 		motorSelector.getSelectionModel().select(0);
@@ -607,7 +596,6 @@ public class MainController {
         for(String flag: flags){
 			flaggerName.getItems().add(flag);		
 		}
-	
 	}
 	
 	private void populateModeNameSelector() {
@@ -624,39 +612,30 @@ public class MainController {
 
 	private void populateConditionTransition() {
 		transitionCondition1.getItems().removeAll(conditions.getKeys());
-		//transitionCondition2.getItems().removeAll(conditions.getKeys());
 		
 		Set<String> conditionsTransition = conditions.getKeys();
 		
 		transitionCondition1.getItems().add("Condition");
-		//transitionCondition2.getItems().add("Condition");
 		
         for(String condition: conditionsTransition){
 			transitionCondition1.getItems().add(condition);
-			//transitionCondition2.getItems().add(condition);
 		}
 		transitionCondition1.getSelectionModel().select(0);
-		//transitionCondition2.getSelectionModel().select(0);
 	}
 	
 	private void populateModeTransition() {
 		transitionMode1.getItems().removeAll(modes.getKeys());
-		//transitionMode2.getItems().removeAll(modes.getKeys());
 		
 		Set<String> modesTransition = modes.getKeys();
 		
 		transitionMode1.getItems().add("Mode");
-		//transitionMode2.getItems().add("Mode");
 		
 		for(String mode: modesTransition){
 			transitionMode1.getItems().add(mode);
-			//transitionMode2.getItems().add(mode);
 		}
 		transitionMode1.getSelectionModel().select(0);
-		//transitionMode2.getSelectionModel().select(0);
 
 	}
-	
 	
 	private void addTransition1Handler(){
 		addTransitionTable1.setOnAction(new EventHandler<ActionEvent>() {
@@ -773,8 +752,7 @@ public class MainController {
 	
 	private boolean checkModes(){
 		if(modes.getKeys().contains(modeName.getSelectionModel().getSelectedItem())){
-			Alert alert = new Alert(AlertType.ERROR, "That mode already exists - No two modes should have the same name.\nPlease try again.", ButtonType.OK);
-			alert.showAndWait();
+			throwErrorAlert("That mode already exists - No two modes should have the same name.\nPlease try again.");
 			return false;
 
 		} else {
@@ -788,11 +766,9 @@ public class MainController {
             public void handle(ActionEvent event) {
             	try {
             		codeRunner = new RunCode(programName.getText(), theCode);
-            		//codeRunner.writeToFile();
             		codeRunner.run();
             		if(codeRunner.isJarExist(programName.getText() + ".jar") == false){
-            			Alert alert = new Alert(AlertType.ERROR, "There was an error creating your JAR file.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("There was an error creating your JAR file.");
             		}
 					
 				} catch (NumberFormatException e) {

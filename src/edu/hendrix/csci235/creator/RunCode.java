@@ -24,6 +24,7 @@ import javafx.stage.FileChooser;
 
 public class RunCode {
 	private String programName, code;
+	private File whereSaved;
 	//FileChooser chooser = new FileChooser();
 	
 	public String pathInfo;
@@ -65,26 +66,13 @@ public class RunCode {
 		programNameCaps = programNameCaps + temp;
 		save.setInitialFileName(programNameCaps + ".java");
 		File chosen = save.showSaveDialog(null);
-		File chosen2 = new File(chosen.getPath());
 		//System.out.println(chosen2.toString());
-		PrintWriter out = new PrintWriter(chosen2.getAbsolutePath());
+		PrintWriter out = new PrintWriter(chosen.getAbsolutePath());
 		out.println(code);
 		out.close();
-		String pathName = returnPath(chosen2.getPath());
-		pathInfo = pathName;
-		//String programNameAddJava = programName + ".java";
-		File chosenPath = new File(pathName);
-		//System.out.println(pathName);
-		return chosenPath;
-	}
-	
-	// Our path must not include the file. We only need to know the directory in which we are working.
-	// This method chops the file name off of the directory. 
-	public String returnPath(String pathName){
-		String programNameAddJava = programName + ".java";
-		pathName = pathName.substring(0, ((pathName.length()-1) - (programNameAddJava.length()-1)));
-		//pathName = pathName + File.separatorChar;
-		return pathName;
+		
+		whereSaved = chosen.getParentFile();
+		return whereSaved;
 	}
 	
 	// Makes calls to the command line that will first compile the program and separate it into its classes.
@@ -119,67 +107,63 @@ public class RunCode {
 		manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
 		manifest.getMainAttributes().put(Attributes.Name.CLASS_PATH, "/home/root/lejos/lib/ev3classes.jar /home/root/lejos/lib/opencv-2411.jar /home/root/lejos/lib/dbusjava.jar /home/root/lejos/libjna/usr/share/java/jna.jar");
 		manifest.getMainAttributes().put(Attributes.Name.MAIN_CLASS, programName);
-		JarOutputStream target = new JarOutputStream(new FileOutputStream(programName + ".jar"), manifest);
-		add(new File("bin" + File.separatorChar + programName + ".class"), target);
-		add(new File("bin" + File.separatorChar + programName + "$Condition.class"), target);
-		add(new File("bin" + File.separatorChar + programName + "$Mode.class"), target);
-		add(new File("bin" + File.separatorChar + "edu" + File.separatorChar + "hendrix" + File.separatorChar + "modeselection"), target);
+		JarOutputStream target = new JarOutputStream(new FileOutputStream(whereSaved.getAbsolutePath() + File.separator + programName + ".jar"), manifest);
+		add(whereSaved, programName + ".class", target);
+		add(whereSaved, programName + "$Condition.class", target);
+		add(whereSaved, programName + "$Mode.class", target);
+		add(new File(MODE_SELECTION_CLASSES + File.separatorChar), "edu" + File.separatorChar + "hendrix" + File.separatorChar + "modeselection", target);
 		target.close();
 		
 		
 	}
 	
-	public static boolean isJarExist(String jarName)
+	public boolean isJarExist(String jarName)
     {	
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        if (classLoader instanceof URLClassLoader)
-        {
-            URLClassLoader classLoader2 = (URLClassLoader) classLoader;
-            URL [] urls = classLoader2.getURLs();
-            for (URL url : urls)
-            {
-                File file = new File(url.getFile());
-                if (file.getPath().endsWith(jarName))
-                {
-                    System.out.println(jarName + " exist");
-                    return true;
-                }
-            }
-            System.out.println(jarName + " not exist");
-            return false;
-        }
-		return false;
+		if (!jarName.endsWith(".jar")) {
+			jarName += ".jar";
+		}
+		File candidate = new File(whereSaved.getAbsolutePath() + File.separator + jarName);
+		return candidate.exists();
     }
 	
 	private static void printWhere() {
 		File f = new File(".");
 		System.out.println("pwd:" + f.getAbsolutePath());
 	}
+	
+	private String jarSlash(String name) {
+		return name.replace("\\", "/");
+	}
 
-	private static void add(File source, JarOutputStream target) throws IOException
+	private void add(File originPath, String offset, JarOutputStream target) throws IOException
 	{
+	  File source = new File(originPath.getAbsolutePath() + File.separator + offset);
 	  BufferedInputStream in = null;
 	  try
 	  {
 	    if (source.isDirectory())
 	    {
-	      String name = source.getPath().replace("\\", "/");
+	      String name = jarSlash(source.getPath());
 	      if (!name.isEmpty())
 	      {
 	        if (!name.endsWith("/"))
 	          name += "/";
-	        JarEntry entry = new JarEntry(name.replace("bin/", ""));
+	        JarEntry entry = new JarEntry(offset);
 	        entry.setTime(source.lastModified());
 	        target.putNextEntry(entry);
 	        target.closeEntry();
 	      }
-	      for (File nestedFile: source.listFiles())
-	        add(nestedFile, target);
+	      for (File nestedFile: source.listFiles()) {
+	    	  String fullPath = nestedFile.getAbsolutePath();
+	    	  String nestedOffset = fullPath.substring(originPath.getAbsolutePath().length() + 1);
+		      add(originPath, nestedOffset, target);
+	      }
 	      return;
 	    }
 
-	    System.out.println("source: " + source.getPath());
-	    JarEntry entry = new JarEntry(source.getPath().replace("\\", "/").replace("bin/", ""));
+	    String jarPath = jarSlash(offset);
+	    System.out.println("source: " + source.getPath() + " jarPath: " + jarPath);
+	    JarEntry entry = new JarEntry(jarPath);
 	    entry.setTime(source.lastModified());
 	    target.putNextEntry(entry);
 	    in = new BufferedInputStream(new FileInputStream(source));
