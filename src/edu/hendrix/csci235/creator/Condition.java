@@ -26,6 +26,10 @@ public class Condition {
 		conditions.remove(key);
 	}
 	
+	public void removeAll(){
+		conditions.clear();
+	}
+	
 	public Set<String> getKeys(){
 		return conditions.keySet();
 	}
@@ -64,4 +68,5 @@ public class Condition {
 		
 		return toReturn;
 	}
+	
 }

@@ -51,11 +51,7 @@ public class TrueFalse {
 	@Override
 	public String toString(){
 		return "\n      > True condition: " + trueCondition.toUpperCase() + "\n      > False condition: " + falseCondition.toUpperCase() + 
-				"\n      > " + falseCondition.toUpperCase() + " will become true when v " + inequality + " "  + number + ".";
-				
-				/*"The current true condition is " + trueCondition + " until the value(v) is " + inequality + 
-				" " + number + ". When the value is " + inequality + 
-				" " + number + ", the new currently true condition will be " + falseCondition + ".";*/
+				"\n      > " + trueCondition.toUpperCase() + " will become true when v " + inequality + " "  + number + ".";
 	}
 
 	public String getFlaggerType() {

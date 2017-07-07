@@ -1,6 +1,9 @@
 package edu.hendrix.csci235.creator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import javafx.beans.value.*;
@@ -10,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class MainController {
 	Condition conditions = new Condition();
@@ -23,7 +28,7 @@ public class MainController {
 	RunCode codeRunner;
 	
 	@FXML
-	MenuBar menu;
+	MenuBar menuBar;
 	
 	@FXML
 	TextField programName;
@@ -50,7 +55,7 @@ public class MainController {
 	Label uLow, uHigh, vLow, vHigh;
 	
 	@FXML
-	Button addCondition, addMode, addTransitionTable1, addTransitionTable2, previewCode, executeCode;
+	Button addCondition, addMode, addTransitionTable1, addTransitionTable2, executeCode;
 	
 	@FXML
 	ChoiceBox<String> motor1, motor2;
@@ -97,6 +102,58 @@ public class MainController {
 	@FXML
 	TableColumn<TempTableData,String> transitionTableMode;
 	
+	@FXML 
+	MenuItem open;
+	
+	@FXML
+	MenuItem newProgram;
+	
+	@FXML
+	MenuItem buildJar;
+	
+	@FXML
+	void openHandler() {
+		FileChooser chooser = new FileChooser();
+		File chosen = chooser.showOpenDialog(null);
+		System.out.println(chosen.getAbsolutePath());
+	}
+	
+	@FXML
+	void buildJarHandler() {
+		executeCodeHandler();
+	}
+	
+	@FXML
+	void newHandler(){
+		conditions.removeAll();
+		modes.removeAll();
+		flaggerMap.removeAll();
+		for(int i = 0; i < transitions.length;i++){
+			transitions[i].removeAll();
+		}
+		System.out.println(conditions.getKeys());
+		theCode = "";
+		codeOutput.setText("");
+		programName.setText("ProgramName");
+		modeName.getItems().removeAll(modes.getKeys());
+		flaggerName.getItems().removeAll(flaggerMap.getKeys());
+		
+		
+	}
+	
+	// open file chooser and write to a .txt file
+	@FXML
+	void save() throws FileNotFoundException{
+		FileChooser chooser = new FileChooser();
+		chooser.setTitle("Save Program");
+		chooser.setInitialFileName(programName + ".txt");
+		File chosen = chooser.showSaveDialog(null);
+		PrintWriter out = new PrintWriter(chosen.getAbsolutePath());
+		out.println(codeOutput.getText());
+		out.close();
+
+	}
+	
 	
 	final ToggleGroup motorGroup1 = new ToggleGroup();
 	final ToggleGroup motorGroup2 = new ToggleGroup();
@@ -140,16 +197,7 @@ public class MainController {
 		addCodeViewHandler();
 		executeCodeHandler();
 		
-		MenuItem open = new MenuItem("Open");
-		open.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override public void handle(ActionEvent e) {
-		        open();
-		    }
-		});
-		
-		file.getItems().add(open);
-		
-		
+		 
 		
 		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
@@ -182,6 +230,10 @@ public class MainController {
 	    }
 	    });
 		
+		programName.textProperty().addListener((observable, oldValue, newValue) -> {
+		    previewCode();
+		});
+		
 		tableNumber.valueProperty().addListener((obs, oldValue, newValue) -> {
 			int tableNum = tableNumber.getValueFactory().getValue() - 1;
 			if (tableNum >= 0 && tableNum < transitions.length) {
@@ -209,12 +261,6 @@ public class MainController {
 	    	}
 	    	
 	    });
-		
-		programName.textProperty().addListener((observable, oldValue, newValue) -> {
-		    //System.out.println("textfield changed from " + oldValue + " to " + newValue);
-		    //programName
-			previewCode();
-		});
 		
 		modeName.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
@@ -300,9 +346,8 @@ public class MainController {
             });        
             return row ;
         });
-
+		
 	}
-	
 	private void setFalseHelper(){
 		sensorPortSelector.setVisible(false);
     	sensorPort.setVisible(false);
@@ -340,22 +385,24 @@ public class MainController {
 		simplified.setSelected(true);
 	}
 	
+	private void throwErrorAlert(String msg){
+		Alert alert = new Alert(AlertType.ERROR, msg, ButtonType.OK);
+		alert.showAndWait();
+	}
+	
 	private void addConditionButtonHandler(){
 		addCondition.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
             		if(trueCondition.getText().equals("") || falseCondition.getText().equals("")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please enter a name for both conditions.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please enter a name for both conditions."); 
             		} else if( flaggerSelector.getSelectionModel().getSelectedItem().equals("Flagger")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please select a flagger type.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please select a flagger type.");
             		} else if(flaggerName.getSelectionModel().getSelectedItem().equals("Flagger Name")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid flagger Name.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please enter a valid flagger Name.");
             		} else {
-            			if(/*checkConditions() == true &&*/ validateValue(value.getText())){
+            			if(validateValue(value.getText())){
                 			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
                 				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
                 				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
@@ -393,15 +440,12 @@ public class MainController {
                 					falseCondition.getText().toUpperCase(),
                 					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
                 					value.getText());
-                			//conditions.printKeys();
                 			populateFlaggerNameSelector();
                 			flaggerMap.toString();
                 			previewCode();
                 			clearAllCondition();
                 		} 
             		}
-            		
-					
 					populateConditionTransition();
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -417,11 +461,9 @@ public class MainController {
 	private boolean validateValue(String value){
 		try{
 			Double.parseDouble(value);
-			//Integer.parseInt(value);
 			return true;
 		} catch(NumberFormatException nfe){
-			Alert alert = new Alert(AlertType.ERROR, "Please enter a valid number in the value text box.", ButtonType.OK);
-			alert.showAndWait();
+			throwErrorAlert("Please enter a valid number in the value text box.");
 			return false;
 		}
 	}
@@ -432,14 +474,12 @@ public class MainController {
             public void handle(ActionEvent event) {
             	try {
             		if(modeName.getSelectionModel().getSelectedItem().equals("Mode Name")){
-            			Alert alert = new Alert(AlertType.ERROR, "Please enter a mode name.", ButtonType.OK);
-            			alert.showAndWait();
+            			throwErrorAlert("Please enter a mode name.");
             		} else {
             			if(modes.getModes().isEmpty()){
             				startMode.setSelected(true);
             			}
             			if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
-            				//System.out.println(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
             				modes.remove(modeName.getSelectionModel().getSelectedItem().toString());
             			}
             			if(checkModes() == true){
@@ -448,15 +488,8 @@ public class MainController {
 
             				RadioButton selectedRadioButton2 = (RadioButton) motorGroup2.getSelectedToggle();
             				String toogleGroupValue2 = selectedRadioButton2.getText();
-            				//System.out.println(toogleGroupValue2);
 
-            				//RadioButton selectedRadioButton3 = (RadioButton) startingMode.getSelectedToggle();
-            				//String toogleGroupValue3 = selectedRadioButton3.getText();
-
-            				String isStart = "";
-            				if(startMode.isSelected()){
-            					isStart = "Starting Mode";
-            				}
+            				String isStart = getStartMode();
 
             				modes.add(modeName.getSelectionModel().getSelectedItem().toString().toUpperCase(), 
             						motor1.getSelectionModel().getSelectedItem().toString(),
@@ -482,18 +515,23 @@ public class MainController {
         });
 	}	
 	
+	private String getStartMode(){
+		String isStart = "";
+		if(startMode.isSelected()){
+			isStart = "Starting Mode";
+		}
+		
+		return isStart;
+	}
+	
 	private void clearAllMode() {
-		//motor1.getSelectionModel().select(0);
 		forwardMotor1.setSelected(true);
 		forwardMotor2.setSelected(true);
-		//motor2.getSelectionModel().select(0);
 		startMode.setSelected(false);
 		
 	}
 	
-	
 	private void clearAllCondition() {
-		//flaggerName.setText("");
 		flaggerSelector.getSelectionModel().select(0);
 		trueCondition.setText("");
 		falseCondition.setText("");
@@ -505,8 +543,6 @@ public class MainController {
     	sonar.setVisible(false);
     	motorSelector.setVisible(false);
     	motor.setVisible(false);
-		
-		
 	}
 
 	private void populateSensorPortselector() {
@@ -525,17 +561,15 @@ public class MainController {
 			inequalitySelector.getItems().add(inequality);
 		}
 		inequalitySelector.getSelectionModel().select(0);
-		
 	}
 	
 	private void populateFlaggerSelector() {
 		List<String> flaggerTypes = new ArrayList<>(Arrays.asList("Flagger", "Motor", 
-				"Sensor", "Button", "ColorCount"));
+				"Sensor", "ColorCount"));
         for(String flagger: flaggerTypes){
 			flaggerSelector.getItems().add(flagger);
 		}
 		flaggerSelector.getSelectionModel().select(0);
-		
 	}
 	
 	
@@ -547,7 +581,6 @@ public class MainController {
 			motor2.getItems().add(motor);
 			motorSelector.getItems().add(motor);		
 		}
-        
 		motor1.getSelectionModel().select(0);
 		motor2.getSelectionModel().select(0);
 		motorSelector.getSelectionModel().select(0);
@@ -563,7 +596,6 @@ public class MainController {
         for(String flag: flags){
 			flaggerName.getItems().add(flag);		
 		}
-	
 	}
 	
 	private void populateModeNameSelector() {
@@ -580,39 +612,30 @@ public class MainController {
 
 	private void populateConditionTransition() {
 		transitionCondition1.getItems().removeAll(conditions.getKeys());
-		//transitionCondition2.getItems().removeAll(conditions.getKeys());
 		
 		Set<String> conditionsTransition = conditions.getKeys();
 		
 		transitionCondition1.getItems().add("Condition");
-		//transitionCondition2.getItems().add("Condition");
 		
         for(String condition: conditionsTransition){
 			transitionCondition1.getItems().add(condition);
-			//transitionCondition2.getItems().add(condition);
 		}
 		transitionCondition1.getSelectionModel().select(0);
-		//transitionCondition2.getSelectionModel().select(0);
 	}
 	
 	private void populateModeTransition() {
 		transitionMode1.getItems().removeAll(modes.getKeys());
-		//transitionMode2.getItems().removeAll(modes.getKeys());
 		
 		Set<String> modesTransition = modes.getKeys();
 		
 		transitionMode1.getItems().add("Mode");
-		//transitionMode2.getItems().add("Mode");
 		
 		for(String mode: modesTransition){
 			transitionMode1.getItems().add(mode);
-			//transitionMode2.getItems().add(mode);
 		}
 		transitionMode1.getSelectionModel().select(0);
-		//transitionMode2.getSelectionModel().select(0);
 
 	}
-	
 	
 	private void addTransition1Handler(){
 		addTransitionTable1.setOnAction(new EventHandler<ActionEvent>() {
@@ -729,8 +752,7 @@ public class MainController {
 	
 	private boolean checkModes(){
 		if(modes.getKeys().contains(modeName.getSelectionModel().getSelectedItem())){
-			Alert alert = new Alert(AlertType.ERROR, "That mode already exists - No two modes should have the same name.\nPlease try again.", ButtonType.OK);
-			alert.showAndWait();
+			throwErrorAlert("That mode already exists - No two modes should have the same name.\nPlease try again.");
 			return false;
 
 		} else {
@@ -739,13 +761,15 @@ public class MainController {
 	}
 
 	private void executeCodeHandler(){
-		executeCode.setOnAction(new EventHandler<ActionEvent>() {
+		buildJar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
             		codeRunner = new RunCode(programName.getText(), theCode);
-            		//codeRunner.writeToFile();
             		codeRunner.run();
+            		if(codeRunner.isJarExist(programName.getText() + ".jar") == false){
+            			throwErrorAlert("There was an error creating your JAR file.");
+            		}
 					
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -753,20 +777,6 @@ public class MainController {
 				}
             }
         });
-	}
-	
-	void open(){
-		System.out.println("open");
-	}
-	
-	@FXML
-	void save(){
-		System.out.println("save");
-	}
-	
-	@FXML
-	void generateJar(){
-		System.out.println("generateJar");
 	}
 
 

@@ -39,5 +39,6 @@ public class CycleTimer {
 	
 	public void display(int row, String prefix) {
 		LCD.drawString(String.format("%s:%4.2f hz    ", prefix, cyclesPerSecond()), 0, row);
+		LCD.drawString(String.format("(%d/%d ms)", cycles, duration), 0, row + 1);
 	}
 }

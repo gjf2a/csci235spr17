@@ -20,6 +20,10 @@ public class Transition implements Iterable<ConditionModePair> {
 		}
 	}
 	
+	public void removeAll(){
+		transitions.clear();
+	}
+	
 	public ArrayList<ConditionModePair> getTransitions(){
 		return transitions;
 	}
@@ -76,14 +80,6 @@ public class Transition implements Iterable<ConditionModePair> {
 			}
 		}
 	}
-	
-	/*public Set<String> getKeys(){
-		return transitions.keySet();
-	}
-	
-	public Collection<String> getValues(){
-		return transitions.values();
-	}*/
 	
 	@Override
 	public String toString(){
