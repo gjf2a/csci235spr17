@@ -2,17 +2,17 @@ package edu.hendrix.csci235.creator;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class TempTableData {
+public class TransitionsTableData {
 	
 	private SimpleStringProperty condition;
 	private SimpleStringProperty mode;
 	public int begIndex = 23;
 	
-	public TempTableData(ConditionModePair cmp) {
+	public TransitionsTableData(ConditionModePair cmp) {
 		this(cmp.getCondition(), cmp.getMode());
 	}
 
-	public TempTableData(String condition, String mode){
+	public TransitionsTableData(String condition, String mode){
 	    this.condition = new SimpleStringProperty(condition);
 	    this.mode = new SimpleStringProperty(mode);
 	}

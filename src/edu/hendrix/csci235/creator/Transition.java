@@ -13,9 +13,9 @@ public class Transition implements Iterable<ConditionModePair> {
 		transitions.add(new ConditionModePair(condition, mode));
 	}
 	
-	public void regenerate(Iterable<TempTableData> data) {
+	public void regenerate(Iterable<TransitionsTableData> data) {
 		transitions.clear();
-		for (TempTableData dat: data) {
+		for (TransitionsTableData dat: data) {
 			transitions.add(dat.getPair());
 		}
 	}

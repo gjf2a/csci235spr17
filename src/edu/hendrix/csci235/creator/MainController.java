@@ -96,13 +96,13 @@ public class MainController {
 	Spinner<Integer> modeTableNumber;
 	
 	@FXML
-	TableView<TempTableData> transitionTableViewer;
+	TableView<TransitionsTableData> transitionTableViewer;
 	
 	@FXML
-	TableColumn<TempTableData,String> transitionTableCondition;
+	TableColumn<TransitionsTableData,String> transitionTableCondition;
 	
 	@FXML
-	TableColumn<TempTableData,String> transitionTableMode;
+	TableColumn<TransitionsTableData,String> transitionTableMode;
 	
 	@FXML 
 	MenuItem open;
@@ -171,13 +171,10 @@ public class MainController {
 		programName.setText("ProgramName");
 		
 		transitionTableCondition.setCellValueFactory(
-			    new PropertyValueFactory<TempTableData,String>("Condition"));
+			    new PropertyValueFactory<TransitionsTableData,String>("Condition"));
 		transitionTableMode.setCellValueFactory(
-			    new PropertyValueFactory<TempTableData,String>("Mode"));
+			    new PropertyValueFactory<TransitionsTableData,String>("Mode"));
 		
-		//transitions.addAll(new ConditionModePair, );
-		
-		//conditions.getConditions();
 		modes.values();
 		
 		flaggerName.getItems().add("Flagger Name");
@@ -191,12 +188,10 @@ public class MainController {
 		populateFlaggerSelector();
 		populateSensorPortselector();
 		populateMotorSelectors();
-		//populateFlaggerNameSelector();
 		
 		addConditionButtonHandler();
 		addModeButtonHandler();
 		addTransition1Handler();
-		//addTransition2Handler();
 		addCodeViewHandler();
 		executeCodeHandler();
 		
@@ -242,7 +237,7 @@ public class MainController {
 			if (tableNum >= 0 && tableNum < transitions.length) {
 				if(transitions[tableNum].transitions.size() > 0){
 					for(int i = 0; i < transitions[tableNum].size(); i++){
-						transitionTableViewer.getItems().add(new TempTableData(transitions[tableNum].get(i)));
+						transitionTableViewer.getItems().add(new TransitionsTableData(transitions[tableNum].get(i)));
 					}
 				}
 			}
@@ -301,7 +296,7 @@ public class MainController {
 		// Resource: https://stackoverflow.com/questions/28603224/sort-tableview-with-drag-and-drop-rows
 		// Thank you James_D!!!!! 
 		transitionTableViewer.setRowFactory(tv -> {
-            TableRow<TempTableData> row = new TableRow<>();
+            TableRow<TransitionsTableData> row = new TableRow<>();
 
             row.setOnDragDetected(event -> {
                 if (! row.isEmpty()) {
@@ -329,7 +324,7 @@ public class MainController {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
                     int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-                    TempTableData draggedItem1 = transitionTableViewer.getItems().remove(draggedIndex);
+                    TransitionsTableData draggedItem1 = transitionTableViewer.getItems().remove(draggedIndex);
 
                     int dropIndex ; 
 
@@ -411,39 +406,7 @@ public class MainController {
                 				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
                 				flaggerMap.remove(flaggerName.getSelectionModel().getSelectedItem().toString());
                 			}
-                			conditions.put(trueCondition.getText().toUpperCase(),
-                					new FlaggerInfo(
-                					flaggerName.getSelectionModel().getSelectedItem().toString(),
-                					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
-                					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
-                					sensorFlaggerInfo.getSelectedToggle().toString(),
-                					motorSelector.getSelectionModel().getSelectedItem().toString(),
-                					true,
-                					inequalitySelector.getSelectionModel().getSelectedItem().toString(),
-                					Integer.parseInt(uLowText.getText()),
-                					Integer.parseInt(uHighText.getText()),
-                					Integer.parseInt(vLowText.getText()),
-                					Integer.parseInt(vHighText.getText()), 
-                					Double.parseDouble(value.getText())));
-                			conditions.put(falseCondition.getText().toUpperCase(), new FlaggerInfo(
-                					flaggerName.getSelectionModel().getSelectedItem().toString(),
-                					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
-                					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
-                					sensorFlaggerInfo.getSelectedToggle().toString(),
-                					motorSelector.getSelectionModel().getSelectedItem().toString(),
-                					false,
-                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-                					Integer.parseInt(uLowText.getText()),
-                					Integer.parseInt(uHighText.getText()),
-                					Integer.parseInt(vLowText.getText()),
-                					Integer.parseInt(vHighText.getText()),
-                					Double.parseDouble(value.getText())));
-                			flaggerMap.add(flaggerName.getSelectionModel().getSelectedItem().toString(),
-                					(String) flaggerSelector.getSelectionModel().getSelectedItem(),
-                					trueCondition.getText().toUpperCase(), 
-                					falseCondition.getText().toUpperCase(),
-                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-                					value.getText());
+                			putConditions();
                 			populateFlaggerNameSelector();
                 			flaggerMap.toString();
                 			previewCode();
@@ -460,6 +423,42 @@ public class MainController {
 				}
             }
         });
+	}
+	
+	private void putConditions() throws IOException{
+		conditions.put(trueCondition.getText().toUpperCase(),
+				new FlaggerInfo(
+				flaggerName.getSelectionModel().getSelectedItem().toString(),
+				flaggerSelector.getSelectionModel().getSelectedItem().toString(),
+				sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
+				sensorFlaggerInfo.getSelectedToggle().toString(),
+				motorSelector.getSelectionModel().getSelectedItem().toString(),
+				true,
+				inequalitySelector.getSelectionModel().getSelectedItem().toString(),
+				Integer.parseInt(uLowText.getText()),
+				Integer.parseInt(uHighText.getText()),
+				Integer.parseInt(vLowText.getText()),
+				Integer.parseInt(vHighText.getText()), 
+				Double.parseDouble(value.getText())));
+		conditions.put(falseCondition.getText().toUpperCase(), new FlaggerInfo(
+				flaggerName.getSelectionModel().getSelectedItem().toString(),
+				flaggerSelector.getSelectionModel().getSelectedItem().toString(),
+				sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
+				sensorFlaggerInfo.getSelectedToggle().toString(),
+				motorSelector.getSelectionModel().getSelectedItem().toString(),
+				false,
+				inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+				Integer.parseInt(uLowText.getText()),
+				Integer.parseInt(uHighText.getText()),
+				Integer.parseInt(vLowText.getText()),
+				Integer.parseInt(vHighText.getText()),
+				Double.parseDouble(value.getText())));
+		flaggerMap.add(flaggerName.getSelectionModel().getSelectedItem().toString(),
+				(String) flaggerSelector.getSelectionModel().getSelectedItem(),
+				trueCondition.getText().toUpperCase(), 
+				falseCondition.getText().toUpperCase(),
+				inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
+				value.getText());
 	}
 	
 	private boolean validateValue(String value){
@@ -508,7 +507,6 @@ public class MainController {
             		}
             		
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -651,7 +649,7 @@ public class MainController {
         							transitionMode1.getSelectionModel().getSelectedItem().toString()));
             					transitionTableViewer.getItems().clear();
             					for (ConditionModePair cmp: transitions[tableNum]) {
-            						transitionTableViewer.getItems().add(new TempTableData(cmp));
+            						transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
             					}
             				} else {
             					transitions[tableNum].add(
@@ -661,7 +659,7 @@ public class MainController {
             					transitionMode1.getSelectionModel().select(0);
             					transitionTableViewer.getItems().clear();
             					for (ConditionModePair cmp: transitions[tableNum]) {
-            						transitionTableViewer.getItems().add(new TempTableData(cmp));
+            						transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
             					}
             				}
             			}
@@ -669,7 +667,6 @@ public class MainController {
             		
 					previewCode();
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -744,7 +741,6 @@ public class MainController {
 			}
 			
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
@@ -772,7 +768,6 @@ public class MainController {
             		}
 					
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }

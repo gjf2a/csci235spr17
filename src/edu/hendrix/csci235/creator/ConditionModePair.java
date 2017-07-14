@@ -2,7 +2,6 @@ package edu.hendrix.csci235.creator;
 
 public class ConditionModePair {
 	
-	//private ArrayList<String> conditionModePair;
 	private String condition, mode;
 	
 	public ConditionModePair(String condition, String mode ){
