@@ -25,10 +25,6 @@ public class FlaggerInfo {
 		this.value = value;
 	}
 
-	public void setInequality(String inequality) {
-		this.inequality = inequality; 
-	}
-
 	public double getValue() {
 		return value;
 	}
@@ -36,43 +32,22 @@ public class FlaggerInfo {
 	public String getFlaggerName() {
 		return flaggerName;
 	}
-
-	public void setFlaggerName(String flaggerName) {
-		this.flaggerName = flaggerName;
-	}
 	
 	public String getFlaggerType() {
 		return flaggerType;
-	}
-
-	public void setFlaggerType(String flaggerType) {
-		this.flaggerType = flaggerType;
 	}
 
 	public String getSensorPort() {
 		return sensorPort;
 	}
 
-	public void setSensorPort(String sensorPort) {
-		this.sensorPort = sensorPort;
-	}
-
 	public String getBumpOrSonar() {
 		return bumpOrSonar;
-	}
-
-	public void setBumpOrSonar(String bumpOrSonar) {
-		this.bumpOrSonar = bumpOrSonar;
 	}
 
 	public Boolean getTrueOrFalse() {
 		return trueOrFalse;
 	}
-
-	public void setTrueOrFalse(Boolean trueOrFalse) {
-		this.trueOrFalse= trueOrFalse;
-	}
-
 
 	public String getInequality() {
 		return inequality;
@@ -82,38 +57,18 @@ public class FlaggerInfo {
 		return uLow;
 	}
 
-	public void setuLow(int uLow) {
-		this.uLow = uLow;
-	}
-
 	public int getuHigh() {
 		return uHigh;
-	}
-
-	public void setuHigh(int uHigh) {
-		this.uHigh = uHigh;
 	}
 
 	public int getvLow() {
 		return vLow;
 	}
 
-	public void setvLow(int vLow) {
-		this.vLow = vLow;
-	}
-
 	public int getvHigh() {
 		return vHigh;
 	}
 
-	public void setvHigh(int vHigh) {
-		this.vHigh = vHigh;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-	
 	public String addFlaggers(){
 		if(trueOrFalse == true){
 			if(flaggerType.equals("Sensor")){

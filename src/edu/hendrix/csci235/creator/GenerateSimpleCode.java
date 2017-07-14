@@ -14,12 +14,12 @@ public class GenerateSimpleCode {
 	private Transition transitions4;
 	private Transition transitions5;
 	private TreeMap<String, FlaggerInfo> conditions;
-	private FlaggerMap flagMapping;
+	private TreeMap<String, TrueFalse> flagMapping;
 	private TreeMap<String, MotorInfo> modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
 	public GenerateSimpleCode(String programName, Transition transitions1, Transition transitions2, 
-			Transition transitions3,Transition transitions4,Transition transitions5, TreeMap<String, FlaggerInfo> conditions, FlaggerMap flagMapping, TreeMap<String, MotorInfo> modes ){
+			Transition transitions3,Transition transitions4,Transition transitions5, TreeMap<String, FlaggerInfo> conditions, TreeMap<String, TrueFalse> flaggerMap, TreeMap<String, MotorInfo> modes ){
 		this.programName = programName;
 		this.transitions1 = transitions1;
 		this.transitions2 = transitions2;
@@ -27,7 +27,7 @@ public class GenerateSimpleCode {
 		this.transitions4 = transitions4;
 		this.transitions5 = transitions5;
 		this.conditions = conditions;
-		this.flagMapping = flagMapping;
+		this.flagMapping = flaggerMap;
 		this.modes = modes;
 	}
 	
@@ -77,7 +77,6 @@ public class GenerateSimpleCode {
 	}
 	
 	
-	// TODO: add in second transition table
 	public String transitions(){
 		String transitionsTable2 = "";
 		String transitionsTable3 = "";
@@ -148,13 +147,13 @@ public class GenerateSimpleCode {
 	public String flaggers(){
 		String flagString = "FLAGGERS:\n";
 		
-		Set<String> flags = flagMapping.getKeys();
+		Set<String> flags = flagMapping.keySet();
 		ArrayList<String> flagArray = new ArrayList<String>();
 		for(String flag : flags){
 			flagArray.add(flag);
 		}
 		
-		Collection<TrueFalse> flagInfo = flagMapping.getValues();
+		Collection<TrueFalse> flagInfo = flagMapping.values();
 		ArrayList<String> flagInfoArray = new ArrayList<String>();
 		for(TrueFalse info : flagInfo){
 			flagInfoArray.add(info.toString());

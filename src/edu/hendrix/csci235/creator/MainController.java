@@ -17,6 +17,8 @@ import javafx.scene.input.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+// TODO: find list of java reserved words and keep users from naming their variables those words.
+
 public class MainController {
 	TreeMap<String, FlaggerInfo> conditions = new TreeMap<String, FlaggerInfo>();
 	
@@ -25,7 +27,7 @@ public class MainController {
 	// There's some technical debt to be paid off here -- need to think more about it.
 	Transition[] transitions = new Transition[]{new Transition(), new Transition(), new Transition(), new Transition(), new Transition()};
 
-	FlaggerMap flaggerMap = new FlaggerMap();
+	TreeMap<String, TrueFalse> flaggerMap = new TreeMap<String, TrueFalse>();
 	
 	RunCode codeRunner;
 	
@@ -129,7 +131,7 @@ public class MainController {
 	void newHandler(){
 		conditions.clear();
 		modes.clear();
-		flaggerMap.removeAll();
+		flaggerMap.clear();
 		for(int i = 0; i < transitions.length;i++){
 			transitions[i].removeAll();
 		}
@@ -138,9 +140,7 @@ public class MainController {
 		codeOutput.setText("");
 		programName.setText("ProgramName");
 		modeName.getItems().removeAll(modes.keySet());
-		flaggerName.getItems().removeAll(flaggerMap.getKeys());
-		
-		
+		flaggerName.getItems().removeAll(flaggerMap.keySet());
 	}
 	
 	// open file chooser and write to a .txt file
@@ -153,7 +153,6 @@ public class MainController {
 		PrintWriter out = new PrintWriter(chosen.getAbsolutePath());
 		out.println(codeOutput.getText());
 		out.close();
-
 	}
 	
 	
@@ -174,8 +173,6 @@ public class MainController {
 			    new PropertyValueFactory<TransitionsTableData,String>("Condition"));
 		transitionTableMode.setCellValueFactory(
 			    new PropertyValueFactory<TransitionsTableData,String>("Mode"));
-		
-		modes.values();
 		
 		flaggerName.getItems().add("Flagger Name");
 		modeName.getItems().add("Mode Name");
@@ -245,19 +242,18 @@ public class MainController {
 		
 		flaggerName.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
-	    	if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
-	    		flaggerSelector.getSelectionModel().select(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().
+	    	if(flaggerMap.containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
+	    		flaggerSelector.getSelectionModel().select(flaggerMap.get(flaggerName.getSelectionModel().
 	    				getSelectedItem().toString()).getFlaggerType());
-	    		trueCondition.setText(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().
+	    		trueCondition.setText(flaggerMap.get(flaggerName.getSelectionModel().
 	    				getSelectedItem().toString()).getTrueCondition());
-	    		falseCondition.setText(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().
+	    		falseCondition.setText(flaggerMap.get(flaggerName.getSelectionModel().
 	    				getSelectedItem().toString()).getFalseCondition());
-	    		inequalitySelector.getSelectionModel().select(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().
+	    		inequalitySelector.getSelectionModel().select(flaggerMap.get(flaggerName.getSelectionModel().
 	    				getSelectedItem().toString()).getInequality());
-	    		value.setText(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().
+	    		value.setText(flaggerMap.get(flaggerName.getSelectionModel().
 	    				getSelectedItem().toString()).getNumber());
 	    	}
-	    	
 	    });
 		
 		modeName.getSelectionModel().selectedItemProperty()
@@ -288,10 +284,7 @@ public class MainController {
 	    		modeTableNumber.getValueFactory().setValue(modes.get(modeName.getSelectionModel().getSelectedItem()).getTransitionTableNumber());
 	    		
 	    	}
-	    	
-	    	
-	    });
-		
+	   });
 		
 		// Resource: https://stackoverflow.com/questions/28603224/sort-tableview-with-drag-and-drop-rows
 		// Thank you James_D!!!!! 
@@ -401,9 +394,9 @@ public class MainController {
             			throwErrorAlert("Please enter a valid flagger Name.");
             		} else {
             			if(validateValue(value.getText())){
-                			if(flaggerMap.getFlagMapping().containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
-                				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
-                				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
+                			if(flaggerMap.containsKey(flaggerName.getSelectionModel().getSelectedItem().toString())){
+                				conditions.remove(flaggerMap.get(flaggerName.getSelectionModel().getSelectedItem().toString()).getTrueCondition());
+                				conditions.remove(flaggerMap.get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
                 				flaggerMap.remove(flaggerName.getSelectionModel().getSelectedItem().toString());
                 			}
                 			putConditions();
@@ -415,10 +408,8 @@ public class MainController {
             		}
 					populateConditionTransition();
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -453,12 +444,13 @@ public class MainController {
 				Integer.parseInt(vLowText.getText()),
 				Integer.parseInt(vHighText.getText()),
 				Double.parseDouble(value.getText())));
-		flaggerMap.add(flaggerName.getSelectionModel().getSelectedItem().toString(),
+		flaggerMap.put(flaggerName.getSelectionModel().getSelectedItem().toString(),
+				new TrueFalse(
 				(String) flaggerSelector.getSelectionModel().getSelectedItem(),
 				trueCondition.getText().toUpperCase(), 
 				falseCondition.getText().toUpperCase(),
 				inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-				value.getText());
+				value.getText()));
 	}
 	
 	private boolean validateValue(String value){
@@ -526,7 +518,6 @@ public class MainController {
 		forwardMotor1.setSelected(true);
 		forwardMotor2.setSelected(true);
 		startMode.setSelected(false);
-		
 	}
 	
 	private void clearAllCondition() {
@@ -570,7 +561,6 @@ public class MainController {
 		flaggerSelector.getSelectionModel().select(0);
 	}
 	
-	
 	private void populateMotorSelectors() {
 		List<String> motors = new ArrayList<>(Arrays.asList("A", "B", 
 				"C", "D"));
@@ -584,9 +574,8 @@ public class MainController {
 		motorSelector.getSelectionModel().select(0);
 	}
 	
-	
 	private void populateFlaggerNameSelector() {
-		Collection<String> flags = flaggerMap.getFlagMapping().keySet();
+		Collection<String> flags = flaggerMap.keySet();
 		flaggerName.getItems().removeAll(flags);
 		
 		flaggerName.getSelectionModel().select(0);
@@ -743,9 +732,8 @@ public class MainController {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-	}	
-	
-	
+	}
+		
 	private boolean checkModes(){
 		if(modes.keySet().contains(modeName.getSelectionModel().getSelectedItem())){
 			throwErrorAlert("That mode already exists - No two modes should have the same name.\nPlease try again.");

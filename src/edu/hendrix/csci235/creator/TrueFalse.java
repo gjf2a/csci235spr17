@@ -19,34 +19,17 @@ public class TrueFalse {
 		return trueCondition;
 	}
 
-	public void setTrueCondition(String trueCondition) {
-		this.trueCondition = trueCondition;
-	}
-
 	public String getFalseCondition() {
 		return falseCondition;
-	}
-
-	public void setFalseCondition(String falseCondition) {
-		this.falseCondition = falseCondition;
 	}
 
 	public String getInequality() {
 		return inequality;
 	}
-
-	public void setInequality(String inequality) {
-		this.inequality = inequality;
-	}
-
+	
 	public String getNumber() {
 		return number;
 	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-	
 
 	@Override
 	public String toString(){

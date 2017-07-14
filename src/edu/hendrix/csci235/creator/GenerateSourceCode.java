@@ -17,12 +17,12 @@ public class GenerateSourceCode {
 	private Transition transitions4;
 	private Transition transitions5;
 	private TreeMap<String, FlaggerInfo> conditions;
-	private FlaggerMap flagMapping;
+	private TreeMap<String, TrueFalse> flagMapping;
 	private TreeMap<String, MotorInfo> modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
 	public GenerateSourceCode(String programName, Transition transitions1, Transition transitions2, 
-			Transition transitions3, Transition transitions4, Transition transitions5, TreeMap<String, FlaggerInfo> conditions, FlaggerMap flagMapping, TreeMap<String, MotorInfo> modes ){
+			Transition transitions3, Transition transitions4, Transition transitions5, TreeMap<String, FlaggerInfo> conditions, TreeMap<String, TrueFalse> flaggerMap, TreeMap<String, MotorInfo> modes ){
 		this.programName = programName.replaceAll(" ", "_");
 		this.transitions1 = transitions1;
 		this.transitions2 = transitions2;
@@ -30,7 +30,7 @@ public class GenerateSourceCode {
 		this.transitions4 = transitions4;
 		this.transitions5 = transitions5;
 		this.conditions = conditions;
-		this.flagMapping = flagMapping;
+		this.flagMapping = flaggerMap;
 		this.modes = modes;
 	}
 	
@@ -55,7 +55,7 @@ public class GenerateSourceCode {
 	
 	public String addFlaggerConditions(){
 		String flaggerConditions = "";
-		TreeMap<String, TrueFalse> flaggers = flagMapping.getFlagMapping();
+		TreeMap<String, TrueFalse> flaggers = flagMapping;
 		for(Map.Entry<String, TrueFalse> entry : flaggers.entrySet()){
 			String key = entry.getKey().toString();
 			TrueFalse value = entry.getValue();
@@ -186,7 +186,6 @@ public class GenerateSourceCode {
 			String forwardOrBackward2 = value.getForwardOrBackward2();
 			String startingOrNot = value.getStartingOrNot();
 			int transitionTableNumber = value.getTransitionTableNumber();
-			
 			
 			
 			thirdPart = thirdPart + "\n			.mode(Mode." + key.toUpperCase() + ",\n				transitions"+ transitionTableNumber + ",\n				() ->{"
