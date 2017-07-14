@@ -16,13 +16,13 @@ public class GenerateSourceCode {
 	private Transition transitions3;
 	private Transition transitions4;
 	private Transition transitions5;
-	private Condition conditions;
+	private TreeMap<String, FlaggerInfo> conditions;
 	private FlaggerMap flagMapping;
-	private Mode modes;
+	private TreeMap<String, MotorInfo> modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
 	public GenerateSourceCode(String programName, Transition transitions1, Transition transitions2, 
-			Transition transitions3, Transition transitions4, Transition transitions5, Condition conditions, FlaggerMap flagMapping, Mode modes ){
+			Transition transitions3, Transition transitions4, Transition transitions5, TreeMap<String, FlaggerInfo> conditions, FlaggerMap flagMapping, TreeMap<String, MotorInfo> modes ){
 		this.programName = programName.replaceAll(" ", "_");
 		this.transitions1 = transitions1;
 		this.transitions2 = transitions2;
@@ -46,7 +46,7 @@ public class GenerateSourceCode {
 	
 	public String addFlaggers(){
 		String addingFlaggers= "";
-		rawFlaggers = conditions.getValues();
+		rawFlaggers = conditions.values();
 		for(FlaggerInfo f : rawFlaggers){
 			addingFlaggers = addingFlaggers + f.addFlaggers();
 		}
@@ -174,7 +174,7 @@ public class GenerateSourceCode {
 	}
 	
 	public String generateModeSelector(){
-		TreeMap<String, MotorInfo> rawModes = modes.getModes();
+		TreeMap<String, MotorInfo> rawModes = modes;
 		String firstPart = "";
 		String thirdPart = "";
 		for(Map.Entry<String, MotorInfo> entry : rawModes.entrySet()){
@@ -199,7 +199,7 @@ public class GenerateSourceCode {
 			} 
 		}
 		
-		Collection<FlaggerInfo> flaggerSet = conditions.getValues();
+		Collection<FlaggerInfo> flaggerSet = conditions.values();
 	
 		for(FlaggerInfo flagger : flaggerSet){
 			firstPart = firstPart + "\n			.flagger(" + flagger + ")";
@@ -211,7 +211,7 @@ public class GenerateSourceCode {
 	
 	public String generateModeEnum() {
 		String code = "	enum Mode{";
-		Set<String> modeSet = modes.getModes().keySet();
+		Set<String> modeSet = modes.keySet();
 		
 		int i = 0;
 		for(String mode : modeSet){
@@ -230,7 +230,7 @@ public class GenerateSourceCode {
 
 	public String generateConditionEnum() {
 		String code = "	enum Condition{";
-		Set<String> conditionSet = conditions.getConditions().keySet();
+		Set<String> conditionSet = conditions.keySet();
 		
 		int i = 0;
 		for(String condition : conditionSet){

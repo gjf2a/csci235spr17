@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import edu.hendrix.modeselection.Transitions;
 import javafx.beans.value.*;
 import javafx.event.*;
 import javafx.fxml.FXML;
@@ -17,12 +18,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class MainController {
-	Condition conditions = new Condition();
+	TreeMap<String, FlaggerInfo> conditions = new TreeMap<String, FlaggerInfo>();
 	
-	Mode modes = new Mode();
+	TreeMap<String, MotorInfo> modes =  new TreeMap<String, MotorInfo>();
 	
+	// There's some technical debt to be paid off here -- need to think more about it.
 	Transition[] transitions = new Transition[]{new Transition(), new Transition(), new Transition(), new Transition(), new Transition()};
-	
+
 	FlaggerMap flaggerMap = new FlaggerMap();
 	
 	RunCode codeRunner;
@@ -125,17 +127,17 @@ public class MainController {
 	
 	@FXML
 	void newHandler(){
-		conditions.removeAll();
-		modes.removeAll();
+		conditions.clear();
+		modes.clear();
 		flaggerMap.removeAll();
 		for(int i = 0; i < transitions.length;i++){
 			transitions[i].removeAll();
 		}
-		System.out.println(conditions.getKeys());
+		System.out.println(conditions.keySet());
 		theCode = "";
 		codeOutput.setText("");
 		programName.setText("ProgramName");
-		modeName.getItems().removeAll(modes.getKeys());
+		modeName.getItems().removeAll(modes.keySet());
 		flaggerName.getItems().removeAll(flaggerMap.getKeys());
 		
 		
@@ -173,9 +175,10 @@ public class MainController {
 		transitionTableMode.setCellValueFactory(
 			    new PropertyValueFactory<TempTableData,String>("Mode"));
 		
+		//transitions.addAll(new ConditionModePair, );
 		
-		conditions.getConditions();
-		modes.getModes();
+		//conditions.getConditions();
+		modes.values();
 		
 		flaggerName.getItems().add("Flagger Name");
 		modeName.getItems().add("Mode Name");
@@ -264,30 +267,30 @@ public class MainController {
 		
 		modeName.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
-	    	if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
-	    		if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getStartingOrNot().equals("Starting Mode")){
+	    	if(modes.containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
+	    		if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getStartingOrNot().equals("Starting Mode")){
 	    			startMode.setSelected(true);
 	    		}
-	    		motor1.getSelectionModel().select(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getMotor1());
-	    		motor2.getSelectionModel().select(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getMotor2());
+	    		motor1.getSelectionModel().select(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getMotor1());
+	    		motor2.getSelectionModel().select(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getMotor2());
 	    		
-	    		if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward1().equals("Backward")){
+	    		if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward1().equals("Backward")){
 	    			motorGroup1.selectToggle(backwardMotor1);
-	    		} else if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward1().equals("Forward")){
+	    		} else if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward1().equals("Forward")){
 	    			motorGroup1.selectToggle(forwardMotor1);
-	    		} else if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward1().equals("Stop")){
+	    		} else if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward1().equals("Stop")){
 	    			motorGroup1.selectToggle(stopMotor1);
 	    		} 
 	    		
-	    		if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward2().equals("Backward")){
+	    		if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward2().equals("Backward")){
 	    			motorGroup2.selectToggle(backwardMotor2);
-	    		} else if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward2().equals("Forward")){
+	    		} else if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward2().equals("Forward")){
 	    			motorGroup2.selectToggle(forwardMotor2);
-	    		} else if(modes.getModes().get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward2().equals("Stop")){
+	    		} else if(modes.get(modeName.getSelectionModel().getSelectedItem().toString()).getForwardOrBackward2().equals("Stop")){
 	    			motorGroup2.selectToggle(stopMotor2);
 	    		} 
 	    		
-	    		modeTableNumber.getValueFactory().setValue(modes.getModes().get(modeName.getSelectionModel().getSelectedItem()).getTransitionTableNumber());
+	    		modeTableNumber.getValueFactory().setValue(modes.get(modeName.getSelectionModel().getSelectedItem()).getTransitionTableNumber());
 	    		
 	    	}
 	    	
@@ -408,32 +411,33 @@ public class MainController {
                 				conditions.remove(flaggerMap.getFlagMapping().get(flaggerName.getSelectionModel().getSelectedItem().toString()).getFalseCondition());
                 				flaggerMap.remove(flaggerName.getSelectionModel().getSelectedItem().toString());
                 			}
-                			conditions.add(trueCondition.getText().toUpperCase(), 
+                			conditions.put(trueCondition.getText().toUpperCase(),
+                					new FlaggerInfo(
                 					flaggerName.getSelectionModel().getSelectedItem().toString(),
                 					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
                 					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
                 					sensorFlaggerInfo.getSelectedToggle().toString(),
                 					motorSelector.getSelectionModel().getSelectedItem().toString(),
                 					true,
+                					inequalitySelector.getSelectionModel().getSelectedItem().toString(),
                 					Integer.parseInt(uLowText.getText()),
                 					Integer.parseInt(uHighText.getText()),
                 					Integer.parseInt(vLowText.getText()),
-                					Integer.parseInt(vHighText.getText()),
-                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-                					Double.parseDouble(value.getText()));
-                			conditions.add(falseCondition.getText().toUpperCase(), 
+                					Integer.parseInt(vHighText.getText()), 
+                					Double.parseDouble(value.getText())));
+                			conditions.put(falseCondition.getText().toUpperCase(), new FlaggerInfo(
                 					flaggerName.getSelectionModel().getSelectedItem().toString(),
                 					flaggerSelector.getSelectionModel().getSelectedItem().toString(),
                 					sensorPortSelector.getSelectionModel().getSelectedItem().toString(),
                 					sensorFlaggerInfo.getSelectedToggle().toString(),
                 					motorSelector.getSelectionModel().getSelectedItem().toString(),
                 					false,
+                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
                 					Integer.parseInt(uLowText.getText()),
                 					Integer.parseInt(uHighText.getText()),
                 					Integer.parseInt(vLowText.getText()),
                 					Integer.parseInt(vHighText.getText()),
-                					inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-                					Double.parseDouble(value.getText()));
+                					Double.parseDouble(value.getText())));
                 			flaggerMap.add(flaggerName.getSelectionModel().getSelectedItem().toString(),
                 					(String) flaggerSelector.getSelectionModel().getSelectedItem(),
                 					trueCondition.getText().toUpperCase(), 
@@ -476,10 +480,10 @@ public class MainController {
             		if(modeName.getSelectionModel().getSelectedItem().equals("Mode Name")){
             			throwErrorAlert("Please enter a mode name.");
             		} else {
-            			if(modes.getModes().isEmpty()){
+            			if(modes.isEmpty()){
             				startMode.setSelected(true);
             			}
-            			if(modes.getModes().containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
+            			if(modes.containsKey(modeName.getSelectionModel().getSelectedItem().toString())){
             				modes.remove(modeName.getSelectionModel().getSelectedItem().toString());
             			}
             			if(checkModes() == true){
@@ -490,13 +494,12 @@ public class MainController {
             				String toogleGroupValue2 = selectedRadioButton2.getText();
 
             				String isStart = getStartMode();
-
-            				modes.add(modeName.getSelectionModel().getSelectedItem().toString().toUpperCase(), 
-            						motor1.getSelectionModel().getSelectedItem().toString(),
+            				modes.put(modeName.getSelectionModel().getSelectedItem().toString().toUpperCase(), 
+            						new MotorInfo(motor1.getSelectionModel().getSelectedItem().toString(),
             						toogleGroupValue1,
             						motor2.getSelectionModel().getSelectedItem().toString(),
             						toogleGroupValue2,
-            						isStart, (int) modeTableNumber.getValue());
+            						isStart, (int) modeTableNumber.getValue()));
             				previewCode();
             				clearAllMode();
             				populateModeTransition();
@@ -505,9 +508,6 @@ public class MainController {
             		}
             		
 				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -599,7 +599,7 @@ public class MainController {
 	}
 	
 	private void populateModeNameSelector() {
-		Collection<String> modesCollection = modes.getKeys();
+		Collection<String> modesCollection = modes.keySet();
 		modeName.getItems().removeAll(modesCollection);
 		
 		modeName.getSelectionModel().select(0);
@@ -611,9 +611,9 @@ public class MainController {
 	}
 
 	private void populateConditionTransition() {
-		transitionCondition1.getItems().removeAll(conditions.getKeys());
+		transitionCondition1.getItems().removeAll(conditions.keySet());
 		
-		Set<String> conditionsTransition = conditions.getKeys();
+		Set<String> conditionsTransition = conditions.keySet();
 		
 		transitionCondition1.getItems().add("Condition");
 		
@@ -624,9 +624,9 @@ public class MainController {
 	}
 	
 	private void populateModeTransition() {
-		transitionMode1.getItems().removeAll(modes.getKeys());
+		transitionMode1.getItems().removeAll(modes.keySet());
 		
-		Set<String> modesTransition = modes.getKeys();
+		Set<String> modesTransition = modes.keySet();
 		
 		transitionMode1.getItems().add("Mode");
 		
@@ -751,7 +751,7 @@ public class MainController {
 	
 	
 	private boolean checkModes(){
-		if(modes.getKeys().contains(modeName.getSelectionModel().getSelectedItem())){
+		if(modes.keySet().contains(modeName.getSelectionModel().getSelectedItem())){
 			throwErrorAlert("That mode already exists - No two modes should have the same name.\nPlease try again.");
 			return false;
 

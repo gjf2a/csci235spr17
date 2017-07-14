@@ -3,6 +3,7 @@ package edu.hendrix.csci235.creator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class GenerateSimpleCode {
 
@@ -12,13 +13,13 @@ public class GenerateSimpleCode {
 	private Transition transitions3;
 	private Transition transitions4;
 	private Transition transitions5;
-	private Condition conditions;
+	private TreeMap<String, FlaggerInfo> conditions;
 	private FlaggerMap flagMapping;
-	private Mode modes;
+	private TreeMap<String, MotorInfo> modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
 	public GenerateSimpleCode(String programName, Transition transitions1, Transition transitions2, 
-			Transition transitions3,Transition transitions4,Transition transitions5, Condition conditions, FlaggerMap flagMapping, Mode modes ){
+			Transition transitions3,Transition transitions4,Transition transitions5, TreeMap<String, FlaggerInfo> conditions, FlaggerMap flagMapping, TreeMap<String, MotorInfo> modes ){
 		this.programName = programName;
 		this.transitions1 = transitions1;
 		this.transitions2 = transitions2;
@@ -42,7 +43,7 @@ public class GenerateSimpleCode {
 	
 	public String conditions(){
 		String conditionsString = "CONDITIONS:\n";
-		Set<String> conditionSet = conditions.getConditions().keySet();
+		Set<String> conditionSet = conditions.keySet();
 		
 		for(String condition : conditionSet){
 			conditionsString = conditionsString + "- " + condition.toUpperCase() + "\n";
@@ -54,14 +55,14 @@ public class GenerateSimpleCode {
 	public String modes(){
 		String modesString = "MODES:\n";
 		
-		Set<String> modeSet = modes.getModes().keySet();
+		Set<String> modeSet = modes.keySet();
 		ArrayList<String> modesArray = new ArrayList<String>();
 		for(String mode : modeSet){
 			modesArray.add(mode.toUpperCase());
 		}
 		
 		
-		Collection<MotorInfo> modeInfo = modes.getModes().values();
+		Collection<MotorInfo> modeInfo = modes.values();
 		ArrayList<String> info = new ArrayList<String>();
 		for(MotorInfo motorInformation : modeInfo){
 			info.add(motorInformation.toString());
