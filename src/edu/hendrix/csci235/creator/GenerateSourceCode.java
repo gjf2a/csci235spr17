@@ -2,6 +2,7 @@ package edu.hendrix.csci235.creator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -11,24 +12,15 @@ public class GenerateSourceCode {
 	// This class builds all of the programs using strings. 
 	
 	private String programName;
-	private Transition transitions1;
-	private Transition transitions2;
-	private Transition transitions3;
-	private Transition transitions4;
-	private Transition transitions5;
+	private List<List<ConditionModePair>> transitions;
 	private TreeMap<String, FlaggerInfo> conditions;
 	private TreeMap<String, TrueFalse> flagMapping;
 	private TreeMap<String, MotorInfo> modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
-	public GenerateSourceCode(String programName, Transition transitions1, Transition transitions2, 
-			Transition transitions3, Transition transitions4, Transition transitions5, TreeMap<String, FlaggerInfo> conditions, TreeMap<String, TrueFalse> flaggerMap, TreeMap<String, MotorInfo> modes ){
+	public GenerateSourceCode(String programName, List<List<ConditionModePair>> transitions, TreeMap<String, FlaggerInfo> conditions, TreeMap<String, TrueFalse> flaggerMap, TreeMap<String, MotorInfo> modes ){
 		this.programName = programName.replaceAll(" ", "_");
-		this.transitions1 = transitions1;
-		this.transitions2 = transitions2;
-		this.transitions3 = transitions3;
-		this.transitions4 = transitions4;
-		this.transitions5 = transitions5;
+		this.transitions = transitions;
 		this.conditions = conditions;
 		this.flagMapping = flaggerMap;
 		this.modes = modes;
@@ -92,85 +84,22 @@ public class GenerateSourceCode {
 		return code;
 	}
 	
-	// TODO: Come back to this and refactor
 	public String generateTransitionTables(){
-		ArrayList<ConditionModePair> rawTransitions1 = transitions1.getTransitions();
-		ArrayList<ConditionModePair> rawTransitions2 = transitions2.getTransitions();
-		ArrayList<ConditionModePair> rawTransitions3 = transitions3.getTransitions();
-		ArrayList<ConditionModePair> rawTransitions4 = transitions4.getTransitions();
-		ArrayList<ConditionModePair> rawTransitions5 = transitions5.getTransitions();
-		
-		String toReturn2 = "";
-		String toReturn3 = "";
-		String toReturn4 = "";
-		String toReturn5 = "";
-		
-		if(transitions2.isEmpty() == false){
-			toReturn2 =  "\n		Transitions<Condition,Mode> transitions2 = new Transitions<>();";
-		}
-		if(transitions3.isEmpty() == false){
-			toReturn3 =  "\n		Transitions<Condition,Mode> transitions3 = new Transitions<>();";
-		}
-		if(transitions4.isEmpty() == false){
-			toReturn4 =  "\n		Transitions<Condition,Mode> transitions4 = new Transitions<>();";
-		}
-		if(transitions5.isEmpty() == false){
-			toReturn5 =  "\n		Transitions<Condition,Mode> transitions5 = new Transitions<>();";
-		}
-
-		String toReturn1 =  "\n		Transitions<Condition,Mode> transitions1 = new Transitions<>();";
-		
-		
-		
-		for(ConditionModePair cmp : rawTransitions1){
-			String condition = cmp.getCondition();
-			String mode = cmp.getMode();
+		String toReturn = "";
+		for(int i = 0; i < transitions.size(); i++){
+			for(ConditionModePair cmp : transitions.get(i)){
+				String condition = cmp.getCondition();
+				String mode = cmp.getMode();
+				int tableNum = i+1;
+				
+				toReturn = toReturn + "\n		transitions" + tableNum + ".add(Condition." + condition.toUpperCase() + ", Mode." +
+						mode.toUpperCase() + ");";
+			}
 			
-			toReturn1 = toReturn1 + "\n		transitions1.add(Condition." + condition.toUpperCase() + ", Mode." +
-					mode.toUpperCase() + ");";
+			toReturn = toReturn + "\n\n";
 		}
 		
-		if(transitions2.isEmpty() == false){
-			for(ConditionModePair cmp : rawTransitions2){
-				String condition = cmp.getCondition();
-				String mode = cmp.getMode();
-				
-				toReturn2 = toReturn2 + "\n		transitions2.add(Condition." + condition.toUpperCase() + ", Mode." +
-						mode.toUpperCase() + ");";
-			}
-		}
-		
-		if(transitions3.isEmpty() == false){
-			for(ConditionModePair cmp : rawTransitions3){
-				String condition = cmp.getCondition();
-				String mode = cmp.getMode();
-				
-				toReturn3 = toReturn3 + "\n		transitions3.add(Condition." + condition.toUpperCase() + ", Mode." +
-						mode.toUpperCase() + ");";
-			}
-		}
-		
-		if(transitions4.isEmpty() == false){
-			for(ConditionModePair cmp : rawTransitions4){
-				String condition = cmp.getCondition();
-				String mode = cmp.getMode();
-				
-				toReturn4 = toReturn4 + "\n		transitions4.add(Condition." + condition.toUpperCase() + ", Mode." +
-						mode.toUpperCase() + ");";
-			}
-		}
-		
-		if(transitions5.isEmpty() == false){
-			for(ConditionModePair cmp : rawTransitions5){
-				String condition = cmp.getCondition();
-				String mode = cmp.getMode();
-				
-				toReturn5 = toReturn5 + "\n		transitions5.add(Condition." + condition.toUpperCase() + ", Mode." +
-						mode.toUpperCase() + ");";
-			}
-		}
-		
-		return toReturn1 + "\n\n" + toReturn2 + "\n\n" + toReturn3 + "\n\n" + toReturn4 + "\n\n" + toReturn5 +"\n";
+		return toReturn; 
 	}
 	
 	public String generateModeSelector(){

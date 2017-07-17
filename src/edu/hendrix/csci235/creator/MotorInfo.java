@@ -19,49 +19,25 @@ public class MotorInfo {
 	public String getMotor1() {
 		return motor1;
 	}
-
-	public void setMotor1(String motor1) {
-		this.motor1 = motor1;
-	}
-
+	
 	public String getMotor2() {
 		return motor2;
-	}
-
-	public void setMotor2(String motor2) {
-		this.motor2 = motor2;
 	}
 
 	public String getForwardOrBackward1() {
 		return forwardOrBackward1;
 	}
 
-	public void setForwardOrBackward1(String forwardOrBackward1) {
-		this.forwardOrBackward1 = forwardOrBackward1;
-	}
-
 	public String getForwardOrBackward2() {
 		return forwardOrBackward2;
 	}
 
-	public void setForwardOrBackward2(String forwardOrBackward2) {
-		this.forwardOrBackward2 = forwardOrBackward2;
-	}
-	
 	public String getStartingOrNot() {
 		return startingOrNot;
 	}
 
-	public void setStartingOrNot(String startingOrNot) {
-		this.startingOrNot = startingOrNot;
-	}
-
 	public int getTransitionTableNumber() {
 		return transitionTableNumber;
-	}
-
-	public void setTransitionTableNumber(int transitionTableNumber) {
-		this.transitionTableNumber = transitionTableNumber;
 	}
 
 	@Override
@@ -73,9 +49,5 @@ public class MotorInfo {
 		return("\n      > " + s +  "\n      > Motor " + motor1.toString() + ": " + forwardOrBackward1.toString()  + "\n      > Motor " + motor2.toString() + ": " + forwardOrBackward2.toString()
 				+ "\n      > Transition table " + transitionTableNumber + "\n");
 	}
-
-	
-	
-	
 	
 }

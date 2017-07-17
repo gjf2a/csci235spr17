@@ -2,35 +2,27 @@ package edu.hendrix.csci235.creator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class GenerateSimpleCode {
 
 	private String programName;
-	private Transition transitions1;
-	private Transition transitions2;
-	private Transition transitions3;
-	private Transition transitions4;
-	private Transition transitions5;
+	private List<List<ConditionModePair>> transitions;
 	private TreeMap<String, FlaggerInfo> conditions;
 	private TreeMap<String, TrueFalse> flagMapping;
 	private TreeMap<String, MotorInfo> modes;
 	public Collection<FlaggerInfo> rawFlaggers;
 	
-	public GenerateSimpleCode(String programName, Transition transitions1, Transition transitions2, 
-			Transition transitions3,Transition transitions4,Transition transitions5, TreeMap<String, FlaggerInfo> conditions, TreeMap<String, TrueFalse> flaggerMap, TreeMap<String, MotorInfo> modes ){
+	public GenerateSimpleCode(String programName, List<List<ConditionModePair>> transitions, TreeMap<String, FlaggerInfo> conditions, TreeMap<String, TrueFalse> flaggerMap, TreeMap<String, MotorInfo> modes ){
 		this.programName = programName;
-		this.transitions1 = transitions1;
-		this.transitions2 = transitions2;
-		this.transitions3 = transitions3;
-		this.transitions4 = transitions4;
-		this.transitions5 = transitions5;
+		this.transitions = transitions;
 		this.conditions = conditions;
 		this.flagMapping = flaggerMap;
 		this.modes = modes;
 	}
-	
+
 	public String programNameView(){
 		String programNameView = "";
 		
@@ -76,72 +68,24 @@ public class GenerateSimpleCode {
 		return modesString;
 	}
 	
-	
 	public String transitions(){
-		String transitionsTable2 = "";
-		String transitionsTable3 = "";
-		String transitionsTable4 = "";
-		String transitionsTable5 = "";
+		String toReturn = "";
 		
-		
-		String transitionsTable1 = "\nTRANSITION TABLE 1:\n	Condition  ------>  Mode       \n" + 
-				"-------------------------------------\n	";
-		ArrayList<ConditionModePair> t1 = transitions1.getTransitions();
-		for(ConditionModePair cmp : t1){
-			String mode = cmp.getMode().toUpperCase();
-			String condition = cmp.getCondition().toUpperCase();
-			transitionsTable1 = transitionsTable1  + condition + 
-					"     ------>     "+ mode + "\n	";
-		}
-		if(transitions2.isEmpty() == false){
-			transitionsTable2 = "\nTRANSITION TABLE 2:\n	Condition  ------>  Mode       \n" + 
+		for(int i = 0; i < transitions.size(); i++){
+			int tableNum = i+1;
+			toReturn = toReturn + "TRANSITION TABLE " + tableNum + ":\n	Condition  ------>  Mode       \n" + 
 					"-------------------------------------\n	";
-			ArrayList<ConditionModePair> t2 = transitions2.getTransitions();
-			for(ConditionModePair cmp : t2){
+			for(ConditionModePair cmp : transitions.get(i)){
 				String mode = cmp.getMode().toUpperCase();
 				String condition = cmp.getCondition().toUpperCase();
-				transitionsTable2 = transitionsTable2  + condition + 
+				toReturn = toReturn  + condition + 
 						"     ------>     "+ mode + "\n	";
 			}
+			
+			toReturn = toReturn + "\n\n";
 		}
 		
-		if(transitions3.isEmpty() == false){
-			transitionsTable3 = "\nTRANSITION TABLE 3:\n	Condition  ------>  Mode       \n" + 
-					"-------------------------------------\n	";
-			ArrayList<ConditionModePair> t3 = transitions3.getTransitions();
-			for(ConditionModePair cmp : t3){
-				String mode = cmp.getMode().toUpperCase();
-				String condition = cmp.getCondition().toUpperCase();
-				transitionsTable3 = transitionsTable3  + condition + 
-						"     ------>     "+ mode + "\n	";
-			}
-		}
-		
-		if(transitions4.isEmpty() == false){
-			transitionsTable4 = "\nTRANSITION TABLE 4:\n	Condition  ------>  Mode       \n" + 
-					"-------------------------------------\n	";
-			ArrayList<ConditionModePair> t4 = transitions4.getTransitions();
-			for(ConditionModePair cmp : t4){
-				String mode = cmp.getMode().toUpperCase();
-				String condition = cmp.getCondition().toUpperCase();
-				transitionsTable4 = transitionsTable4  + condition + 
-						"     ------>     "+ mode + "\n	";
-			}
-		}
-		
-		if(transitions5.isEmpty() == false){
-			transitionsTable5 = "\nTRANSITION TABLE 5:\n	Condition  ------>  Mode       \n" + 
-					"-------------------------------------\n	";
-			ArrayList<ConditionModePair> t5 = transitions5.getTransitions();
-			for(ConditionModePair cmp : t5){
-				String mode = cmp.getMode().toUpperCase();
-				String condition = cmp.getCondition().toUpperCase();
-				transitionsTable5 = transitionsTable5  + condition + 
-						"     ------>     "+ mode + "\n	";
-			}
-		}		
-		
-		return transitionsTable1 + "\n" + transitionsTable2 + "\n" + transitionsTable3 + "\n" + transitionsTable4+ "\n" + transitionsTable5; 
+		return toReturn;
 	}
 	
 	public String flaggers(){

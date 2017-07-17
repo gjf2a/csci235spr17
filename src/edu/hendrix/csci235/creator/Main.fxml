@@ -93,8 +93,8 @@
                   <Font name="Courier New" size="12.0" />
                </font>
             </Button>
-            <ChoiceBox fx:id="transitionCondition1" layoutX="125.0" layoutY="547.0" prefHeight="25.0" prefWidth="93.0" />
-            <ChoiceBox fx:id="transitionMode1" layoutX="265.0" layoutY="547.0" prefHeight="25.0" prefWidth="93.0" />
+            <ChoiceBox fx:id="transitionCondition" layoutX="125.0" layoutY="547.0" prefHeight="25.0" prefWidth="93.0" />
+            <ChoiceBox fx:id="transitionMode" layoutX="265.0" layoutY="547.0" prefHeight="25.0" prefWidth="93.0" />
             <Button fx:id="addTransitionTable1" layoutX="363.0" layoutY="547.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="65.0" text="Update">
                <font>
                   <Font name="Courier New" size="12.0" />

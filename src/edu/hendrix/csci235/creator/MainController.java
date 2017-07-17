@@ -25,8 +25,10 @@ public class MainController {
 	TreeMap<String, MotorInfo> modes =  new TreeMap<String, MotorInfo>();
 	
 	// There's some technical debt to be paid off here -- need to think more about it.
-	Transition[] transitions = new Transition[]{new Transition(), new Transition(), new Transition(), new Transition(), new Transition()};
-
+	//Transition[] transitions = new Transition[]();//{new Transition(), new Transition(), new Transition(), new Transition(), new Transition()};
+	
+	List<List<ConditionModePair>> transitions = new ArrayList<>();
+	
 	TreeMap<String, TrueFalse> flaggerMap = new TreeMap<String, TrueFalse>();
 	
 	RunCode codeRunner;
@@ -83,7 +85,10 @@ public class MainController {
 	CheckBox startMode;
 	
 	@FXML
-	ChoiceBox<String> transitionCondition1, transitionMode1;
+	ChoiceBox<String> transitionCondition;
+	
+	@FXML
+	ChoiceBox<String> transitionMode;
 	
 	@FXML
 	TextArea codeOutput;
@@ -132,9 +137,8 @@ public class MainController {
 		conditions.clear();
 		modes.clear();
 		flaggerMap.clear();
-		for(int i = 0; i < transitions.length;i++){
-			transitions[i].removeAll();
-		}
+		//transitions.add(new ConditionModePair());
+		transitions.clear();
 		System.out.println(conditions.keySet());
 		theCode = "";
 		codeOutput.setText("");
@@ -188,13 +192,13 @@ public class MainController {
 		
 		addConditionButtonHandler();
 		addModeButtonHandler();
-		addTransition1Handler();
+		addTransitionHandler();
 		addCodeViewHandler();
 		executeCodeHandler();
 		
 		 
 		
-		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
+		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,15));
 		modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
 		
 		flaggerSelector.getSelectionModel().selectedItemProperty()
@@ -231,10 +235,10 @@ public class MainController {
 		
 		tableNumber.valueProperty().addListener((obs, oldValue, newValue) -> {
 			int tableNum = tableNumber.getValueFactory().getValue() - 1;
-			if (tableNum >= 0 && tableNum < transitions.length) {
-				if(transitions[tableNum].transitions.size() > 0){
-					for(int i = 0; i < transitions[tableNum].size(); i++){
-						transitionTableViewer.getItems().add(new TransitionsTableData(transitions[tableNum].get(i)));
+			if (tableNum >= 0 && tableNum < transitions.size()) {
+				if(transitions.get(tableNum).size() > 0){
+					for(int i = 0; i < transitions.get(tableNum).size(); i++){
+						transitionTableViewer.getItems().add(new TransitionsTableData(transitions.get(tableNum).get(i)));
 					}
 				}
 			}
@@ -328,7 +332,13 @@ public class MainController {
                     }
 
                     transitionTableViewer.getItems().add(dropIndex, draggedItem1);
-                    transitions[tableNumber.getValue() - 1].regenerate(transitionTableViewer.getItems());
+                    transitions.get(tableNumber.getValue() - 1).clear();
+                    Iterable<TransitionsTableData> data = transitionTableViewer.getItems();
+            		for (TransitionsTableData dat: data) {
+            			transitions.get(tableNumber.getValue() - 1).addAll((List<ConditionModePair>) dat.getPair());//add(dat.getPair());
+            		}
+                    
+                    //.regenerate(transitionTableViewer.getItems());
                     event.setDropCompleted(true);
                     transitionTableViewer.getSelectionModel().select(dropIndex);
                     event.consume();
@@ -339,6 +349,7 @@ public class MainController {
         });
 		
 	}
+	
 	private void setFalseHelper(){
 		sensorPortSelector.setVisible(false);
     	sensorPort.setVisible(false);
@@ -598,58 +609,73 @@ public class MainController {
 	}
 
 	private void populateConditionTransition() {
-		transitionCondition1.getItems().removeAll(conditions.keySet());
+		transitionCondition.getItems().removeAll(conditions.keySet());
 		
 		Set<String> conditionsTransition = conditions.keySet();
 		
-		transitionCondition1.getItems().add("Condition");
+		transitionCondition.getItems().add("Condition");
 		
         for(String condition: conditionsTransition){
-			transitionCondition1.getItems().add(condition);
+			transitionCondition.getItems().add(condition);
 		}
-		transitionCondition1.getSelectionModel().select(0);
+		transitionCondition.getSelectionModel().select(0);
 	}
 	
 	private void populateModeTransition() {
-		transitionMode1.getItems().removeAll(modes.keySet());
+		transitionMode.getItems().removeAll(modes.keySet());
 		
 		Set<String> modesTransition = modes.keySet();
 		
-		transitionMode1.getItems().add("Mode");
+		transitionMode.getItems().add("Mode");
 		
 		for(String mode: modesTransition){
-			transitionMode1.getItems().add(mode);
+			transitionMode.getItems().add(mode);
 		}
-		transitionMode1.getSelectionModel().select(0);
+		transitionMode.getSelectionModel().select(0);
 
 	}
 	
-	private void addTransition1Handler(){
+	private void addTransitionHandler(){
 		addTransitionTable1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		if(!transitionCondition1.getSelectionModel().getSelectedItem().equals("Condition") && !transitionMode1.getSelectionModel().getSelectedItem().equals("Mode")){
+            		if(!transitionCondition.getSelectionModel().getSelectedItem().equals("Condition") && !transitionMode.getSelectionModel().getSelectedItem().equals("Mode")){
+            			System.out.println("Got into handler.");
             			int tableNum = tableNumber.getValue() - 1;
-            			if (tableNum >= 0 && tableNum < transitions.length) {
-            				if(transitions[tableNum].contains(transitionCondition1.getSelectionModel().getSelectedItem())){
-            					int num = transitions[tableNum].whichIndex(transitionCondition1.getSelectionModel().getSelectedItem());
-            					transitions[tableNum].replace(num, new ConditionModePair(transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-        							transitionMode1.getSelectionModel().getSelectedItem().toString()));
+            			System.out.println(tableNum);
+            			if (tableNum < transitions.size() && transitions.size() > 0) {
+            				System.out.println("inside first if");
+            				if(transitions.get(tableNum).contains(transitionCondition.getSelectionModel().getSelectedItem())){
+            					System.out.println("inside second if");
+            					int num = transitions.get(tableNum).indexOf(transitionCondition.getSelectionModel().getSelectedItem());
+            					transitions.get(tableNum).set(num, new ConditionModePair(transitionCondition.getSelectionModel().getSelectedItem().toString(),
+        							transitionMode.getSelectionModel().getSelectedItem().toString()));
             					transitionTableViewer.getItems().clear();
-            					for (ConditionModePair cmp: transitions[tableNum]) {
+            					for (ConditionModePair cmp: transitions.get(tableNum)) {
             						transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
             					}
-            				} else {
-            					transitions[tableNum].add(
-            							transitionCondition1.getSelectionModel().getSelectedItem().toString(),
-            							transitionMode1.getSelectionModel().getSelectedItem().toString());
-            					transitionCondition1.getSelectionModel().select(0);
-            					transitionMode1.getSelectionModel().select(0);
-            					transitionTableViewer.getItems().clear();
-            					for (ConditionModePair cmp: transitions[tableNum]) {
-            						transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
-            					}
+            				} else{
+            					transitions.get(tableNum).add(new ConditionModePair(transitionCondition.getSelectionModel().getSelectedItem(),
+            							transitionMode.getSelectionModel().getSelectedItem()));
+            					transitionCondition.getSelectionModel().select(0);
+                				transitionMode.getSelectionModel().select(0);
+                				transitionTableViewer.getItems().clear();
+                				for (ConditionModePair cmp: transitions.get(tableNum)) {
+                					transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
+                				}
+            				}
+            			}
+            			else {
+            				transitions.add(new ArrayList<ConditionModePair>());
+            				transitions.get(transitions.size() - 1).add(new ConditionModePair(transitionCondition.getSelectionModel().getSelectedItem(),
+            						transitionMode.getSelectionModel().getSelectedItem()));
+            				System.out.println(transitions.get(tableNum));
+            				transitionCondition.getSelectionModel().select(0);
+            				transitionMode.getSelectionModel().select(0);
+            				transitionTableViewer.getItems().clear();
+            				for (ConditionModePair cmp: transitions.get(tableNum)) {
+            					transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
             				}
             			}
             		}
@@ -686,11 +712,7 @@ public class MainController {
 				}
 				GenerateSourceCode codeGenerator = new GenerateSourceCode(
 						className,
-						transitions[0],
-						transitions[1],
-						transitions[2],
-						transitions[3],
-						transitions[4],
+						transitions,
 						conditions,
 						flaggerMap,
 						modes);
@@ -707,21 +729,13 @@ public class MainController {
 				}
 				GenerateSourceCode codeSourceGenerator = new GenerateSourceCode(
 						className,
-						transitions[0],
-						transitions[1],
-						transitions[2],
-						transitions[3],
-						transitions[4],
+						transitions,
 						conditions,
 						flaggerMap,
 						modes);
 				GenerateSimpleCode codeSimpleGenerator = new GenerateSimpleCode(
 						className,
-						transitions[0],
-						transitions[1],
-						transitions[2],
-						transitions[3],
-						transitions[4],
+						transitions,
 						conditions,
 						flaggerMap,
 						modes);

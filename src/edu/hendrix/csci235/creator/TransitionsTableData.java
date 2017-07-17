@@ -37,6 +37,10 @@ public class TransitionsTableData {
 		this.mode = mode;
 	}
 	
+	//public Iterable<TempTableData> returnData(){
+		//return 
+	//}
+	
 	public String toString(){
 	    String s = String.format("[condition: %s | mode: %s ]", condition, mode);
 	    return s;
