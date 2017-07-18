@@ -15,6 +15,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -22,7 +23,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="721.0" prefWidth="1151.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.hendrix.csci235.creator.MainController">
    <children>
-      <Pane layoutX="-4.0" layoutY="-5.0" prefHeight="717.0" prefWidth="1150.0">
+      <Pane layoutX="-2.0" layoutY="-5.0" prefHeight="717.0" prefWidth="1150.0">
          <children>
             <Label layoutX="464.0" layoutY="32.0" text="Create Your Program">
                <font>
@@ -251,6 +252,8 @@
                 </Menu>
               </menus>
             </MenuBar>
+            <Button fx:id="selectImage" layoutX="130.0" layoutY="117.0" mnemonicParsing="false" onAction="#selectImageHandler" text="Select Image" visible="false" />
+            <ImageView fx:id="selectedImage" fitHeight="149.0" fitWidth="189.0" layoutX="237.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" visible="false" />
          </children>
       </Pane>
    </children>

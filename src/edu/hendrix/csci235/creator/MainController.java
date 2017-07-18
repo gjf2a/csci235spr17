@@ -1,18 +1,29 @@
 package edu.hendrix.csci235.creator;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import javax.activation.MimetypesFileTypeMap;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+
 import edu.hendrix.modeselection.Transitions;
 import javafx.beans.value.*;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -111,6 +122,12 @@ public class MainController {
 	@FXML
 	TableColumn<TransitionsTableData,String> transitionTableMode;
 	
+	@FXML
+	Button selectImage;
+	
+	@FXML
+	ImageView selectedImage;
+	
 	@FXML 
 	MenuItem open;
 	
@@ -119,6 +136,11 @@ public class MainController {
 	
 	@FXML
 	MenuItem buildJar;
+
+	Image img;
+	File imgFile = new File("random.txt");
+	
+	int spinnerEndValue = 1;
 	
 	@FXML
 	void openHandler() {
@@ -198,8 +220,8 @@ public class MainController {
 		
 		 
 		
-		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,15));
-		modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,5));
+		tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1));
+		modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,1));
 		
 		flaggerSelector.getSelectionModel().selectedItemProperty()
 	    .addListener((obs, oldV, newV) -> {
@@ -224,10 +246,18 @@ public class MainController {
 	    	uHigh.setVisible(true);
 	    	vLow.setVisible(true);
 	    	vHigh.setVisible(true);
-	    } else{
+	    } else if(flaggerSelector.getSelectionModel().getSelectedItem().equals("ImageMatching")){
+	    	setFalseHelper();
+	    	selectImage.setVisible(true);	    	
+	    }
+	    else{
 	    	setFalseHelper();
 	    }
 	    });
+		
+		tableNumber.valueProperty().addListener((obs, oldValue, newValue) -> {
+		transitionTableViewer.getItems().clear();
+		});
 		
 		programName.textProperty().addListener((observable, oldValue, newValue) -> {
 		    previewCode();
@@ -350,6 +380,25 @@ public class MainController {
 		
 	}
 	
+	@FXML
+	void selectImageHandler(){
+		FileChooser chooser = new FileChooser();
+		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        chooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+		File chosen = chooser.showOpenDialog(null);
+        try {
+            BufferedImage bufferedImage = ImageIO.read(chosen);
+            WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
+            imgFile = chosen;
+            selectedImage.setImage(image);
+            selectedImage.setVisible(true);
+        } catch (IOException ex) {
+            System.out.println("It didn't work.");
+        }
+		
+	}
+	
 	private void setFalseHelper(){
 		sensorPortSelector.setVisible(false);
     	sensorPort.setVisible(false);
@@ -365,6 +414,8 @@ public class MainController {
     	uHigh.setVisible(false);
     	vLow.setVisible(false);
     	vHigh.setVisible(false);
+    	selectImage.setVisible(false);
+    	selectedImage.setVisible(false);
 	}
 
 	private void setButtonGroups(){
@@ -441,7 +492,8 @@ public class MainController {
 				Integer.parseInt(uHighText.getText()),
 				Integer.parseInt(vLowText.getText()),
 				Integer.parseInt(vHighText.getText()), 
-				Double.parseDouble(value.getText())));
+				Double.parseDouble(value.getText()),
+				imgFile.getName()));
 		conditions.put(falseCondition.getText().toUpperCase(), new FlaggerInfo(
 				flaggerName.getSelectionModel().getSelectedItem().toString(),
 				flaggerSelector.getSelectionModel().getSelectedItem().toString(),
@@ -454,14 +506,16 @@ public class MainController {
 				Integer.parseInt(uHighText.getText()),
 				Integer.parseInt(vLowText.getText()),
 				Integer.parseInt(vHighText.getText()),
-				Double.parseDouble(value.getText())));
+				Double.parseDouble(value.getText()),
+				imgFile.getName()));
 		flaggerMap.put(flaggerName.getSelectionModel().getSelectedItem().toString(),
 				new TrueFalse(
 				(String) flaggerSelector.getSelectionModel().getSelectedItem(),
 				trueCondition.getText().toUpperCase(), 
 				falseCondition.getText().toUpperCase(),
 				inequalitySelector.getSelectionModel().getSelectedItem().toString(), 
-				value.getText()));
+				value.getText(), 
+				imgFile.getName()));
 	}
 	
 	private boolean validateValue(String value){
@@ -565,7 +619,7 @@ public class MainController {
 	
 	private void populateFlaggerSelector() {
 		List<String> flaggerTypes = new ArrayList<>(Arrays.asList("Flagger", "Motor", 
-				"Sensor", "ColorCount"));
+				"Sensor", "ColorCount", "ImageMatching"));
         for(String flagger: flaggerTypes){
 			flaggerSelector.getItems().add(flagger);
 		}
@@ -641,13 +695,9 @@ public class MainController {
             public void handle(ActionEvent event) {
             	try {
             		if(!transitionCondition.getSelectionModel().getSelectedItem().equals("Condition") && !transitionMode.getSelectionModel().getSelectedItem().equals("Mode")){
-            			System.out.println("Got into handler.");
             			int tableNum = tableNumber.getValue() - 1;
-            			System.out.println(tableNum);
             			if (tableNum < transitions.size() && transitions.size() > 0) {
-            				System.out.println("inside first if");
             				if(transitions.get(tableNum).contains(transitionCondition.getSelectionModel().getSelectedItem())){
-            					System.out.println("inside second if");
             					int num = transitions.get(tableNum).indexOf(transitionCondition.getSelectionModel().getSelectedItem());
             					transitions.get(tableNum).set(num, new ConditionModePair(transitionCondition.getSelectionModel().getSelectedItem().toString(),
         							transitionMode.getSelectionModel().getSelectedItem().toString()));
@@ -670,13 +720,15 @@ public class MainController {
             				transitions.add(new ArrayList<ConditionModePair>());
             				transitions.get(transitions.size() - 1).add(new ConditionModePair(transitionCondition.getSelectionModel().getSelectedItem(),
             						transitionMode.getSelectionModel().getSelectedItem()));
-            				System.out.println(transitions.get(tableNum));
             				transitionCondition.getSelectionModel().select(0);
             				transitionMode.getSelectionModel().select(0);
             				transitionTableViewer.getItems().clear();
             				for (ConditionModePair cmp: transitions.get(tableNum)) {
             					transitionTableViewer.getItems().add(new TransitionsTableData(cmp));
             				}
+            				tableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,spinnerEndValue + 1));
+            				modeTableNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1,spinnerEndValue + 1));
+            				spinnerEndValue += 1;
             			}
             		}
             		

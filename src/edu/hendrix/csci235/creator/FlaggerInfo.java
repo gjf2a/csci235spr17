@@ -1,16 +1,19 @@
 package edu.hendrix.csci235.creator;
 
+import java.awt.Image;
+
 public class FlaggerInfo {
 	
 	// Holds all of the relevant info for a specific flag
 	
 	private String flaggerName, flaggerType, sensorPort, bumpOrSonar, motor, inequality;
+	private String imageName;
 	private Boolean trueOrFalse;
 	private int uLow, uHigh, vLow, vHigh;
 	private double value;
 
 	public FlaggerInfo(String flaggerName, String flaggerType, String sensorPort, String bumpOrSonar, String motor, Boolean trueOrFalse,
-			String inequality, int uLow, int uHigh, int vLow, int vHigh, double value){
+			String inequality, int uLow, int uHigh, int vLow, int vHigh, double value, String imageName){
 		this.flaggerName = flaggerName;
 		this.flaggerType = flaggerType;
 		this.sensorPort = sensorPort;
@@ -23,6 +26,7 @@ public class FlaggerInfo {
 		this.vLow = vLow;
 		this.vHigh = vHigh;
 		this.value = value;
+		this.imageName = imageName;
 	}
 
 	public double getValue() {
@@ -85,6 +89,9 @@ public class FlaggerInfo {
 			} else if(flaggerType.equals("ColorCount")){
 				return( "		CameraFlagger<Condition> camera = new CameraFlagger<>();\n" + "		"  + flaggerType + "Flagger<Condition> " + flaggerName + " = new " +
 						flaggerType +"Flagger<>(" + uLow + ", " + uHigh + ", " + vLow + ", " + vHigh + ");\n		camera.addSub(" + flaggerName + ");\n");
+			} else if(flaggerType.equals("ImageMatching")){
+				return( "		CameraFlagger<Condition> camera = new CameraFlagger<>();\n" + "		"  + "BitSceneFlagger<Condition> " + flaggerName + " = new " +
+						"BitSceneFlagger<>(\"" + imageName + "\");\n		camera.addSub(" + flaggerName + ");\n");
 			}
 		}
 		else{
