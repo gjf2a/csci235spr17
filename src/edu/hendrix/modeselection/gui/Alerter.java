@@ -1,5 +1,8 @@
 package edu.hendrix.modeselection.gui;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.scene.control.Alert;
 
 public class Alerter {
@@ -13,5 +16,17 @@ public class Alerter {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setContentText(infoMsg);
 		alert.show();
+	}
+	
+	public static void fileIO(File f, FileIO func) {
+		try {
+			if (f == null) {
+				errorBox("No file selected");
+			} else {
+				func.accessFile(f);
+			}
+		} catch (IOException ioe) {
+			errorBox(ioe.getMessage());
+		}
 	}
 }

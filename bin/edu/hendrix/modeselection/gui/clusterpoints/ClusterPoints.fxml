@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.hendrix.modeselection.gui.clusterpoints.ClusterPointsController">
+   <center>
+      <Canvas fx:id="canvas" height="300.0" width="300.0" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox>
+               <children>
+                  <Label text="Clusters" />
+                  <TextField fx:id="kValue" prefHeight="26.0" prefWidth="31.0" text="2" />
+               </children>
+            </HBox>
+            <CheckBox fx:id="scrambled" mnemonicParsing="false" text="Scrambled" />
+            <Button mnemonicParsing="false" onAction="#plusPlusSeed" text="++Seed" />
+            <Button mnemonicParsing="false" onAction="#kMeans" text="K-Means++" />
+            <Button mnemonicParsing="false" onAction="#bsoc" text="BSOC" />
+            <Button mnemonicParsing="false" onAction="#bsocSimpleEdge" text="BSOCSimple" />
+         </children>
+      </VBox>
+   </left>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#openPoints" text="Open points/clusters" />
+                  <MenuItem mnemonicParsing="false" onAction="#savePoints" text="Save points/clusters" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#openImage" text="Open Image" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Reports">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#summaryReport" text="Summary" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

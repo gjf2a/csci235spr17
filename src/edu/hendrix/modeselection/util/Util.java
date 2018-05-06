@@ -235,4 +235,33 @@ public class Util {
 		}
 		throw new IllegalArgumentException(String.format("'%s' does not match enum type", src));
 	}
+	
+	/** 
+	 * Extracts red component from RGB
+	 */
+	public static int getRed(int rgb) {
+		return (rgb & 0xFF0000) >> 16;
+	}
+	
+	/** 
+	 * Extracts red component from RGB
+	 */
+	public static int getGreen(int rgb) {
+		return (rgb & 0x00FF00) >> 8;
+	}
+	
+	/** 
+	 * Extracts red component from RGB
+	 */
+	public static int getBlue(int rgb) {
+		return (rgb & 0xFF);
+	}
+	
+	/**
+	 * Computes gray from RGB
+	 */
+	public static int getGray(int rgb) {
+		return (getRed(rgb) + getBlue(rgb) + getGreen(rgb)) / 3;
+	}
+	
 }

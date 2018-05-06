@@ -18,8 +18,11 @@ public interface Clusterer<C,I> {
 		return getClosestNodeDistanceFor(example).getFirst();
 	}
 	
+	default public C getMatchingIdealInputFor(I example) {
+		return getIdealInputFor(getClosestMatchFor(example));
+	}
+	
 	default public Duple<Integer, Double> getClosestNodeDistanceFor(I example) {
-		Util.assertState(size() > 0, "No nodes exist");
 		Util.assertArgument(example != null, "Null example given!");
 		C transformed = transform(example);
 		Duple<Integer,Double> result = null;
@@ -40,6 +43,14 @@ public interface Clusterer<C,I> {
 			result.add(new Duple<>(id, distance(transformed, getIdealInputFor(id))));
 		}
 		Collections.sort(result, (o1, o2) -> o1.getSecond() < o2.getSecond() ? -1 : o1.getSecond() > o2.getSecond() ? 1 : 0);
+		return result;
+	}
+	
+	default public ArrayList<C> getAllIdealInputs() {
+		ArrayList<C> result = new ArrayList<>();
+		for (int id: getClusterIds()) {
+			result.add(getIdealInputFor(id));
+		}
 		return result;
 	}
 	

@@ -161,7 +161,7 @@ public class BoundedSelfOrgCluster<C extends Clusterable<C> & DeepCopyable<C>, I
 		return dist.distance(one, two);
 	}
 	
-	private double distance(Node<C> n1, Node<C> n2) {
+	double distance(Node<C> n1, Node<C> n2) {
 		return Math.max(n1.getNumInputs(), n2.getNumInputs()) * distance(n1.getCluster(), n2.getCluster());
 	}
 	

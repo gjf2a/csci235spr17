@@ -1,0 +1,5 @@
+k,algorithm,mean,stdev
+2,PlusPlusSeed,0.0,0.0
+2,KMeans,0.0,0.0
+2,BoundedSelfOrgCluster,0.0,0.0
+2,BSOCSimpleEdge,0.0,0.0
